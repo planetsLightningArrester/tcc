@@ -1,0 +1,752 @@
+\documentclass[11pt]{abntex2}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{pdflscape}
+\usepackage{textcomp}
+\usepackage[num, overcite]{abntex2cite}
+\citebrackets[]
+    
+\titulo{Módulo remoto para ensaios de vibração}
+\autor{Francisco Gomes Soares Sanches Manso}
+\data{\today}
+\instituicao{%
+Universidade Federal de Minas Gerais - UFMG
+\par
+Escola de Engenharia
+\par
+Kotchergenko Engenharia Ltda.}
+\local{Belo Horizonte}
+\preambulo{Monografia apresentada durante o Seminário dos Trabalhos de Conclusão do Curso de Graduação em
+Engenharia Elétrica da UFMG, como parte dos requisitos necessários à obtenção do título de Engenheiro Eletricista}
+\orientador[Orientador:]{Ricardo de Oliveira Duarte}
+\coorientador[Supervisor:]{Bruno Freitas Brant}
+
+\begin{document}
+\makeatletter
+	\imprimircapa
+	\imprimirfolhaderosto
+
+	\begin{resumo}
+		
+	\end{resumo}
+
+	\tableofcontents
+	\newpage
+	\listoffigures
+	\newpage
+	
+	\chapter{Introdução}
+		A mineração no Brasil possui grande importância na economia atual do país e
+		do mundo e é um dos setores em maior expansão. Atividades nessa área já
+		representam em torno de 5\% do PIB do país e geram mais de dois milhões de
+		empregos diretos e indiretos.\cite{pib}
+
+		Novas tecnologias vêm alavancando esse setor, buscando aumentar a eficiência
+		de produção e transporte e o aproveitamento de resíduos para a
+		transformação em insumos. A Escola de Engenharia da Universidade Federal de
+		Minas Gerais (UFMG), por exemplo, desenvolve metodologias de calcificação
+		dos resíduos da mineração, os tornando matéria-prima para a fabricação de
+		produtos das áreas de construção civil. Esse reaproveitamento chega a
+		proporcionar uma redução de até 40\% no custo das obras.\cite{mineracaoUFMG}
+		
+		O setor de mineração conta com diversas estruturas de grande porte em
+		terminais portuários e ferrovias por todo o Brasil. A manutenção
+		preditiva e o diagnóstico de falha são duas atividades de extrema
+		importância no âmbito de possibilitar a segurança dos operadores, a
+		redução de custos em bloqueios de produção por falhas e uma melhor
+		modelagem da dinâmicas das estruturas utilizadas. Nesse sentido,
+		diversas empresas da área baseiam suas atividades em três grandes
+		pilares: a metodologia teórica de análise de estruturas, a capacidade de
+		modelagem e simulação via \textit{software} e um preciso e confiável
+		ensaio de campo para a obtenção de dados.
+		
+		Ensaios de campo de vibração e extensometria são comumente realizados
+		utilizando equipamentos capazes de fazer aquisição de dados em tempo
+		real de vários canais simultaneamente. Os ensaios de vibração, por
+		exemplo, utilizam sensores piezoelétricos uniaxiais que são ligados em
+		sistemas de aquisição, como o NI-9234 da National
+		Instruments\textsuperscript{TM}.
+		
+		Os dados de vibração são obtidos por meio de sensores piezoelétricos com
+		eletrônica integrada, conhecidos como sensores IEPE ou \textit{Integrated
+		Electronics Piezo-Electric}. Materiais piezoelétricos são cristais capazes de
+		gerar uma tensão elétrica após os aplicar uma força mecânica.
+		Os transdutores IEPE pré-amplificam esse sinal de forma a possibilitar a
+		condução dos mesmos através de cabos coaxiais.
+
+		Tais ensaios são realizados em peneiras vibratórias de mineração,
+        transportadores de correia e outras máquinas de áreas portuárias e ferroviárias.
+
+		\chapter{Revisão Bibliográfica}
+			No processo de amostragem de um sinal qualquer, deve-se filtrar o sinal com
+			um filtro anti-\textit{aliasing} e aplicar os ganhos necessários para adequar
+			o sinal à faixa de leitura do conversor analógico-digital. Os processos são
+			ilustrados abaixo.
+
+			\begin{figure}[H]
+				\centering
+				\includegraphics[width=\linewidth]{../../Fotos/Diagramas/sinalFaaADC/sinalFaaADC.png}
+				\caption{Condicionamento do sinal analógico}
+				\label{fig:condicionamentoSinal}
+			\end{figure}
+
+			A seguir, serão descritos cada parte que compõe este processo.
+
+			\section{Transdutores piezoelétricos}
+				Transdutores piezoelétricos são largamente utilizados para
+				monitoramento industrial. Estes transdutores possuem uma eletrônica
+				integrada que pré-amplifica e condiciona o sinal para melhor
+				desempenho da medição. Os transdutores piezoelétricos com eletrônica
+				integrada são denominados IEPE (\textit{Integrated Electronics
+				Piezo-Electric}). Entre os transdutores, ou medidores, do tipo IEPE
+				mais comuns, encontram-se os transdutores de pressão e de
+				aceleração.
+
+				Os medidores IEPE possuem variadas fichas técnicas, com diferentes
+				faixas de alimentação, faixas de sinal de saída e tipos de sinal de
+				saída. No caso dos medidores de aceleração com saída em tensão, os
+				terminais de alimentação e de sinal de saída são compartilhados.
+
+				Os transdutores de aceleração necessitam ser alimentados por uma
+				tensão entre $18V$ e $30V$ com uma corrente constante de polarização
+				entre $2ma$ e $10ma$, podendo variar de medidor para medidor. Para
+				isso, utiliza-se uma fonte de tensão em série com uma fonte de
+				corrente. Assim, o sinal de saída é a tensão imediatamente após a
+				fonte de corrente. O esquemático abaixo ilustra o circuito elétrico
+				equivalente da alimentação de um transdutor IEPE com saída em
+				tensão.
+
+				A conversão do sinal de saída para a grandeza de interesse é dada
+				por uma relação linear de tensão e da unidade da grandeza. Essa
+				relação é denominada sensibilidade. Como exemplo, toma-se o
+				transdutor IEPE AC102, que possui sensibilidade de $100mV/g$.
+				Assim, com um valor de fundo de escala de $\pm50g$, têm-se variações
+				no valor da tensão de saída de $\pm5V$.\cite{ctc}
+				\newpage
+
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\linewidth]{../../Fotos/Diagramas/iepe.png}
+					\caption{Diagrama de interligação de um transdutor \textit{IEPE}}
+					\label{fig:ligacaoIEPE}
+				\end{figure}
+
+			\section{O filtro anti-\textit{aliasing} e o teorema da amostragem}
+				Seja um sinal $S(t)$ com maior componente de frequência
+				$f_{max}$. Segundo o Teorema da Amostragem, ou Teorema de
+				\textit{Nyquist}, esse sinal deve ser amostrado com uma
+				frequência $f_s$ tal que $f_s>2f_{max}$. Caso contrário, o
+				espectro de frequência irá sobrepor-se, impossibilitando a
+				reconstrução correta do sinal no tempo. Esse fenômeno é denominado
+				de \textit{aliasing} e a frequência $2\*f_{max}$ é definida como
+				frequência de \textit{Nyquist}. \cite{nyquist}
+
+				Como exemplo, assume-se o sinal $S(t) = 0,7\*sen(2\*\pi\*50\*t)
+				+ sen(2\*\pi\*120\*t)$. O sinal é amostrado com uma frequência
+				$f_s = 250Hz$. Os gráficos do sinal original, do sinal
+				amostrado e da FFT (\textit{Fast Fourier Transform}), gerada a
+				partir da aquisição do sinal na dada frequência de amostragem,
+				são exibidos na Figura ~\ref{fig:exemploAliasing250} e foram gerados
+				através do \textit{software} Scilab
+
+				Como a maior componente de frequência do sinal $S(t)$ é $120Hz$,
+				a frequência de \textit{Nyquist} é $240Hz$. Assim, a taxa de
+				amostragem satisfaz o Teorema da Amostragem. Com isso possibilita-se
+				uma correta visualização da FFT e da reconstrução do sinal no tempo.
+
+				Ao fazer uma segunda aquisição do mesmo sinal com uma taxa de
+				amostragem $f_s = 200Hz$, obtém-se os gráficos exibidos na
+				Figura ~\ref{fig:exemploAliasing200}. Como a frequência de amostragem
+				é menor que a frequência de \textit{Nyquist} para este sinal, ocorre
+				\textit{aliasing} e o sinal não é reconstruído corretamente.
+				Esse erro também pode ser visto pela FFT, que apresenta
+				frequências diferentes do sinal original.
+
+				\newpage
+
+				\begin{figure}[!ht]
+					\centering
+					\includegraphics[width=\linewidth]{../../Fotos/aliasingFs250.png}
+					\caption{Exemplo de sinal sem \textit{aliasing} amostrado à $250Hz$}
+					\label{fig:exemploAliasing250}
+				\end{figure}
+
+				\begin{figure}[H]
+					\centering
+					\includegraphics[width=\linewidth]{../../Fotos/aliasingFs200.png}
+					\caption{Exemplo de sinal com \textit{aliasing} amostrado à $200Hz$}
+					\label{fig:exemploAliasing200}
+				\end{figure}
+
+				\pagebreak
+
+				O filtro anti-\textit{aliasing} trata-se de um filtro passa-faixa
+				ou passa-baixa. Como no projeto não há restrições com relação à
+				baixas frequências, o filtro anti-\textit{aliasing} deste projeto
+				é um filtro passa-baixa. Um filtro passa-baixa ideal possui
+				característica de módulo em frequência mostrada na Figura ~\ref{fig:filtroIdeal}.
+
+				\begin{figure}[!ht]
+					\centering
+					\begin{minipage}{.4\linewidth}
+						\centering
+						\includegraphics[width=.8\linewidth]{../../Fotos/Diagramas/sinalFaaADC/filtroIdeal.png}
+						\caption{Resposta em frequência de um filtro ideal}
+						\label{fig:filtroIdeal}
+					\end{minipage}
+					\hfill\vline\hfill
+					\begin{minipage}{.4\linewidth}
+						\centering
+						\includegraphics[width=\linewidth]{../../Fotos/Diagramas/sinalFaaADC/filtroReal.png}
+						\caption{Resposta em frequência de um filtro real}
+					\end{minipage}
+				\end{figure}
+
+				Entretanto, os filtros passa-baixa reais possuem uma banda a
+				mais: a banda de transição. Essa banda representa os sinais de
+				frequência cujas amplitudes não foram atenuadas suficientemente,
+				de forma que não possam ser lidas pelo Conversor Analógico-Digital
+				(ADC). Assim, se forem desprezadas na admissão da taxa de amostragem,
+				podem gerar \textit{aliasing}.
+
+				Com isso, em uma primeira análise, pode-se dizer que a frequência de
+				amostragem deve satisfazer $f_s>2*f_{sb}$, em que $f_{sb}$ é chamada
+				\textit{stop band frequency}, ou frequência da banda de rejeição.
+
+				Não existe método capaz de reverter o \textit{aliasing} após o
+				sinal ser amostrado. Então, o que deve ser feito é assumir uma
+				faixa de frequência de interesse e utilizar circuitos capazes de
+				atenuar frequências acima da frequência de \textit{Nyquist}.
+				Essa atenuação deve ser tal que o ADC não possua resolução capaz
+				de detectar as componentes de alta frequência. Os circuitos
+				responsáveis por garantir que não ocorra \textit{aliasing} são
+				denominados filtro anti-\textit{aliasing} (FAA).
+
+			\section{Conversor analógico-digital}
+				O conversor analógico-digital, ou ADC, é responsável por digitalizar
+				um sinal analógico. A conversão é referenciada às tensões de alimentação
+				do ADC e graduada de acordo com o número de \textit{bits}. Como exemplo,
+				um conversor alimentado por uma tensão de $5V$ e com $10$ \textit{bits} de
+				resolução possui $2^{10}$ divisões. Assim, a menor divisão do conversor é
+				de $5/2^{10} = 4,88mV$ e, consequentemente, este é o menor valor que pode
+				ser detectado pelo ADC. Se a resolução fosse de $12$ \textit{bits} ao invés
+				de $10$ \textit{bits}, a resolução do conversor seria de $5/2^{12}=1,22mV$.
+				Este também é o passo do conversor, também definido como LSB
+				(\textit{Least Significant Bit}), ou seja, todas os valores digitalizados
+				são múltiplos da resolução.
+
+		\chapter{Metodologia}
+
+			\section{Levantamento de requisitos}
+				Abaixo são descritos os principais requisitos do projeto.
+
+				\begin{itemize}
+					\item O sistema deve ser capaz de amostrar dados de vibração da
+					estrutura e enviar remotamente para um computador com uma outra
+					placa, que será brevemente descrita neste relatório. O alcance
+					deve ser superior à 20 metros.
+					
+					\item Possuir quatro canais com entradas para conectores BNC.
+					
+					\item Ser capaz de aquisitar sinais de 1kHz com uma resolução de $50mg$, sendo g
+					a aceleração da gravidade.
+					
+					\item Ser capaz de operar por 2h com um \textit{powerbank} modelo CB078 com saída de $5V$
+					e capacidade de $2200mAh$.
+					
+					\item Todos os componentes, com exceção da fabricação das
+					PCBs(\textit{Printed Circuit Board}), devem ser encontrados à
+					venda no Brasil.
+				\end{itemize}
+
+			\section{Análise de requisitos}
+			
+				A partir dos requisitos, a placa deve possuir, essencialmente, uma
+				ou mais fontes reguláveis, um ou mais conversores ADC
+				(\textit{analog-digital converter}), unidades de lógica programável
+				e sistemas de telecomunicações.
+
+				Considerando uma eficiência de $80\%$ do conversor DC/DC interno do
+				\textit{powerbank}, a capacidade total do modelo CB078 é admitida como sendo
+				1760mAh. Assim, para operar durante 2h o sistema deve ter consumo de
+				corrente inferior a 880mA e possuir tensão de alimentação de $5V$.
+				
+				Os sensores de vibração utilizados na empresa são do modelo CTC
+				AC102. Estes operam quando aplicado uma corrente de excitação fixa,
+				além da alimentação. Tal sensor irá basear o projeto do circuito de
+				condicionamento do sinal.
+				
+				As principais características do transdutor AC102 são apresentadas
+				abaixo.\cite{ctc}
+				
+				\begin{itemize}
+					\item Sensibilidade: $100mV/g$
+					\item Tensão de alimentação: $18 - 30 VDC$
+					\item Faixa de operação: $\pm 50g$
+					\item Corrente de excitação: $2 - 10mA$
+					\item Tensão de saída polarizada: $10 - 14 VDC$
+					\item Faixa de passagem: $1 - 10.000 Hz$
+				\end{itemize}
+				
+				A última consideração a ser feita é com relação aos componentes
+				possuírem disponibilidade no Brasil. Infelizmente, existe uma grande
+				dificuldade de se encontrar componentes com características
+				desejáveis para projetos que exigem precisão. Assim, a ordem de
+				definição da arquitetura do projeto pode ser invertida. Por exemplo,
+				no Brasil existe uma variedade maior de fontes de alimentação do que
+				de microcontroladores. Dessa forma, os componentes da fonte de
+				alimentação serão determinados após a escolha do microcontrolador.
+				
+				Todos os valores acima citados definem as condições de contorno do
+				projeto a ser desenvolvido.
+
+			\section{Condicionamento de sinais}
+
+				A alimentação do sensor deve ser de $18V$ a $30V$. Como a entrada de
+				alimentação do sistema é de $5V$, optou-se por alimentar o sensor
+				piezoelétrico com $19V$ utilizando uma fonte chaveada \textit{boost}, que será
+				descrita mais à frente.
+
+				A fonte de corrente deve possuir valor de corrente de $2mA$ a $10mA$. Um valor muito
+				utilizado comercialmente é $4mA$, por ter um consumo intermediário e não trabalhar
+				muito próximo dos valores máximos e mínimos absolutos.
+
+				A fim de desenvolvimento do projeto, será considerado que a tensão
+				média de saída será de $14V$. Mais à frente irá ser demonstrado que
+				essa premissa é indiferente. Esta será a tensão média em que o sinal
+				de $\pm 5V$ irá varia, excursionando de $7V$ a $17V$. Assim, como o
+				sinal excursiona sobre uma tensão positiva, não há a necessidade de
+				utilização de fontes simétricas. Dessa forma, o filtro
+				anti-\textit{aliasing} deve possuir amplificadores operacionais
+				capazes de operar com alimentação não-simétrica de 19V.
+
+			\section{Dimensionamento do ADC}
+				
+				As condições de contorno do projeto impõem uma resolução de $50mg$. Como
+				visto na análise de requisitos e no diagrama da Figura ~\ref{fig:condicionamentoSinal},
+				têm-se os seguintes dados.
+				\begin{itemize}
+					
+					\item Tensão média de entrada: $V_{i(av)} = 14V$;
+					\item Excursão total do sinal ($\pm5V$): $V_{i(pp)} = 10V$.
+					
+				\end{itemize}
+				Assim, as tensões após o FAA e o bloco de ganho são:
+
+				\begin{itemize}	
+					\item Tensão média de saída: $V_{o(av)} = G\* V_{i(av)}$;
+					\item Tensão máxima de saída: $V_{o(max)} = G\* (V_{i(av)} + \frac{V_{i(pp)}}{2})$;
+				\end{itemize}	
+					
+
+				A excursão do sinal de $V_{o(av)}$ até $V_{o(max)}$ representa a excursão de aceleração
+				de $0g$ a $50g$. Assim, a excursão de 1mg representa um sinal de tensão de:
+
+				\begin{gather*}
+					V_{o(1mg)} = \frac{V_{o(max)} - V_{o(av)}}{50000mg}\\
+					V_{o(1mg)} = \frac{G\*V_{i(av)} + G\*\frac{V_{i(pp)}}{2} - G\*V_{i(av)}}{50000}\\
+					V_{o(1mg)} = \frac{G\*V_{i(pp)}}{100000}\\
+					V_{o(1mg)} = 10\*G/100000\\
+					V_{o(1mg)} = G/10000
+				\end{gather*}
+				
+				E $50mg$ representam $50$ vezes o valor anterior. Logo:
+				\begin{gather*}
+					V_{o(50mg)} =50\*V_{o(1mg)}\\
+					V_{o(50mg)} =50\*G/10000\\
+					V_{o(50mg)} =G/200
+				\end{gather*}
+				Percebe-se que o valor da tensão de saída independe da tensão média
+				de entrada, podendo esta variar entre os valores nominais do sensor
+				de $10V$ a $14V$. Isso se dá uma vez que realiza-se a correção do
+				\textit{offset}, tornando $V_{o(50mg)}$ um valor diferencial. Assim,
+				o valor da tensão depende apenas do ganho.
+				
+				Por sua vez, o ganho é dado por:
+				\begin{gather*}
+					G = V_{o(max)}/V_{i(max)}
+				\end{gather*}
+				Em que $V_{o(max)}$ é a tensão de alimentação do conversor ADC e $V_{i(max)}$ é
+				$19V$. Da expressão do número de \textit{bits} do ADC, têm-se que:
+				\begin{gather*}
+					LSB = \frac{V_{o(max)}}{2^n}\\
+					ou\\
+					V_{o(max)} = LSB\times 2^n
+				\end{gather*}
+				em que:\\
+				\textit{LSB} (\textit{Least Significant Bit}) é a resolução do ADC;\\
+				\textit{n} é o número de \textit{bits} do ADC.\\
+				
+				Como já citado, a menor resolução da grandeza a ser lida deve ser de
+				$50mg$. Sendo a sensibilidade do sensor $100mV/g$, então $50mg$
+				correspondem a $5mV$ de excursão na tensão de entrada. Dessa forma,
+				pode-se escrever LSB em função da mínima resolução desejada.
+				\begin{gather*}
+					LSB = 5\times 10^{-3}\times G
+				\end{gather*}
+				Substituindo na equação do ganho:
+				\begin{gather*}
+					G = V_{o(max)}/V_{i(max)}\\
+					G = \frac{LSB\times 2^n}{V_{i(max)}}\\
+					G = \frac{G\times 5\times 10^{-3}\times 2^n}{V_{i(max)}}\\
+					1 = \frac{5\times 10^{-3}\*2^n}{V_{i(max)}}\\
+					2^n = \frac{V_{i(max)}}{5\times 10^{-3}}\\
+					n = log_2\left( \frac{V_{i(max)}}{5\times 10^{-3}} \right) = log_2\left( \frac{19}{5\times 10^{-3}}\right)\\
+					n = 11,89
+				\end{gather*}
+				Como o número de \textit{bits} do conversor ADC deve ser um número inteiro, \textit{n}
+				deve ser minimamente $12$ \textit{bits} para atender às condições de contorno. É
+				interessante pontuar que o número de \textit{bits} independe da tensão de
+				alimentação do conversor ADC, seja ela $3,3V$ ou $5V$. E, consequentemente,
+				independe do ganho $G$.
+				
+				Para o cálculo do ganho $G$ admite-se o pior caso, ou seja, um sinal médio
+				de saída de $14V$ com excursão positiva máxima, gerando um sinal de $19V$. O
+				ganho deve ser tal que $19V$ seja atenuado para $5V$ ou $3,3V$. Para isso, o
+				ganho deve ser de, respectivamente, $0,263V/V$ ou $0,1737V/V$.
+
+			\section{Dimensionamento do FAA}
+
+				A banda de rejeição é caracterizada por ter atenuação
+				suficiente para que as frequências inseridas naquela banda possuam amplitude
+				inferior ao LSB do ADC. Assim, o ganho na banda de rejeição $H(f_{SB})$ é
+				dada por:
+				\begin{gather*}
+					H(f_{SB}) = LSB/V_{o(max)}\\
+					H(f_{SB}) = \frac{LSV}{2^n\times LSV}\\
+					H(f_{SB}) = 2^{-n}V/V\\
+					ou\\
+					H(f_{SB})_{[dB]} = -20\*log(2^n) dB
+				\end{gather*}
+				Como já calculado anteriormente, $n=12$. Assim:
+				\begin{gather*}
+					H(f_{SB})_{[db]} = -72,25 dB
+				\end{gather*}
+				Os filtros analógicos, a partir da frequência de corte $f_c$, possuem
+				atenuação dada por:
+				\begin{gather*}
+					H(f) = -m\times 20 dB/dec, para f>f_c
+				\end{gather*}
+				Em que m é a ordem do filtro. Logo, um filtro de sexta ordem levaria
+				menos de uma década para atenuar o sinal em $72,25dB$.
+
+				O ensaio de vibração que baseia o projeto possui, em sua grande
+				maioria, excitações de frequência fixa com eventuais picos. O que
+				interessa para a análise da estrutura é se a amplitude em
+				determinada frequência é maior que a prevista no modelo. Ou se a
+				estrutura sofreu algum impacto cuja amplitude ultrapassa determinado
+				valor. Então, é importante que o filtro possua uma banda de passagem
+				plana, com o mínimo \textit{ripple} possível, para que as amplitudes não
+				variem dentro da banda de passagem. Como, em geral, apenas uma
+				frequência é presente, não há a necessidade da característica de
+				fase do filtro ser linear.
+
+				Com isso, optou-se pelo filtro de topologia
+				\textit{Butterworth}, que apresenta banda de passagem plana. O
+				filtro ainda é caracterizado por ser de sexta ordem, com
+				frequência de corte de $2kHz$. Esta frequência foi escolhida um
+				pouco acima da frequência de interesse pelo fato do ganho da
+				frequência de corte já ser de $-3dB$. Assim, se a frequência de
+				$1kHz$ fosse escolhida como frequência de corte, os sinais com
+				essa frequência seriam atenuados em cerca de $30\%$.
+
+				Os amplificadores operacionais utilizados no FAA devem
+				possuir \textit{offset} de tensão cumulativo aos quatro CIs
+				menor que $LSB$. No pior caso, em que o ADC opera com $3,3V$,
+				o \textit{offset} de cada CI (Circuito Integrado) não pode ser
+				maior que $201,4\mu V$. Além disso devem permitir alimentação
+				não simétrica de até $19V$.O amplificador operacional de apenas
+				94 centavos OP07CDR atende à tais especificações com um \textit{offset}
+				típico de $60\mu V$.
+
+				Para o projeto do filtro, utilizou-se o \textit{software}
+				FilterPro\textsuperscript{TM} da Texas
+				Instruments\textsuperscript{TM}. As Figuras ~\ref{fig:circuitoFAA},
+				~\ref{fig:faaDiagramaBode} e ~\ref{fig:faaDiagramaBodeZoom} apresentam o
+				circuito recomendado para o filtro passa-baixa de 6ª ordem
+				\textit{Butterworth} com topologia \textit{Sallen Key} de ganho
+				unitário, frequência de corte $f_c = 2kHz$ e frequência de
+				rejeição $f_{SB}\simeq 8,2kHz$.
+
+				\begin{figure}[!ht]
+					\centering
+					\includegraphics[width=\linewidth]{../../Fotos/filterPro.jpg}
+					\caption{Filtro anti-\textit{aliasing}}
+					\label{fig:circuitoFAA}
+				\end{figure}
+
+				\begin{figure}[!ht]
+					\centering
+					\includegraphics[width=\linewidth]{../../Fotos/filterProGF.jpg}
+					\caption{Diagrama de Bode do FFA}
+					\label{fig:faaDiagramaBode}
+				\end{figure}
+
+				\begin{figure}[!ht]
+					\centering
+					\includegraphics[width=\linewidth]{../../Fotos/filterProZoom.jpg}
+					\caption{\textit{Zoom} na banda de transição}
+					\label{fig:faaDiagramaBodeZoom}
+				\end{figure}
+
+				Após o FAA, o nível do sinal é atenuado para valores abaixo de
+				3,3V por meio do ganho $G$. Como já citado anteriormente, para
+				alimentação do ADC igual  a 3,3V, o ganho deve ser igual a $G =
+				0,1737V/V$. Essa relação, dada por um divisor de tensão, pode
+				ser aproximada pro resistores de $15k\Omega$ e $75k\Omega$, de
+				forma que:
+				\begin{gather*}
+					G = \frac{15k}{15k+75k} = 0,1667V/V
+				\end{gather*}
+
+				Como já mostrado, o número de \textit{bits} e o FAA independem do valor
+				de $G$, sendo que tal variação irá afetar apenas na calibração dos
+				canais. Por tal calibração já fazer-se necessária, também é
+				dispensável o uso de resistores de precisão, uma vez que cada
+				canal será calibrado individualmente.
+
+				A partir da Figura ~\ref{fig:faaDiagramaBodeZoom}, nota-se que a banda de rejeição inicia em
+				$8,2kHz$. Assim, pelo teorema da amostragem seria necessária uma amostragem
+				de, pelo menos, $16,4kHz$ para que não ocorra \textit{aliasing}. Contudo,
+				é indiferente qualquer \textit{aliasing} que apareça fora da banda de interesse.
+				Dessa forma, é passível que ocorra \textit{aliasing} de $f=1kHz$ em diante. Tomando
+				uma margem de segurança de aproximadamente $500Hz$, uma frequência de amostragem
+				de $f_s=10kHz$ não elimina o \textit{aliasing} na banda de rejeição, mas, sim, na banda
+				de interesse.
+
+				A tolerância dos resistores e capacitores do FAA influenciam no
+				deslocamento para mais ou para menos das frequências de corte e
+				de rejeição no diagrama de magnitude. Porém, como foi dado uma
+				margem de $1kHz$ para a frequência de corte e de $2kHz$ para o
+				início da banda de rejeição, novamente torna-se dispensável a
+				utilização de componentes de precisão.
+				\newpage
+
+			\section{Fonte de corrente}
+
+				A fonte de corrente usará a topologia da Figura ~\ref{fig:topologiaFonteCorrente}.
+
+				\begin{figure}[!ht]
+					\centering
+					\includegraphics[scale = 0.3]{../../Fotos/fonteCorrenteClean2.jpg}
+					\caption{Fonte de corrente}
+					\label{fig:topologiaFonteCorrente}
+				\end{figure}
+
+				Admitindo uma impedância de medição infinita e alpha dos transistores
+				$\alpha\simeq1$, a corrente entregue ao sensor \textit{IEPE} será dada por:
+				\begin{gather*}
+					I_s = V_{be}/R_1
+				\end{gather*}
+				Assim, considerando $V_{be}$ aproximadamente constante e igual a $0,7V$ e
+				$I_s = 4mA$:
+				\begin{gather*}
+					R_1 = V_{be}/I_s = 170\Omega
+				\end{gather*}
+				O resistor $R_2$ garante a polarização de ambos transistores. A
+				corrente necessária para polarizar o $Q_1$ será aproximadamente a
+				corrente total que passa pelo resistor $R_2$. Segundo o
+				\textit{datasheet} do transistor PNP BC857, para $V_{be} = 0,7V$
+				tem-se $I_c = 2mA$. $R_2$ possui queda de tensão de $19V -
+				2\*V_{be}$. Assim:
+				\begin{gather*}
+					R_2 = \frac{19 - 2\*V_{be}}{0,002} = 8k88\Omega
+				\end{gather*}
+				Após montar e simular o circuito, utilizando o \textit{software}
+				LTSpice, foi possível realizar um ajuste fino para reduzir a
+				corrente de polarização do transistor para cerca de $350\mu A$,
+				fazendo com que ambos $V_{be}s$ ficassem em torno de $0,6V$. Assim,
+				o novo valor de $R_1$ e $R_2$, aproximado para valores comerciais,
+				são:
+				\begin{gather*}
+					R_1 = 0,6/0,004 = 150\Omega\\
+					R_2 = \frac{19-2\times 0,6}{0,00035} = 51k\Omega
+				\end{gather*}
+
+				\begin{figure}[!ht]
+					\centering
+					\includegraphics[scale = 0.3]{../../Fotos/fonteCorrente2.jpg}
+					\caption{Fonte de corrente com medições}
+				\end{figure}
+
+				A fonte de corrente que alimenta o sensor IEPE deve possuir
+				corrente de saída de $2mA$ a $10mA$. Como o valor da corrente
+				escolhido é um valor intermediário, $4mA$, os resistores da
+				fonte de corrente não precisam ter valores precisos. Resistores
+				de 5\% podem ser usados sem influenciar nos resultados.
+
+				Os transistores devem ser transistores de sinal, com
+				$V_{be}\simeq 0,7V$. Assim, utilizou-se os transistores BC857B
+				que são facilmente encontrados e possuem baixo custo.
+
+			\section{Microcontrolador}
+				Uma vez definido a taxa de amostragem, a resolução necessária do
+				ADC e o número de canais, é possível a escolha do
+				microcontrolador e do módulo de telemetria.
+
+				A restrição do ADC de $12$ \textit{bits} e a venda no Brasil
+				restringe a escolha de microcontrolares a apenas o
+				STM32F103C8T6.\cite{stm} Nenhum outro microcontrolador com conversor de
+				$12$ \textit{bits} foi encontrado à venda.
+
+				Apesar disso, o microcontrolador possui características que
+				atendem perfeitamente às especificações do projeto. Como
+				principais características, pode-se citar:
+
+				\begin{itemize}
+					\item Arquitetura de 32 \textit{bits}
+					\item $72MHz$ de frequência de \textit{clock} com 1.25 DMIPIS/MHz
+					\item 2xADC de $12$ \textit{bits} com até 1MS/s
+					\item Tensão de alimentação de $2V$ a $3.6V$
+					\item 2xSPI
+					\item 3xUSART
+					\item 2x$I^2C$
+				\end{itemize}
+
+				A capacidade de conversão de até 1MS/s permite que o
+				microcontrolador amostre os dados e os transmita para o módulo
+				de telemetria em tempo hábil.
+				
+				O microcontrolador ainda pode ser encontrada em módulos com os
+				componentes básicos para utilização como capacitores e barra de
+				pinos para programação. Esse módulo é vendido no Brasil por
+				cerca de 20 reais.
+
+				Existem diversas interfaces de programação que podem ser
+				utilizadas. A IDE (\textit{Integrated Development Environment })
+				disponibilizada gratuitamente pelo fabricante é o \textit{System
+				Workbench for STM32}, ou \textit{SW4STM32}, será utilizada.
+
+				Para a programação, utiliza-se o programador ST-Link/V2 que
+				conecta USB no computador e faz a interface de programação via
+				JTAG.
+
+				Segundo simulações utilizando o \textit{software} STM32CubeMX, o
+				microcontrolador possui um consumo médio de $30,56mA$, como pode ser
+				visto na Figura ~\ref{fig:consumoSTM}.
+
+				\begin{figure}[!ht]
+					\centering
+					\includegraphics[scale = 0.6]{../../Fotos/stmConsumo.jpg}
+					\caption{Consumo estimado do STM32F103C8T6}
+					\label{fig:consumoSTM}
+				\end{figure}
+
+			\section{Telemetria}
+				Como cada dado possui $12$ \textit{bits} e cada placa possui um
+				máximo de $4$ canais, é necessário que o módulo de telemetria
+				tenha uma taxa de transferência de:
+
+				\begin{gather*}
+					f_s = 10kHz
+					Total de bytes por amostra = 4\times 12 = 48 bits = 6 bytes
+					B/s = 6\times 10000 = 60kB/s
+				\end{gather*}
+
+				O módulo nRF24L01+\cite{nrf} possui taxa de comunicação de até $2Mbps$,
+				equivalente a $250kBps$. Outras características do módulo são
+				citadas abaixo.
+
+				\begin{itemize}
+					\item Frequência de operação de $2,4GHz$
+					\item Tensão de alimentação de $1,9V$ a $3,6V$
+					\item Half-duplex
+					\item Recebe dados de até 6 módulos no mesmo canal
+					\item Comunicação SPI de até $10Mbps$
+					\item Alcance de comunicação de até $1km$ (ideal)
+				\end{itemize}
+
+				Assim, esse módulo se torna ideal para que a placa receptora consiga
+				obter dados de até 6 placas de 4 canais, possibilitando a leitura de
+				um total de 24 acelerômetros.
+
+				\begin{figure}[!ht]
+					\centering
+					\includegraphics[scale = 0.6]{../../Fotos/nrf.jpg}
+					\caption[Módulo nRF24L01+]{Módulo nRF24L01+ \footnotemark}
+				\end{figure}
+
+				\footnotetext{Acessado(03/06/2018): https://www.epictinker.com/IT-NRF24L01-PA-LNA-p/it-nrf24l01-pa-lna.htm}
+
+				O nível lógico se adequa ao do microcontrolador bem como a fonte
+				de alimentação. Segundo o \textit{datasheet}, o módulo possui
+				consumo médio de $40mA$ em transmissão com picos de $115mA$.
+
+			\section{Fonte Linear}
+				A fonte de 3,3V deve alimentar o microcontrolador e o módulo de
+				telemetria. O consumo total é de menos de 100mA na média. Os
+				picos de corrente do módulo de telemetria devem ser supridos por
+				capacitores posicionados próximos aos terminais de alimentação
+				do módulo.
+
+				Como a tensão de alimentação é próxima da tensão a ser regulada,
+				optou-se por utilizar um regulador linear ao invés de um
+				\textit{buck}. Um \textit{buck} teria uma eficiência em torno de
+				80\% enquanto, para essa situação, a eficiência de um regulador
+				linear é de $3,3/5 = 66\%$. Devido ao preço e à baixa
+				complexidade, escolheu-se o CI AMS1117-3.3 que possui capacidade
+				de corrente de 1A e requer apenas dois capacitores para
+				funcionar.
+
+			\section{Fonte chaveada \textit{boost}}
+				Os sensores IEPE operam com uma tensão de alimentação de $18V$ a
+				$30V$. A fonte que provê tal alimentação deve ser capaz de
+				elevar a tensão de entrada, $5V$, para a tensão desejada e
+				alimentar as fontes de corrente dos sensores e o FAA.
+				
+				Para elevar a tensão, utiliza-se uma fonte chaveada tipo
+				\textit{boost}. De forma a manter a uma alta eficiência do
+				\textit{boost} e não trabalhar com uma tensão muito próxima do
+				limite inferior, a tensão de alimentação escolhida foi de 19V.
+				A corrente total que a fonte de 19V deve fornecer é dada por:
+				\begin{gather*}
+					I_{total} = 4\* \left(I_{FAA} + I_{FonteCorrente}\right)
+				\end{gather*}
+				O \textit{quatro} representa os quatro canais. A corrente do FAA
+				é basicamente a corrente consumida pelos amplificadores
+				operacionais que, segundo o \textit{datasheet} do OP07CDR, é de
+				abaixo de 1mA para tensões de alimentação superiores a
+				aproximadamente 11V. Assim, como cada FAA possui quatro OP07CDR,
+				o consumo do FAA é de $4\times 1mA =  4mA$.
+
+				As fontes de corrente consomem os 4mA da polarização do sensor
+				mais a corrente que passa pelo resistor de polarização $R_2$.
+				Assim, cada filtro consome aproximadamente $4,3mA$. Então:
+				\begin{gather*}
+					I_{total} = 4\* \left(4mA + 4,3mA\right) = 33,2mA.
+				\end{gather*}
+
+				Assim, a fonte \textit{boost} deve ser capaz de elevar a tensão
+				de 5V para 19V e fornecer uma corrente de 60mA, aplicando uma
+				margem de segurança. Devido ao baixo custo e por atender às
+				especificações do projeto, optou-se pelo módulo \textit{boost}
+				XL6009. Trata-se de uma fonte chaveada elevadora de tensão com
+				capacidade de regular a tensão de saída por meio de um
+				\textit{trimpot} até 32V e capacidade de corrente de 4A.
+
+			\section{Consumo total}
+				O consumo total é dado pelas cargas das fontes de $19V$ e $3,3V$ e
+				suas respectivas eficiências. Assumindo que a eficiência do
+				módulo XL6009 como sendo de $75\%$ e que toda a corrente que entra
+				na fonte linear é entregue à carga, têm-se que:
+				\begin{gather*}
+					P = \frac{V_{XL}\times I_{XL}}{\eta _{XL}} + \frac{V_{AMS}\times I_{AMS}}{\eta _{AMS}}\\
+					P = \frac{19\times 33,2mA}{0,75} + \frac{3,3\times 70,56mA}{0,66}\\
+					P = 1,19W
+				\end{gather*}
+				Em que o subscrito $XL$ refere-se ao conversor \textit{boost} e
+				o subscrito $AMS$ refere-se ao conversor linear.
+
+				O \textit{powerbank} que alimenta a placa possui estimados $1760mAh$ de
+				energia. Em \textit{potência-hora}, assumindo uma tensão nominal
+				de 5V, a energia total é de 8.8Wh. Assim, a placa consegue operar
+				por pouco mais 7h com esse \textit{powerbank}.
+
+        \bibliography{../../Bibliografia/bibliografia}
+
+\end{document}
