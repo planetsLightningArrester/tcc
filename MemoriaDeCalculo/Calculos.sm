@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?application progid="SMath Studio Desktop" version="0.99.6884.37264"?>
+<worksheet xmlns="http://smath.info/schemas/worksheet/1.0">
+  <settings dpi="96">
+    <identity>
+      <id>68b253ec-ac3d-42d1-90bd-ef2c07433a40</id>
+      <revision>5</revision>
+    </identity>
+    <calculation>
+      <precision>4</precision>
+      <exponentialThreshold>5</exponentialThreshold>
+      <trailingZeros>false</trailingZeros>
+      <significantDigitsMode>false</significantDigitsMode>
+      <roundingMode>0</roundingMode>
+      <fractions>decimal</fractions>
+    </calculation>
+    <pageModel active="false" viewMode="2" printGrid="false" printAreas="true" simpleEqualsOnly="false" printBackgroundImages="true">
+      <paper id="1" orientation="Portrait" width="850" height="1100" />
+      <margins left="39" right="39" top="39" bottom="39" />
+      <header alignment="Center" color="#a9a9a9">&amp;[DATE] &amp;[TIME] - &amp;[FILENAME]</header>
+      <footer alignment="Center" color="#a9a9a9">&amp;[PAGENUM] / &amp;[COUNT]</footer>
+      <backgrounds />
+    </pageModel>
+    <dependencies>
+      <assembly name="SMath Studio Desktop" version="0.99.6884.37264" guid="a37cba83-b69c-4c71-9992-55ff666763bd" />
+      <assembly name="Math Region" version="0.99.6884.37264" guid="02f1ab51-215b-466e-a74d-5d8b1cf85e8d" />
+      <assembly name="TextRegion" version="1.11.6884.37264" guid="485d28c5-349a-48b6-93be-12a35a1c1e39" />
+    </dependencies>
+  </settings>
+  <regions type="content">
+    <region id="0" top="54" color="#000000" bgColor="#ffffff">
+      <area collapsed="false">
+        <title lang="por">
+          <p>Conversão de bits do ADC para envio</p>
+        </title>
+      </area>
+      <region id="1" left="36" top="90" width="724" height="104" border="true" color="#000000" bgColor="#ffffff" fontSize="10">
+        <text lang="por">
+          <p>Como cada placa é alimentada com uma tensão diferente de 3,3V, os bits obtidos pelo ADCirão variar, pois a referência de tensão irá variar.Assim, faz-se a conversão dos bits para caso a referência fosse de 3,3V, multiplicandoos bits lidos pela tensão real de alimentação dividido por 3,3V. Abaixo um exemplo parauma tensão de alimentação de 3,27V.</p>
+        </text>
+      </region>
+      <region id="2" left="72" top="207" width="192" height="30" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">Tensao.alimentacao</e>
+            <e type="operand">3.27</e>
+            <e type="operand" style="unit">V</e>
+            <e type="operator" args="2">*</e>
+            <e type="operator" args="2">:</e>
+          </input>
+        </math>
+      </region>
+      <region id="3" left="396" top="207" width="126" height="30" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">bits.lidos</e>
+            <e type="operand">1490</e>
+            <e type="operator" args="2">:</e>
+          </input>
+        </math>
+      </region>
+      <region id="4" left="153" top="261" width="430" height="47" border="true" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">bits.convertidos</e>
+            <e type="operand">bits.lidos</e>
+            <e type="operand">Tensao.alimentacao</e>
+            <e type="operator" args="2">*</e>
+            <e type="operand">3.3</e>
+            <e type="operand" style="unit">V</e>
+            <e type="operator" args="2">*</e>
+            <e type="operator" args="2">/</e>
+            <e type="operator" args="2">:</e>
+          </input>
+          <result action="numeric">
+            <e type="operand">1476.4545</e>
+          </result>
+        </math>
+      </region>
+      <region id="5" left="189" top="324" width="296" height="47" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">Tensao.alimentacao</e>
+            <e type="operand">bits.lidos</e>
+            <e type="operator" args="2">*</e>
+            <e type="operand">4096</e>
+            <e type="operator" args="2">/</e>
+          </input>
+          <result action="numeric">
+            <e type="operand">1.1895</e>
+            <e type="operand" style="unit">V</e>
+            <e type="operator" args="2">*</e>
+          </result>
+        </math>
+      </region>
+      <region id="6" left="198" top="387" width="250" height="47" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">3.3</e>
+            <e type="operand" style="unit">V</e>
+            <e type="operator" args="2">*</e>
+            <e type="operand">bits.convertidos</e>
+            <e type="operator" args="2">*</e>
+            <e type="operand">4096</e>
+            <e type="operator" args="2">/</e>
+          </input>
+          <result action="numeric">
+            <e type="operand">1.1895</e>
+            <e type="operand" style="unit">V</e>
+            <e type="operator" args="2">*</e>
+          </result>
+        </math>
+      </region>
+      <region id="7" top="441" color="#000000" bgColor="#ffffff">
+        <area terminator="true" />
+      </region>
+    </region>
+    <region id="8" top="459" color="#000000" bgColor="#ffffff">
+      <area collapsed="false">
+        <title lang="por">
+          <p>Configurações do ADC e Timer</p>
+        </title>
+      </area>
+      <region id="9" left="36" top="495" width="716" height="72" border="true" color="#000000" bgColor="#ffffff" fontSize="10">
+        <text lang="por">
+          <p>A banda de interesse é até 1Hz e a frequência de corte do FAA está em 2kHz. A banda de rejeição inicia-se próxima à 8,2kHz. Assim, a amostragem irá ser feita à 5kHz. Isso garente que não haverá aliasing na banda de passagem, mas pode ocorrer entre 1,8kHz e 8,2kHz</p>
+        </text>
+      </region>
+      <region id="10" left="54" top="576" width="45" height="24" border="true" color="#000000" bgColor="#ffffff" fontSize="10">
+        <text lang="por">
+          <p>&gt;ADC</p>
+        </text>
+      </region>
+      <region id="11" left="405" top="576" width="281" height="24" border="true" color="#000000" bgColor="#ffffff" fontSize="10">
+        <text lang="por">
+          <p>&gt;Timer (por alguma razão tem o 4)</p>
+        </text>
+      </region>
+      <region id="12" left="54" top="603" width="101" height="30" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">f.ADC</e>
+            <e type="operand">12</e>
+            <e type="operand" style="unit">MHz</e>
+            <e type="operator" args="2">*</e>
+            <e type="operator" args="2">:</e>
+          </input>
+        </math>
+      </region>
+      <region id="13" left="180" top="603" width="89" height="30" border="true" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">n.cyc</e>
+            <e type="operand">13.5</e>
+            <e type="operator" args="2">:</e>
+          </input>
+        </math>
+      </region>
+      <region id="14" left="405" top="603" width="80" height="30" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">f.s</e>
+            <e type="operand">5</e>
+            <e type="operand" style="unit">kHz</e>
+            <e type="operator" args="2">*</e>
+            <e type="operator" args="2">:</e>
+          </input>
+        </math>
+      </region>
+      <region id="15" left="522" top="603" width="110" height="24" border="true" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">prescaler</e>
+            <e type="operand">0</e>
+            <e type="operator" args="2">:</e>
+          </input>
+        </math>
+      </region>
+      <region id="16" left="63" top="639" width="172" height="53" border="true" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">T.conv</e>
+            <e type="operand">n.cyc</e>
+            <e type="operand">f.ADC</e>
+            <e type="operator" args="2">/</e>
+            <e type="operator" args="2">:</e>
+          </input>
+          <contract>
+            <e type="operand" style="unit">μs</e>
+          </contract>
+          <result action="numeric">
+            <e type="operand">1.125</e>
+          </result>
+        </math>
+      </region>
+      <region id="17" left="414" top="639" width="260" height="48" border="true" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">CP</e>
+            <e type="operand">72</e>
+            <e type="operand" style="unit">MHz</e>
+            <e type="operator" args="2">*</e>
+            <e type="operand">prescaler</e>
+            <e type="operand">1</e>
+            <e type="operator" args="2">+</e>
+            <e type="bracket">(</e>
+            <e type="operand">4</e>
+            <e type="operand">f.s</e>
+            <e type="operator" args="2">*</e>
+            <e type="operator" args="2">*</e>
+            <e type="operator" args="2">/</e>
+            <e type="operator" args="2">:</e>
+          </input>
+          <result action="numeric">
+            <e type="operand">3600</e>
+          </result>
+        </math>
+      </region>
+      <region id="18" left="63" top="702" width="181" height="30" color="#000000" bgColor="#ffffff" fontSize="10">
+        <math>
+          <input>
+            <e type="operand">T.total</e>
+            <e type="operand">4</e>
+            <e type="operand">T.conv</e>
+            <e type="operator" args="2">*</e>
+            <e type="operator" args="2">:</e>
+          </input>
+          <contract>
+            <e type="operand" style="unit">μs</e>
+          </contract>
+          <result action="numeric">
+            <e type="operand">4.5</e>
+          </result>
+        </math>
+      </region>
+      <region id="19" top="738" color="#000000" bgColor="#ffffff">
+        <area terminator="true" />
+      </region>
+    </region>
+  </regions>
+</worksheet>
