@@ -1,0 +1,47 @@
+nRF24L01.cpp:13:6:void RF_delay_init()	40	static
+nRF24L01.cpp:33:6:void nRF24::microDelay(int)	32	static
+nRF24L01.cpp:45:6:void digitalWrite(uint8_t, bool)	0	static
+nRF24L01.cpp:164:9:uint8_t nRF24::SPIsend(uint8_t)	32	static
+nRF24L01.cpp:376:6:void nRF24::sendInTheNextReceive(const char*, unsigned int, unsigned int)	48	static
+nRF24L01.cpp:754:6:void nRF24::writeRegister(unsigned int, unsigned int)	40	static
+nRF24L01.cpp:170:6:void nRF24::setRetries(uint8_t, uint16_t)	0	static
+nRF24L01.cpp:389:6:void nRF24::Flush()	8	static
+nRF24L01.cpp:560:6:void nRF24::changeChannel(uint8_t)	0	static
+nRF24L01.cpp:356:6:void nRF24::bareSend(const char*, unsigned int, unsigned int)	48	static
+nRF24L01.cpp:763:6:void nRF24::writeRegisterManyTimes(unsigned int, unsigned int*, int)	40	static
+nRF24L01.cpp:731:6:void nRF24::exitTXmode()	16	static
+nRF24L01.cpp:772:14:unsigned int nRF24::readRegister(unsigned int)	32	static
+nRF24L01.cpp:564:6:void nRF24::changeSpeed(uint8_t)	16	static
+nRF24L01.cpp:580:6:void nRF24::powerDown()	8	static
+nRF24L01.cpp:584:6:void nRF24::powerUp()	8	static
+nRF24L01.cpp:656:6:void nRF24::enterRXmode()	16	static
+nRF24L01.cpp:394:6:void nRF24::read(char*)	40	static
+nRF24L01.cpp:174:1:nRF24::nRF24(SPI_HandleTypeDef*, int, int, uint8_t)	56	static
+nRF24L01.cpp:783:6:void nRF24::readRegisterManyTimes(unsigned int, unsigned int*, int)	40	static
+nRF24L01.cpp:797:23:volatile unsigned int nRF24::available()	8	static
+nRF24L01.cpp:814:23:volatile unsigned int nRF24::bareAvailable()	8	static
+nRF24L01.cpp:824:9:uint8_t nRF24::checkRetries()	8	static
+nRF24L01.cpp:828:6:bool nRF24::isRadioInRange()	8	static
+nRF24L01.cpp:832:6:void nRF24::enablePipe(unsigned int)	4	static
+nRF24L01.cpp:588:6:void nRF24::enableBareSend(uint8_t)	16	static
+nRF24L01.cpp:674:6:void nRF24::enterTXmode(unsigned int)	16	static
+nRF24L01.cpp:411:6:void nRF24::pipe0address(unsigned int*)	16	static
+nRF24L01.cpp:435:6:void nRF24::pipe1address(unsigned int*)	16	static
+nRF24L01.cpp:484:6:void nRF24::pipe2address(unsigned int)	8	static
+nRF24L01.cpp:503:6:void nRF24::pipe3address(unsigned int)	8	static
+nRF24L01.cpp:522:6:void nRF24::pipe4address(unsigned int)	8	static
+nRF24L01.cpp:541:6:void nRF24::pipe5address(unsigned int)	8	static
+nRF24L01.cpp:837:6:void nRF24::disablePipe(unsigned int)	4	static
+nRF24L01.cpp:842:6:void nRF24::resetFlags()	0	static
+nRF24L01.cpp:846:14:unsigned int nRF24::msgSize()	8	static
+nRF24L01.cpp:276:9:uint8_t nRF24::send(const char*, unsigned int, unsigned int)	40	static
+nRF24L01.cpp:318:9:uint8_t nRF24::burstSend(const char*, unsigned int, unsigned int)	40	static
+nRF24L01.cpp:855:6:void nRF24::resetReceiveFlag()	0	static
+nRF24L01.cpp:859:6:void nRF24::enableChip()	0	static
+nRF24L01.cpp:863:6:void nRF24::disableChip()	0	static
+nRF24L01.cpp:867:6:void nRF24::selectSlave()	0	static
+nRF24L01.cpp:871:6:void nRF24::deselectSlave()	0	static
+main.cpp:177:6:void SystemClock_Config()	96	static
+main.cpp:87:5:int main()	264	static
+main.cpp:547:6:void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef*)	0	static
+main.cpp:557:6:void Error_Handler()	0	static
