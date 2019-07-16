@@ -12,5 +12,11 @@ OBJS += \
 
 # Each subdirectory must supply rules for building sources it contributes
 startup/%.o: ../startup/%.s
-	arm-none-eabi-gcc -mcpu=cortex-m3 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@" "$<"
+	@echo 'Building file: $<'
+	@echo 'Invoking: MCU GCC Assembler'
+	@echo $(PWD)
+	arm-none-eabi-as -mcpu=cortex-m3 -mthumb -mfloat-abi=soft -g -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
 
