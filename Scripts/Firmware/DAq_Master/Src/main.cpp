@@ -294,6 +294,7 @@ int main(void) {
 			}
 
 		}
+
 		//Receive routine
 		while (started) {
 			for (int i = 0; i < 8; i++) {
