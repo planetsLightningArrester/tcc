@@ -1,0 +1,25 @@
+{
+  "name": "daqkot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "install": "electron-rebuild",
+    "build": "electron-packager . DAqKOT_v0.1.4 --platform=win32 --arch=ia32 --overwrite --icon=./art/logo_kot.ico"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.8.4",
+    "electron-packager": "^12.1.0"
+  },
+  "dependencies": {
+    "electron-rebuild": "^1.7.3",
+    "express": "^4.16.3",
+    "node-gyp": "^3.6.2",
+    "npm": "^5.8.0",
+    "serialport": "^6.1.1",
+    "socket.io": "^2.1.1"
+  }
+}

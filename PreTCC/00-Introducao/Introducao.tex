@@ -1,0 +1,87 @@
+\documentclass[11pt]{abntex2}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{pdflscape}
+\usepackage{textcomp}
+\usepackage[num, overcite]{abntex2cite}
+\citebrackets[]
+
+\titulo{Módulo remoto para ensaios de vibração}
+\autor{Francisco Gomes Soares Sanches Manso}
+\data{\today}
+\instituicao{%
+Universidade Federal de Minas Gerais - UFMG
+\par
+Escola de Engenharia
+\par
+Kotchergenko Engenharia Ltda.}
+\local{Belo Horizonte}
+\preambulo{Monografia apresentada durante o Seminário dos Trabalhos de Conclusão do Curso de Graduação em
+Engenharia Elétrica da UFMG, como parte dos requisitos necessários à obtenção do título de Engenheiro Eletricista}
+\orientador[Orientador:]{Ricardo de Oliveira Duarte}
+\coorientador[Supervisor:]{Bruno Freitas Brant}
+
+\begin{document}
+\makeatletter
+	\imprimircapa
+	\imprimirfolhaderosto
+
+	\begin{resumo}
+		
+	\end{resumo}
+
+	\tableofcontents
+	\newpage
+	\listoffigures
+	\newpage
+	
+	\chapter{Introdução}
+		A mineração no Brasil possui grande importância na economia atual do país e
+		do mundo e é um dos setores em maior expansão. Atividades nessa área já
+		representam em torno de 5\% do PIB do país e geram mais de dois milhões de
+		empregos diretos e indiretos.\cite{pib}
+
+		Novas tecnologias vêm alavancando esse setor, buscando aumentar a eficiência
+		de produção e transporte e o aproveitamento de resíduos para a
+		transformação em insumos. A Escola de Engenharia da Universidade Federal de
+		Minas Gerais (UFMG), por exemplo, desenvolve metodologias de calcificação
+		dos resíduos da mineração, os tornando matéria-prima para a fabricação de
+		produtos das áreas de construção civil. Esse reaproveitamento chega a
+		proporcionar uma redução de até 40\% no custo das obras.\cite{mineracaoUFMG}
+		
+		O setor de mineração conta com diversas estruturas de grande porte em
+		terminais portuários e ferrovias por todo o Brasil. A manutenção
+		preditiva e o diagnóstico de falha são duas atividades de extrema
+		importância no âmbito de possibilitar a segurança dos operadores, a
+		redução de custos em bloqueios de produção por falhas e uma melhor
+		modelagem da dinâmicas das estruturas utilizadas. Nesse sentido,
+		diversas empresas da área baseiam suas atividades em três grandes
+		pilares: a metodologia teórica de análise de estruturas, a capacidade de
+		modelagem e simulação via \textit{software} e um preciso e confiável
+		ensaio de campo para a obtenção de dados.
+		
+		Ensaios de campo de vibração e extensometria são comumente realizados
+		utilizando equipamentos capazes de fazer aquisição de dados em tempo
+		real de vários canais simultaneamente. Os ensaios de vibração, por
+		exemplo, utilizam sensores piezoelétricos uniaxiais que são ligados em
+		sistemas de aquisição, como o NI-9234 da National
+		Instruments\textsuperscript{TM}.
+		
+		Os dados de vibração são obtidos por meio de sensores piezoelétricos com
+		eletrônica integrada, conhecidos como sensores IEPE ou \textit{Integrated
+		Electronics Piezo-Electric}. Materiais piezoelétricos são cristais capazes de
+		gerar uma tensão elétrica após os aplicar uma força mecânica.
+		Os transdutores IEPE pré-amplificam esse sinal de forma a possibilitar a
+		condução dos mesmos através de cabos coaxiais.
+
+		Tais ensaios são realizados em peneiras vibratórias de mineração,
+        transportadores de correia e outras máquinas de áreas portuárias e ferroviárias.
+
+        \bibliography{./bibliografia}
+
+\end{document}

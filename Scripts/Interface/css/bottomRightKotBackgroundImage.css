@@ -1,0 +1,15 @@
+#bottomRightKotBackgroundImage{
+    position: absolute;
+    bottom: -25vh;
+    right: -25vh;
+    height : 70vh;
+    opacity : 0;
+    z-index: -2;
+    animation: showUp 1s forwards;
+}
+
+@keyframes shoUp{
+    to{
+        opacity: 1;
+    }
+}

@@ -1,0 +1,60 @@
+.titleBarLine{
+    position: absolute;
+    top: 20px;
+    height: 2px;
+    width: 100%;
+    opacity: 0.5;
+    background: grey;
+}
+
+.titleAppName{
+    cursor: default;
+    width: 100px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    user-select: none;
+    z-index: -2;
+}
+
+/*Buttons*/
+a.windowButton {
+    color: #000000;
+    text-decoration: none;
+    transition: 0.3s ease all;
+  }
+  a.windowButton:hover {
+    color: #fff;
+    z-index: 1;
+  }
+  .windowButton {
+    cursor: default;
+    position: absolute;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+
+    width: 41px;
+    height: 26px;
+    
+    padding: 4px 0px;
+
+    user-select: none;
+
+  }
+  .windowButton:before {
+    transition: 0.5s all ease;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    opacity: 0;
+    content: '';
+    background-color: #a793dd;
+    z-index: -2;
+  }
+  .windowButton:hover:before {
+    transition: 0.5s all ease;
+    left: 0px;
+    right: 0px;
+    opacity: 1;
+  }
+  

@@ -1,0 +1,16 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: Introducao.aux
+The style file: abntex2-num.bst
+Database file #1: abntex2-options.bib
+Database file #2: ./bibliografia.bib
+Warning--entry type for "pib" isn't style-file defined
+--line 24 of file ./bibliografia.bib
+Warning--entry type for "mineracaoUFMG" isn't style-file defined
+--line 32 of file ./bibliografia.bib
+Warning--campo year vazio ou faltando em pib
+Warning--campo year vazio ou faltando em mineracaoUFMG
++---------------------------------------------------------+
+| Estilo bibliográfico abntex2-num.bst versão v-1.9.7           |
+| Em caso de dúvidas ou problemas com este estilo procure |
+| http://www.abntex.net.br/                               |
++---------------------------------------------------------+
+(There were 4 warnings)
