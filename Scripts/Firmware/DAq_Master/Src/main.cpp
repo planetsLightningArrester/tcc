@@ -288,6 +288,7 @@ int main(void) {
 					HAL_Delay(100);
 					toggleLED(_radio + 1);
 				}
+
 				indexUSB = 0;       //Reset the index USB buffer
 				bufUSB[0] = '\0';   //Reset the USB buffer
 			}
