@@ -1,4 +1,4 @@
-Src/main.o: ../Src/main.c \
+Src/main.o: ../Src/main.cpp \
  C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Inc/main.h \
  C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Inc/stm32f1xx_hal_conf.h \
@@ -24,7 +24,9 @@ Src/main.o: ../Src/main.c \
  C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
  C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
- C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
+ C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
+ ../Src/../../Bibliotecas/nRF24L01.cpp \
+ ../Src/../../Bibliotecas/nRF24L01.h
 
 C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Inc/main.h:
 
@@ -77,3 +79,7 @@ C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Drivers/STM32F1xx_HAL_Driver/Inc/st
 C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 
 C:/codeCave/03-TCC/Scripts/Firmware/DAq_IEPE/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
+
+../Src/../../Bibliotecas/nRF24L01.cpp:
+
+../Src/../../Bibliotecas/nRF24L01.h:

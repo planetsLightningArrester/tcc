@@ -248,6 +248,23 @@ int main(void) {
 			{ &hspi1, 10, 11, 25 }, { &hspi1, 12, 13, 30 },
 			{ &hspi1, 14, 18, 35 }, { &hspi1, 19, 21, 40 } };
 
+	uint8_t rf[100];
+	uint32_t sampleCounter = 0;
+
+	while(1){
+		if(radio[3].available()){
+			radio[3].read((char *)rf);
+			/*sampleCounter = (rf[8] & 0xff);				//SampleCounter
+			sampleCounter += ((rf[9])<<8);		//^
+			sampleCounter += ((rf[10])<<16);	//^
+			sampleCounter += ((rf[11])<<24);	//^
+			sprintf(RF24buf, "%d", sampleCounter);
+			CDC_Transmit_FS((uint8_t *)RF24buf, strlen(RF24buf));
+			*/
+			CDC_Transmit_FS((uint8_t *)rf, strlen((char*)rf));
+		}
+	}
+
 	while (1) {
 		//Config routine
 		while (!started) {

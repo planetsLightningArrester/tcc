@@ -26,7 +26,7 @@
 #include "stm32f1xx_hal.h"
 #include <stdlib.h>
 #include <stdbool.h>
-//#include "../../Bibliotecas/nRF24L01.cpp"
+#include "../../Bibliotecas/nRF24L01.cpp"
 
 /* USER CODE END Includes */
 
@@ -91,7 +91,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
+
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -117,13 +117,13 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
-  uint8_t dataPackage[15] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  uint8_t dataPackage[32];
   uint16_t canais[4];
   uint32_t sampleCounter = 0;
   uint8_t i;
 
   HAL_Delay(1000);
-  //nRF24 radio = nRF24(&hspi2, CE_Pin, SS_Pin, 21);
+  nRF24 radio = nRF24(&hspi2, 29, 25, 20);
   HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
   HAL_Delay(200);
   HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
@@ -136,8 +136,9 @@ int main(void)
   HAL_Delay(200);
   HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
   HAL_Delay(200);
-  HAL_TIM_Base_Start_IT(&htim1);
+  //HAL_TIM_Base_Start_IT(&htim1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*) ADCReadings, 4);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -147,14 +148,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	while(1){
-
-	}
 
 	if(convComplete){
 
 		convComplete = false;   //Clear adc flag
-		sampleCounter++;    //Increment sample counter
 
 		canais[0] = (ADCReadings[0] & 0xffff)*ch0Ratio;
 		canais[1] = ((ADCReadings[0] & 0xffff0000)>>16)*ch1Ratio;
@@ -167,25 +164,38 @@ int main(void)
 			}
 		}
 
-		dataPackage[0] = (uint8_t)(canais[0] & 0xff);           		//Ch0
-		dataPackage[1] = (uint8_t)((canais[0] & 0xff00)>>8);	    	//^
-		dataPackage[2] = (uint8_t)(canais[1] & 0xff);     				//Ch1
-		dataPackage[3] = (uint8_t)((canais[1] & 0xff00)>>8);			//^
-		dataPackage[4] = (uint8_t)(canais[2] & 0xff);					//Ch2
-		dataPackage[5] = (uint8_t)((canais[2] & 0xff00)>>8);			//^
-		dataPackage[6] = (uint8_t)(canais[3] & 0xff);					//Ch3
-		dataPackage[7] = (uint8_t)((canais[3] & 0xff00)>>8);			//^
-		dataPackage[8] = (uint8_t)(sampleCounter & 0xff);				//SampleCounter
-		dataPackage[9] = (uint8_t)((sampleCounter & 0xff00)>>8);		//^
-		dataPackage[10] = (uint8_t)((sampleCounter & 0xff0000)>>16);	//^
-		dataPackage[11] = (uint8_t)((sampleCounter & 0xff000000)>>24);	//^
+		dataPackage[0 + sampleCounter*8] = (uint8_t)(canais[0] & 0xff);           		//Ch0
+		dataPackage[1 + sampleCounter*8] = (uint8_t)((canais[0] & 0xff00)>>8);	    	//^
+		dataPackage[2 + sampleCounter*8] = (uint8_t)(canais[1] & 0xff);     				//Ch1
+		dataPackage[3 + sampleCounter*8] = (uint8_t)((canais[1] & 0xff00)>>8);			//^
+		dataPackage[4 + sampleCounter*8] = (uint8_t)(canais[2] & 0xff);					//Ch2
+		dataPackage[5 + sampleCounter*8] = (uint8_t)((canais[2] & 0xff00)>>8);			//^
+		dataPackage[6 + sampleCounter*8] = (uint8_t)(canais[3] & 0xff);					//Ch3
+		dataPackage[7 + sampleCounter*8] = (uint8_t)((canais[3] & 0xff00)>>8);			//^
 
-		if(sampleCounter >= 60000){
+		sampleCounter++;		//Increment sample counter
+
+		if(sampleCounter == 4){
+			radio.send((const char *)dataPackage, 32, 0);
 			sampleCounter = 0;
-			tim1Counter = 0;
 		}
 
-		//HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
+		//radio.send((const char *)"TesteTesteTeTesteTesteTeTesteTesteTe", 32, 0);
+
+		/*
+				dataPackage[0] = (uint8_t)(canais[0] & 0xff);           		//Ch0
+				dataPackage[1] = (uint8_t)((canais[0] & 0xff00)>>8);	    	//^
+				dataPackage[2] = (uint8_t)(canais[1] & 0xff);     				//Ch1
+				dataPackage[3] = (uint8_t)((canais[1] & 0xff00)>>8);			//^
+				dataPackage[4] = (uint8_t)(canais[2] & 0xff);					//Ch2
+				dataPackage[5] = (uint8_t)((canais[2] & 0xff00)>>8);			//^
+				dataPackage[6] = (uint8_t)(canais[3] & 0xff);					//Ch3
+				dataPackage[7] = (uint8_t)((canais[3] & 0xff00)>>8);			//^
+				dataPackage[8] = (uint8_t)(sampleCounter & 0xff);				//SampleCounter
+				dataPackage[9] = (uint8_t)((sampleCounter & 0xff00)>>8);		//^
+				dataPackage[10] = (uint8_t)((sampleCounter & 0xff0000)>>16);	//^
+				dataPackage[11] = (uint8_t)((sampleCounter & 0xff000000)>>24);	//^
+		*/
 	}
   }
   /* USER CODE END 3 */
@@ -201,7 +211,7 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -214,7 +224,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -252,7 +262,7 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 1 */
 
   /* USER CODE END ADC1_Init 1 */
-  /** Common config 
+  /** Common config
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ScanConvMode = ADC_SCAN_ENABLE;
@@ -265,7 +275,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Regular Channel 
+  /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_2;
   sConfig.Rank = ADC_REGULAR_RANK_1;
@@ -274,7 +284,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Regular Channel 
+  /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_3;
   sConfig.Rank = ADC_REGULAR_RANK_2;
@@ -282,7 +292,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Regular Channel 
+  /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_4;
   sConfig.Rank = ADC_REGULAR_RANK_3;
@@ -290,7 +300,7 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Regular Channel 
+  /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_5;
   sConfig.Rank = ADC_REGULAR_RANK_4;
@@ -327,7 +337,7 @@ static void MX_SPI2_Init(void)
   hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi2.Init.NSS = SPI_NSS_SOFT;
-  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
+  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -433,10 +443,10 @@ static void MX_TIM3_Init(void)
 
 }
 
-/** 
+/**
   * Enable DMA controller clock
   */
-static void MX_DMA_Init(void) 
+static void MX_DMA_Init(void)
 {
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
@@ -517,7 +527,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
