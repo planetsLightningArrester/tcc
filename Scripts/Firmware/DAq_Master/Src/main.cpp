@@ -268,6 +268,7 @@ int main(void) {
 				} else if (!strncmp((char *) bufUSB, "analog", 6)) { //Change to analog mode
 					mode = ANALOG;
 				} else if (!strncmp(bufUSB, "start", 5)) {
+					testLEDs();
 					started = true;
 					for (int j = 0; j < 8; j++) {
 						for (int k = 0; k < 6; k++) {

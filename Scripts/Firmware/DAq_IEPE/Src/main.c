@@ -37,6 +37,10 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define ch0Ratio (4095.0/3703.0)
+#define ch1Ratio (4095.0/3616.0)
+#define ch2Ratio (4095.0/3556.0)
+#define ch3Ratio (4095.0/3616.0)
 
 /* USER CODE END PD */
 
@@ -47,19 +51,17 @@
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
-ADC_HandleTypeDef hadc2;
 DMA_HandleTypeDef hdma_adc1;
 
 SPI_HandleTypeDef hspi2;
 
 TIM_HandleTypeDef htim1;
-TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
-TIM_HandleTypeDef htim4;
 
 /* USER CODE BEGIN PV */
 uint32_t ADCReadings[10];
 volatile bool convComplete = false;
+uint8_t tim1Counter;
 
 /* USER CODE END PV */
 
@@ -70,10 +72,7 @@ static void MX_DMA_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM1_Init(void);
-static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
-static void MX_TIM4_Init(void);
-static void MX_ADC2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -116,14 +115,12 @@ int main(void)
   MX_SPI2_Init();
   MX_ADC1_Init();
   MX_TIM1_Init();
-  MX_TIM2_Init();
   MX_TIM3_Init();
-  MX_TIM4_Init();
-  MX_ADC2_Init();
   /* USER CODE BEGIN 2 */
-  uint8_t dataPackage[15];
-  uint32_t canais[4];
+  uint8_t dataPackage[15] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  uint16_t canais[4];
   uint32_t sampleCounter = 0;
+  uint8_t i;
 
   HAL_Delay(1000);
   //nRF24 radio = nRF24(&hspi2, CE_Pin, SS_Pin, 21);
@@ -139,8 +136,8 @@ int main(void)
   HAL_Delay(200);
   HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
   HAL_Delay(200);
-  HAL_ADCEx_MultiModeStart_DMA(&hadc1, (uint32_t*) ADCReadings, 4);
-  //HAL_ADC_Start_DMA(&hadc1, (uint32_t*) ADCReadings, 4);
+  HAL_TIM_Base_Start_IT(&htim1);
+  HAL_ADC_Start_DMA(&hadc1, (uint32_t*) ADCReadings, 4);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -150,31 +147,46 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    if(convComplete){
+	while(1){
 
-      convComplete = false;   //Clear adc flag
-      sampleCounter++;    //Increment sample counter
+	}
 
-      // dataPackage[0] = (uint8_t)(ADCReadings[0] & 0xff);               //Ch0              
-      // dataPackage[1] = (uint8_t)((ADCReadings[0] & 0xff00)>>8);        //^
-      // dataPackage[2] = (uint8_t)((ADCReadings[0] & 0xff0000)>>16);     //Ch1
-      // dataPackage[3] = (uint8_t)((ADCReadings[0] & 0xff000000)>>24);   //^
-      // dataPackage[4] = (uint8_t)(ADCReadings[1] & 0xff);               //Ch2
-      // dataPackage[5] = (uint8_t)((ADCReadings[1] & 0xff00)>>8);        //^
-      // dataPackage[6] = (uint8_t)((ADCReadings[1] & 0xff0000)>>16);     //Ch3
-      // dataPackage[7] = (uint8_t)((ADCReadings[1] & 0xff000000)>>24);   //^
-      // dataPackage[8] = (uint8_t)(sampleCounter & 0xff);                //SampleCounter
-      // dataPackage[9] = (uint8_t)((sampleCounter & 0xff00)>>8);         //^
-      // dataPackage[10] = (uint8_t)((sampleCounter & 0xff0000)>>16);     //^
-      // dataPackage[11] = (uint8_t)((sampleCounter & 0xff000000)>>24);   //^
+	if(convComplete){
 
-      canais[0] = ADCReadings[0] & 0xffff;
-      canais[1] = (ADCReadings[0] & 0xffff0000)>>16;
-      canais[2] = ADCReadings[1] & 0xffff;
-      canais[3] = (ADCReadings[1] & 0xffff0000)>>16;
+		convComplete = false;   //Clear adc flag
+		sampleCounter++;    //Increment sample counter
 
-      HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-    }
+		canais[0] = (ADCReadings[0] & 0xffff)*ch0Ratio;
+		canais[1] = ((ADCReadings[0] & 0xffff0000)>>16)*ch1Ratio;
+		canais[2] = (ADCReadings[1] & 0xffff)*ch2Ratio;
+		canais[3] = ((ADCReadings[1] & 0xffff0000)>>16)*ch3Ratio;
+
+		for(i = 0; i< 4; i++){
+			if(canais[i] > 4095){
+				canais[i] = 4095;
+			}
+		}
+
+		dataPackage[0] = (uint8_t)(canais[0] & 0xff);           		//Ch0
+		dataPackage[1] = (uint8_t)((canais[0] & 0xff00)>>8);	    	//^
+		dataPackage[2] = (uint8_t)(canais[1] & 0xff);     				//Ch1
+		dataPackage[3] = (uint8_t)((canais[1] & 0xff00)>>8);			//^
+		dataPackage[4] = (uint8_t)(canais[2] & 0xff);					//Ch2
+		dataPackage[5] = (uint8_t)((canais[2] & 0xff00)>>8);			//^
+		dataPackage[6] = (uint8_t)(canais[3] & 0xff);					//Ch3
+		dataPackage[7] = (uint8_t)((canais[3] & 0xff00)>>8);			//^
+		dataPackage[8] = (uint8_t)(sampleCounter & 0xff);				//SampleCounter
+		dataPackage[9] = (uint8_t)((sampleCounter & 0xff00)>>8);		//^
+		dataPackage[10] = (uint8_t)((sampleCounter & 0xff0000)>>16);	//^
+		dataPackage[11] = (uint8_t)((sampleCounter & 0xff000000)>>24);	//^
+
+		if(sampleCounter >= 60000){
+			sampleCounter = 0;
+			tim1Counter = 0;
+		}
+
+		//HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
+	}
   }
   /* USER CODE END 3 */
 }
@@ -235,7 +247,6 @@ static void MX_ADC1_Init(void)
 
   /* USER CODE END ADC1_Init 0 */
 
-  ADC_MultiModeTypeDef multimode = {0};
   ADC_ChannelConfTypeDef sConfig = {0};
 
   /* USER CODE BEGIN ADC1_Init 1 */
@@ -249,15 +260,8 @@ static void MX_ADC1_Init(void)
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc1.Init.NbrOfConversion = 2;
+  hadc1.Init.NbrOfConversion = 4;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /** Configure the ADC multi-mode 
-  */
-  multimode.Mode = ADC_DUALMODE_REGSIMULT;
-  if (HAL_ADCEx_MultiModeConfigChannel(&hadc1, &multimode) != HAL_OK)
   {
     Error_Handler();
   }
@@ -265,7 +269,15 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_2;
   sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Regular Channel 
+  */
+  sConfig.Channel = ADC_CHANNEL_3;
+  sConfig.Rank = ADC_REGULAR_RANK_2;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -273,7 +285,15 @@ static void MX_ADC1_Init(void)
   /** Configure Regular Channel 
   */
   sConfig.Channel = ADC_CHANNEL_4;
-  sConfig.Rank = ADC_REGULAR_RANK_2;
+  sConfig.Rank = ADC_REGULAR_RANK_3;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Regular Channel 
+  */
+  sConfig.Channel = ADC_CHANNEL_5;
+  sConfig.Rank = ADC_REGULAR_RANK_4;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -281,59 +301,6 @@ static void MX_ADC1_Init(void)
   /* USER CODE BEGIN ADC1_Init 2 */
 
   /* USER CODE END ADC1_Init 2 */
-
-}
-
-/**
-  * @brief ADC2 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_ADC2_Init(void)
-{
-
-  /* USER CODE BEGIN ADC2_Init 0 */
-
-  /* USER CODE END ADC2_Init 0 */
-
-  ADC_ChannelConfTypeDef sConfig = {0};
-
-  /* USER CODE BEGIN ADC2_Init 1 */
-
-  /* USER CODE END ADC2_Init 1 */
-  /** Common config 
-  */
-  hadc2.Instance = ADC2;
-  hadc2.Init.ScanConvMode = ADC_SCAN_ENABLE;
-  hadc2.Init.ContinuousConvMode = ENABLE;
-  hadc2.Init.DiscontinuousConvMode = DISABLE;
-  hadc2.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc2.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-  hadc2.Init.NbrOfConversion = 2;
-  if (HAL_ADC_Init(&hadc2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /** Configure Regular Channel 
-  */
-  sConfig.Channel = ADC_CHANNEL_3;
-  sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
-  if (HAL_ADC_ConfigChannel(&hadc2, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /** Configure Regular Channel 
-  */
-  sConfig.Channel = ADC_CHANNEL_5;
-  sConfig.Rank = ADC_REGULAR_RANK_2;
-  if (HAL_ADC_ConfigChannel(&hadc2, &sConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN ADC2_Init 2 */
-
-  /* USER CODE END ADC2_Init 2 */
 
 }
 
@@ -394,9 +361,9 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 11000;
+  htim1.Init.Prescaler = 1199;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 650;
+  htim1.Init.Period = 60;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
@@ -418,51 +385,6 @@ static void MX_TIM1_Init(void)
   /* USER CODE BEGIN TIM1_Init 2 */
 
   /* USER CODE END TIM1_Init 2 */
-
-}
-
-/**
-  * @brief TIM2 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_TIM2_Init(void)
-{
-
-  /* USER CODE BEGIN TIM2_Init 0 */
-
-  /* USER CODE END TIM2_Init 0 */
-
-  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
-
-  /* USER CODE BEGIN TIM2_Init 1 */
-
-  /* USER CODE END TIM2_Init 1 */
-  htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 9;
-  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 719;
-  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM2_Init 2 */
-
-  /* USER CODE END TIM2_Init 2 */
 
 }
 
@@ -508,64 +430,6 @@ static void MX_TIM3_Init(void)
   /* USER CODE BEGIN TIM3_Init 2 */
 
   /* USER CODE END TIM3_Init 2 */
-
-}
-
-/**
-  * @brief TIM4 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_TIM4_Init(void)
-{
-
-  /* USER CODE BEGIN TIM4_Init 0 */
-
-  /* USER CODE END TIM4_Init 0 */
-
-  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
-  TIM_OC_InitTypeDef sConfigOC = {0};
-
-  /* USER CODE BEGIN TIM4_Init 1 */
-
-  /* USER CODE END TIM4_Init 1 */
-  htim4.Instance = TIM4;
-  htim4.Init.Prescaler = 37;
-  htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim4.Init.Period = 113;
-  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-  if (HAL_TIM_Base_Init(&htim4) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim4, &sClockSourceConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_TIM_OC_Init(&htim4) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigOC.OCMode = TIM_OCMODE_TIMING;
-  sConfigOC.Pulse = 0;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_OC_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM4_Init 2 */
-
-  /* USER CODE END TIM4_Init 2 */
 
 }
 
@@ -623,6 +487,11 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	convComplete = true;
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+        if(htim == &htim1)
+	    tim1Counter = tim1Counter + 1;
 }
 
 /* USER CODE END 4 */
