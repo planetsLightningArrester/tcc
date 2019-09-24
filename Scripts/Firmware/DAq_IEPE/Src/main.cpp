@@ -60,7 +60,9 @@ TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
 uint32_t ADCReadings[10];
-volatile bool convComplete = false;
+volatile bool convComplete = 0;
+uint16_t canais[100];
+volatile int convCounter = 0;
 uint8_t tim1Counter;
 
 /* USER CODE END PV */
@@ -91,7 +93,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-
+  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -118,24 +120,23 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   uint8_t dataPackage[32];
-  uint16_t canais[4];
   uint32_t sampleCounter = 0;
   uint8_t i;
 
-  HAL_Delay(1000);
+  HAL_Delay(300);
   nRF24 radio = nRF24(&hspi2, 29, 25, 20);
   HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(200);
+  HAL_Delay(100);
   HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(200);
+  HAL_Delay(100);
   HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(200);
+  HAL_Delay(100);
   HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(200);
+  HAL_Delay(100);
   HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(200);
+  HAL_Delay(100);
   HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(200);
+  HAL_Delay(100);
   //HAL_TIM_Base_Start_IT(&htim1);
   HAL_ADC_Start_DMA(&hadc1, (uint32_t*) ADCReadings, 4);
 
@@ -148,55 +149,25 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    if(convComplete){
 
-	if(convComplete){
+      convComplete = false;   //Clear adc flag
 
-		convComplete = false;   //Clear adc flag
+      for(;(sampleCounter < convCounter) && (sampleCounter < 5); sampleCounter++){
+        dataPackage[0 + sampleCounter*6] = (uint8_t)(canais[sampleCounter] & 0xff);
+        dataPackage[1 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter] & 0x0f00)>>8) | ((canais[sampleCounter + 1] & 0x0f)<<4));
+        dataPackage[2 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter + 1] & 0xf0)>>4) | ((canais[sampleCounter + 1] & 0x0f00)>>4));
+        dataPackage[3 + sampleCounter*6] = (uint8_t)(canais[sampleCounter + 2] & 0xff);
+        dataPackage[4 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter + 2] & 0x0f00)>>8) | ((canais[sampleCounter + 3] & 0x0f)<<4));
+        dataPackage[5 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter + 3] & 0xf0)>>4) | ((canais[sampleCounter + 3] & 0x0f00)>>4));
+      }
 
-		canais[0] = (ADCReadings[0] & 0xffff)*ch0Ratio;
-		canais[1] = ((ADCReadings[0] & 0xffff0000)>>16)*ch1Ratio;
-		canais[2] = (ADCReadings[1] & 0xffff)*ch2Ratio;
-		canais[3] = ((ADCReadings[1] & 0xffff0000)>>16)*ch3Ratio;
-
-		for(i = 0; i< 4; i++){
-			if(canais[i] > 4095){
-				canais[i] = 4095;
-			}
-		}
-
-		dataPackage[0 + sampleCounter*8] = (uint8_t)(canais[0] & 0xff);           		//Ch0
-		dataPackage[1 + sampleCounter*8] = (uint8_t)((canais[0] & 0xff00)>>8);	    	//^
-		dataPackage[2 + sampleCounter*8] = (uint8_t)(canais[1] & 0xff);     				//Ch1
-		dataPackage[3 + sampleCounter*8] = (uint8_t)((canais[1] & 0xff00)>>8);			//^
-		dataPackage[4 + sampleCounter*8] = (uint8_t)(canais[2] & 0xff);					//Ch2
-		dataPackage[5 + sampleCounter*8] = (uint8_t)((canais[2] & 0xff00)>>8);			//^
-		dataPackage[6 + sampleCounter*8] = (uint8_t)(canais[3] & 0xff);					//Ch3
-		dataPackage[7 + sampleCounter*8] = (uint8_t)((canais[3] & 0xff00)>>8);			//^
-
-		sampleCounter++;		//Increment sample counter
-
-		if(sampleCounter == 4){
-			radio.send((const char *)dataPackage, 32, 0);
-			sampleCounter = 0;
-		}
-
-		//radio.send((const char *)"TesteTesteTeTesteTesteTeTesteTesteTe", 32, 0);
-
-		/*
-				dataPackage[0] = (uint8_t)(canais[0] & 0xff);           		//Ch0
-				dataPackage[1] = (uint8_t)((canais[0] & 0xff00)>>8);	    	//^
-				dataPackage[2] = (uint8_t)(canais[1] & 0xff);     				//Ch1
-				dataPackage[3] = (uint8_t)((canais[1] & 0xff00)>>8);			//^
-				dataPackage[4] = (uint8_t)(canais[2] & 0xff);					//Ch2
-				dataPackage[5] = (uint8_t)((canais[2] & 0xff00)>>8);			//^
-				dataPackage[6] = (uint8_t)(canais[3] & 0xff);					//Ch3
-				dataPackage[7] = (uint8_t)((canais[3] & 0xff00)>>8);			//^
-				dataPackage[8] = (uint8_t)(sampleCounter & 0xff);				//SampleCounter
-				dataPackage[9] = (uint8_t)((sampleCounter & 0xff00)>>8);		//^
-				dataPackage[10] = (uint8_t)((sampleCounter & 0xff0000)>>16);	//^
-				dataPackage[11] = (uint8_t)((sampleCounter & 0xff000000)>>24);	//^
-		*/
-	}
+      if(sampleCounter == 5){
+        radio.send((const char *)dataPackage, 30, 0);
+        sampleCounter = 0;
+        convCounter = (convCounter > 5)?(convCounter - 5):0;
+      }
+    }
   }
   /* USER CODE END 3 */
 }
@@ -231,14 +202,14 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV4;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
     Error_Handler();
   }
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
-  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV8;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
@@ -496,7 +467,18 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
+  canais[convCounter] = (ADCReadings[0] & 0xffff)*ch0Ratio;
+  canais[convCounter + 1] = ((ADCReadings[0] & 0xffff0000)>>16)*ch1Ratio;
+  canais[convCounter + 2] = (ADCReadings[1] & 0xffff)*ch2Ratio;
+  canais[convCounter + 3] = ((ADCReadings[1] & 0xffff0000)>>16)*ch3Ratio;
+  
+  canais[convCounter] = (canais[convCounter] > 4095)?4095:canais[convCounter];
+  canais[convCounter + 1] = (canais[convCounter + 1] > 4095)?4095:canais[convCounter + 1];
+  canais[convCounter + 2] = (canais[convCounter + 2] > 4095)?4095:canais[convCounter + 2];
+  canais[convCounter + 3] = (canais[convCounter + 3] > 4095)?4095:canais[convCounter + 3];
+
 	convComplete = true;
+	convCounter++;
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
