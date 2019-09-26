@@ -158,7 +158,7 @@
 #define _4000us 15
 
 #define noRetries 0
-#define _1retrie 1
+#define _1retry 1
 #define _2retries 2
 #define _3retries 3
 #define _4retries 4

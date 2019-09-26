@@ -59,11 +59,13 @@ TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
-uint32_t ADCReadings[10];
-volatile bool convComplete = 0;
+uint32_t ADCReadings[4];
+volatile uint32_t convComplete = 0;
 uint16_t canais[100];
-volatile int convCounter = 0;
-uint8_t tim1Counter;
+volatile uint32_t convCounter = 0;
+volatile uint32_t prevConvCounter = 0;
+uint32_t tim1Counter = 0;
+uint32_t globalADC_counter = 0;
 
 /* USER CODE END PV */
 
@@ -76,6 +78,8 @@ static void MX_ADC1_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
+void toggleIdleLED(uint8_t delay = 0, uint8_t times = 1);
+void toggleSendLED(uint8_t delay = 0, uint8_t times = 1);
 
 /* USER CODE END PFP */
 
@@ -119,26 +123,16 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  char RF24msg[32];
   uint8_t dataPackage[32];
   uint32_t sampleCounter = 0;
-  uint8_t i;
+  volatile uint32_t convCounterAux = 0;
+  bool aquisitionStarted = false;
 
   HAL_Delay(300);
   nRF24 radio = nRF24(&hspi2, 29, 25, 20);
-  HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(100);
-  HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(100);
-  HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(100);
-  HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(100);
-  HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(100);
-  HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
-  HAL_Delay(100);
+  toggleIdleLED(100, 7);
   //HAL_TIM_Base_Start_IT(&htim1);
-  HAL_ADC_Start_DMA(&hadc1, (uint32_t*) ADCReadings, 4);
 
   /* USER CODE END 2 */
 
@@ -149,23 +143,47 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    if(convComplete){
-
-      convComplete = false;   //Clear adc flag
-
-      for(;(sampleCounter < convCounter) && (sampleCounter < 5); sampleCounter++){
-        dataPackage[0 + sampleCounter*6] = (uint8_t)(canais[sampleCounter] & 0xff);
-        dataPackage[1 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter] & 0x0f00)>>8) | ((canais[sampleCounter + 1] & 0x0f)<<4));
-        dataPackage[2 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter + 1] & 0xf0)>>4) | ((canais[sampleCounter + 1] & 0x0f00)>>4));
-        dataPackage[3 + sampleCounter*6] = (uint8_t)(canais[sampleCounter + 2] & 0xff);
-        dataPackage[4 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter + 2] & 0x0f00)>>8) | ((canais[sampleCounter + 3] & 0x0f)<<4));
-        dataPackage[5 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter + 3] & 0xf0)>>4) | ((canais[sampleCounter + 3] & 0x0f00)>>4));
+    while(!aquisitionStarted){
+      if(radio.available()){
+        radio.read(RF24msg);
+        if(strncmp(RF24msg, "start", 5) == 0){
+          aquisitionStarted = true;
+          toggleIdleLED();
+          toggleSendLED(100, 6);
+          HAL_ADC_Start_DMA(&hadc1, (uint32_t*) ADCReadings, 4);
+          //HAL_TIM_Base_Start_IT(&htim1);
+        }
       }
+    }
+    while(aquisitionStarted){
+      while(sampleCounter < convCounter){
 
-      if(sampleCounter == 5){
-        radio.send((const char *)dataPackage, 30, 0);
-        sampleCounter = 0;
-        convCounter = (convCounter > 5)?(convCounter - 5):0;
+        convCounterAux = convCounter;
+
+        for(;(sampleCounter < convCounterAux) && (sampleCounter < 5); sampleCounter++){
+          dataPackage[0 + sampleCounter*6] = (uint8_t)(canais[sampleCounter*4] & 0xff);
+          dataPackage[1 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter*4] & 0x0f00)>>8) | ((canais[sampleCounter*4 + 1] & 0x0f)<<4));
+          dataPackage[2 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter*4 + 1] & 0xf0)>>4) | ((canais[sampleCounter*4 + 1] & 0x0f00)>>4));
+          dataPackage[3 + sampleCounter*6] = (uint8_t)(canais[sampleCounter*4 + 2] & 0xff);
+          dataPackage[4 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter*4 + 2] & 0x0f00)>>8) | ((canais[sampleCounter*4 + 3] & 0x0f)<<4));
+          dataPackage[5 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter*4 + 3] & 0xf0)>>4) | ((canais[sampleCounter*4 + 3] & 0x0f00)>>4));
+        }
+
+        if(sampleCounter == 5) {
+          if(radio.send((const char *)dataPackage, 30, 0)){
+            radio.read(RF24msg);
+            if(strncmp(RF24msg, "stop", 4) == 0) {
+              HAL_ADC_Stop_DMA(&hadc1);
+              toggleIdleLED(100, 7);
+              aquisitionStarted = false;
+            }
+          }
+
+          // prevConvCounter = convCounter - 5;
+          convCounter -= 5;
+          memmove(canais, canais + 20, convCounter*4*8);
+          sampleCounter = 0;
+        }
       }
     }
   }
@@ -342,9 +360,9 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 1199;
+  htim1.Init.Prescaler = 19999;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 60;
+  htim1.Init.Period = 1800;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
@@ -439,6 +457,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -448,6 +467,27 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, CE_Pin|idleLed_Pin|sendLed_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : PC13 PC14 PC15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PA0 PA1 PA6 PA7
+                           PA11 PA12 PA15 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_6|GPIO_PIN_7
+                          |GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB0 PB1 PB2 PB10
+                           PB11 PB3 PB4 PB5
+                           PB6 PB7 PB8 PB9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_10
+                          |GPIO_PIN_11|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5
+                          |GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : SS_Pin */
   GPIO_InitStruct.Pin = SS_Pin;
@@ -467,23 +507,54 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
-  canais[convCounter] = (ADCReadings[0] & 0xffff)*ch0Ratio;
-  canais[convCounter + 1] = ((ADCReadings[0] & 0xffff0000)>>16)*ch1Ratio;
-  canais[convCounter + 2] = (ADCReadings[1] & 0xffff)*ch2Ratio;
-  canais[convCounter + 3] = ((ADCReadings[1] & 0xffff0000)>>16)*ch3Ratio;
-  
-  canais[convCounter] = (canais[convCounter] > 4095)?4095:canais[convCounter];
-  canais[convCounter + 1] = (canais[convCounter + 1] > 4095)?4095:canais[convCounter + 1];
-  canais[convCounter + 2] = (canais[convCounter + 2] > 4095)?4095:canais[convCounter + 2];
-  canais[convCounter + 3] = (canais[convCounter + 3] > 4095)?4095:canais[convCounter + 3];
+	// if(prevConvCounter){
+	// 	for (uint32_t i = 0; i < prevConvCounter; i++){
+	// 		canais[4*i] = canais[(i + 6)*4];
+	// 		canais[4*i + 1] = canais[(i + 6)*4 + 1];
+	// 		canais[4*i + 2] = canais[(i + 6)*4 + 2];
+	// 		canais[4*i + 3] = canais[(i + 6)*4 + 3];
+	// 	}
+	// 	convCounter = prevConvCounter;
+	// 	prevConvCounter = 0;
+	// }
+	canais[4*convCounter] = (ADCReadings[0])*ch0Ratio;
+	canais[4*convCounter + 1] = (ADCReadings[1])*ch1Ratio;
+	canais[4*convCounter + 2] = (ADCReadings[2])*ch2Ratio;
+	canais[4*convCounter + 3] = (ADCReadings[3])*ch3Ratio;
 
-	convComplete = true;
+	canais[4*convCounter] = (canais[4*convCounter] > 4095)?4095:canais[4*convCounter];
+	canais[4*convCounter + 1] = (canais[4*convCounter + 1] > 4095)?4095:canais[4*convCounter + 1];
+	canais[4*convCounter + 2] = (canais[4*convCounter + 2] > 4095)?4095:canais[4*convCounter + 2];
+	canais[4*convCounter + 3] = (canais[4*convCounter + 3] > 4095)?4095:canais[4*convCounter + 3];
+
 	convCounter++;
+	globalADC_counter++;
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-        if(htim == &htim1)
-	    tim1Counter = tim1Counter + 1;
+	tim1Counter++;
+	if(tim1Counter == 10){
+		globalADC_counter /= 10;
+		tim1Counter = 0;
+		globalADC_counter = 0;
+	}
+
+}
+
+void toggleIdleLED(uint8_t delay = 0, uint8_t times = 1){
+  while (times--) {
+    HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
+    if (delay)
+    	HAL_Delay(delay);
+  }
+}
+
+void toggleSendLED(uint8_t delay = 0, uint8_t times = 1){
+  while (times--) {
+    HAL_GPIO_TogglePin(sendLed_GPIO_Port, sendLed_Pin);
+    if (delay)
+    	HAL_Delay(delay);
+  }
 }
 
 /* USER CODE END 4 */

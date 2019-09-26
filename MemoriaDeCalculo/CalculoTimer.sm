@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<?application progid="SMath Studio Desktop" version="0.99.6884.37264"?>
+<?application progid="SMath Studio Desktop" version="0.99.7030.1435"?>
 <worksheet xmlns="http://smath.info/schemas/worksheet/1.0">
-  <settings dpi="96">
+  <settings ppi="96">
     <identity>
       <id>a496813b-31f4-44ae-8529-ea67dd5dfa35</id>
-      <revision>4</revision>
+      <revision>5</revision>
     </identity>
     <calculation>
       <precision>4</precision>
@@ -22,36 +22,45 @@
       <backgrounds />
     </pageModel>
     <dependencies>
-      <assembly name="SMath Studio Desktop" version="0.99.6884.37264" guid="a37cba83-b69c-4c71-9992-55ff666763bd" />
-      <assembly name="Math Region" version="0.99.6884.37264" guid="02f1ab51-215b-466e-a74d-5d8b1cf85e8d" />
+      <assembly name="SMath Studio Desktop" version="0.99.7030.1435" guid="a37cba83-b69c-4c71-9992-55ff666763bd" />
+      <assembly name="Math Region" version="0.99.7030.1435" guid="02f1ab51-215b-466e-a74d-5d8b1cf85e8d" />
     </dependencies>
   </settings>
   <regions type="content">
-    <region id="0" left="225" top="117" width="134" height="24" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="0" left="216" top="45" width="101" height="30" color="#000000" bgColor="#ffffff" fontSize="10">
+      <math>
+        <input>
+          <e type="operand">f.clk</e>
+          <e type="operand">36</e>
+          <e type="operand" style="unit">MHz</e>
+          <e type="operator" args="2">*</e>
+          <e type="operator" args="2">:</e>
+        </input>
+      </math>
+    </region>
+    <region id="1" left="225" top="117" width="142" height="24" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">prescaler</e>
-          <e type="operand">1199</e>
+          <e type="operand">19999</e>
           <e type="operator" args="2">:</e>
         </input>
       </math>
     </region>
-    <region id="1" left="414" top="117" width="150" height="24" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="2" left="414" top="117" width="166" height="24" color="#000000" bgColor="#ffffff" fontSize="10">
       <math optimize="2">
         <input>
           <e type="operand">CounterPeriod</e>
-          <e type="operand">19</e>
+          <e type="operand">3600</e>
           <e type="operator" args="2">:</e>
         </input>
       </math>
     </region>
-    <region id="2" left="207" top="207" width="386" height="43" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="3" left="207" top="207" width="338" height="49" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">f</e>
-          <e type="operand">72</e>
-          <e type="operand" style="unit">MHz</e>
-          <e type="operator" args="2">*</e>
+          <e type="operand">f.clk</e>
           <e type="operand">prescaler</e>
           <e type="operand">1</e>
           <e type="operator" args="2">+</e>
@@ -62,13 +71,13 @@
           <e type="operator" args="2">:</e>
         </input>
         <result action="numeric">
-          <e type="operand">3157.8947</e>
+          <e type="operand">0.5</e>
           <e type="operand" style="unit">Hz</e>
           <e type="operator" args="2">*</e>
         </result>
       </math>
     </region>
-    <region id="3" left="324" top="306" width="140" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="4" left="324" top="306" width="100" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">T</e>
@@ -78,13 +87,13 @@
           <e type="operator" args="2">:</e>
         </input>
         <result action="numeric">
-          <e type="operand">0.0003</e>
+          <e type="operand">2</e>
           <e type="operand" style="unit">s</e>
           <e type="operator" args="2">*</e>
         </result>
       </math>
     </region>
-    <region id="4" left="207" top="378" width="90" height="24" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="5" left="207" top="378" width="90" height="24" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">freq</e>
@@ -95,13 +104,11 @@
         </input>
       </math>
     </region>
-    <region id="5" left="207" top="414" width="270" height="43" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="6" left="207" top="414" width="262" height="49" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">CP</e>
-          <e type="operand">72</e>
-          <e type="operand" style="unit">MHz</e>
-          <e type="operator" args="2">*</e>
+          <e type="operand">f.clk</e>
           <e type="operand">prescaler</e>
           <e type="operand">1</e>
           <e type="operator" args="2">+</e>
@@ -112,11 +119,11 @@
           <e type="operator" args="2">:</e>
         </input>
         <result action="numeric">
-          <e type="operand">60000</e>
+          <e type="operand">1800</e>
         </result>
       </math>
     </region>
-    <region id="6" left="378" top="576" width="106" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="7" left="378" top="576" width="106" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">5170</e>
@@ -128,7 +135,7 @@
         </result>
       </math>
     </region>
-    <region id="7" left="387" top="639" width="114" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="8" left="387" top="639" width="114" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">12970</e>
@@ -140,7 +147,7 @@
         </result>
       </math>
     </region>
-    <region id="8" left="180" top="657" width="106" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="9" left="180" top="657" width="106" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">5180</e>
@@ -152,7 +159,7 @@
         </result>
       </math>
     </region>
-    <region id="9" left="189" top="738" width="138" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="10" left="189" top="738" width="138" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">3354</e>
@@ -166,7 +173,7 @@
         </result>
       </math>
     </region>
-    <region id="10" left="153" top="792" width="138" height="58" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="11" left="153" top="792" width="138" height="58" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">3822</e>
@@ -184,7 +191,7 @@
         </result>
       </math>
     </region>
-    <region id="11" left="477" top="855" width="82" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="12" left="477" top="855" width="82" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">12</e>
@@ -198,7 +205,7 @@
         </result>
       </math>
     </region>
-    <region id="12" left="153" top="864" width="174" height="58" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="13" left="153" top="864" width="174" height="58" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">2650</e>
@@ -214,7 +221,7 @@
         </result>
       </math>
     </region>
-    <region id="13" left="153" top="927" width="138" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="14" left="153" top="927" width="138" height="41" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">3822</e>
@@ -228,7 +235,7 @@
         </result>
       </math>
     </region>
-    <region id="14" left="378" top="936" width="166" height="54" color="#000000" bgColor="#ffffff" fontSize="10">
+    <region id="15" left="378" top="936" width="166" height="54" color="#000000" bgColor="#ffffff" fontSize="10">
       <math>
         <input>
           <e type="operand">2</e>

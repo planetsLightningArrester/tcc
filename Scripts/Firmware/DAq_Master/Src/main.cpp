@@ -84,42 +84,34 @@ static void MX_TIM3_Init(void);
 #define DIGITAL 0
 #define ANALOG 1
 
-bool mode = DIGITAL;
+bool mode = ANALOG;
 unsigned int indexUSB;
 char bufUSB[100];
 
 void sendThroughUSB(char* buf, int radioIndex, int pipe) {
 	uint8_t pipeData[100];  //Buffer with data received + pipe
 
-	sprintf((char *) pipeData, "r%d,p%d:", radioIndex, pipe); //Insert pipe
+	//sprintf((char *) pipeData, "r%d,p%d:", radioIndex, pipe); //Insert pipe
+	pipeData[0] = ((radioIndex & 0xF)<<4) | (pipe & 0xF);
 
 	if (mode == DIGITAL) {
-		pipeData[7] = buf[0];           //Acx
-		pipeData[8] = buf[1];           //^
-		pipeData[9] = buf[2];           //Acy
-		pipeData[10] = buf[3];          //^
-		pipeData[11] = buf[4];          //Acz
-		pipeData[12] = buf[5];          //^
-		pipeData[13] = buf[6];          //Battery level
-		pipeData[14] = buf[7];          //Milliseconds
-		pipeData[15] = buf[8];          //^
-		pipeData[16] = buf[9];          //^
-		pipeData[17] = buf[10];         //^
-		CDC_Transmit_FS(pipeData, 18);      //Transmit data through USB
+		pipeData[1] = buf[0];           //Acx
+		pipeData[2] = buf[1];           //^
+		pipeData[3] = buf[2];           //Acy
+		pipeData[4] = buf[3];          //^
+		pipeData[5] = buf[4];          //Acz
+		pipeData[6] = buf[5];          //^
+		pipeData[7] = buf[6];          //Battery level
+		pipeData[8] = buf[7];          //Milliseconds
+		pipeData[9] = buf[8];          //^
+		pipeData[10] = buf[9];          //^
+		pipeData[11] = buf[10];         //^
+		CDC_Transmit_FS(pipeData, 12);      //Transmit data through USB
 	} else {
-		pipeData[7] = buf[0];           //Ch0
-		pipeData[8] = buf[1];           //^
-		pipeData[9] = buf[2];           //Ch1
-		pipeData[10] = buf[3];          //^
-		pipeData[11] = buf[4];          //Ch2
-		pipeData[12] = buf[5];          //^
-		pipeData[13] = buf[6];          //Ch3
-		pipeData[14] = buf[7];          //^
-		pipeData[15] = buf[8];          //SampleCounter
-		pipeData[16] = buf[9];          //^
-		pipeData[17] = buf[10];         //^
-		pipeData[18] = buf[11];         //^
-		CDC_Transmit_FS(pipeData, 19);      //Transmit data through USB
+		for(uint8_t i = 0; i<30; i++){
+			pipeData[i+1] = buf[i];
+		}
+		CDC_Transmit_FS(pipeData, 31);      //Transmit data through USB
 	}
 }
 
@@ -242,28 +234,29 @@ int main(void) {
 	int _radio = 0, _pipe;      		//Var to store the data's last pipe
 	unsigned int indexAux;
 	volatile bool started = false;
+	bool activesRadios[] = {false, false, false, true, false, false, false, false};
 
 	std::vector<nRF24> radio = { { &hspi1, 31, 30, 5 }, { &hspi1, 29, 28, 10 },
 			{ &hspi1, 27, 26, 15 }, { &hspi1, 25, 22, 20 },
 			{ &hspi1, 10, 11, 25 }, { &hspi1, 12, 13, 30 },
 			{ &hspi1, 14, 18, 35 }, { &hspi1, 19, 21, 40 } };
 
-	uint8_t rf[100];
-	uint32_t sampleCounter = 0;
+	// uint8_t rf[100];
+	// uint32_t sampleCounter = 0;
 
-	while(1){
-		if(radio[3].available()){
-			radio[3].read((char *)rf);
-			/*sampleCounter = (rf[8] & 0xff);				//SampleCounter
-			sampleCounter += ((rf[9])<<8);		//^
-			sampleCounter += ((rf[10])<<16);	//^
-			sampleCounter += ((rf[11])<<24);	//^
-			sprintf(RF24buf, "%d", sampleCounter);
-			CDC_Transmit_FS((uint8_t *)RF24buf, strlen(RF24buf));
-			*/
-			CDC_Transmit_FS((uint8_t *)rf, strlen((char*)rf));
-		}
-	}
+	// while(1){
+	// 	if(radio[3].available()){
+	// 		radio[3].read((char *)rf);
+	// 		/*sampleCounter = (rf[8] & 0xff);				//SampleCounter
+	// 		sampleCounter += ((rf[9])<<8);		//^
+	// 		sampleCounter += ((rf[10])<<16);	//^
+	// 		sampleCounter += ((rf[11])<<24);	//^
+	// 		sprintf(RF24buf, "%d", sampleCounter);
+	// 		CDC_Transmit_FS((uint8_t *)RF24buf, strlen(RF24buf));
+	// 		*/
+	// 		CDC_Transmit_FS((uint8_t *)rf, strlen((char*)rf));
+	// 	}
+	// }
 
 	while (1) {
 		//Config routine
@@ -316,73 +309,74 @@ int main(void) {
 		//Receive routine
 		while (started) {
 			for (int i = 0; i < 8; i++) {
-				if (radio[i].available()) {
-					_pipe = radio[i].available() - 1;
-					switch (i) {
-					case 0:
-						HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin,
-								GPIO_PIN_RESET);
-						radio[i].read(RF24buf);
-						sendThroughUSB(RF24buf, i, _pipe);
-						HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin,
-								GPIO_PIN_SET);
-						break;
-					case 1:
-						HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin,
-								GPIO_PIN_RESET);
-						radio[i].read(RF24buf);
-						sendThroughUSB(RF24buf, i, _pipe);
-						HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin,
-								GPIO_PIN_SET);
-						break;
-					case 2:
-						HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin,
-								GPIO_PIN_RESET);
-						radio[i].read(RF24buf);
-						sendThroughUSB(RF24buf, i, _pipe);
-						HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin,
-								GPIO_PIN_SET);
-						break;
-					case 3:
-						HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin,
-								GPIO_PIN_RESET);
-						radio[i].read(RF24buf);
-						sendThroughUSB(RF24buf, i, _pipe);
-						HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin,
-								GPIO_PIN_SET);
-						break;
-					case 4:
-						HAL_GPIO_WritePin(LED5_GPIO_Port, LED5_Pin,
-								GPIO_PIN_RESET);
-						radio[i].read(RF24buf);
-						sendThroughUSB(RF24buf, i, _pipe);
-						HAL_GPIO_WritePin(LED5_GPIO_Port, LED5_Pin,
-								GPIO_PIN_SET);
-						break;
-					case 5:
-						HAL_GPIO_WritePin(LED6_GPIO_Port, LED6_Pin,
-								GPIO_PIN_RESET);
-						radio[i].read(RF24buf);
-						sendThroughUSB(RF24buf, i, _pipe);
-						HAL_GPIO_WritePin(LED6_GPIO_Port, LED6_Pin,
-								GPIO_PIN_SET);
-						break;
-					case 6:
-						HAL_GPIO_WritePin(LED7_GPIO_Port, LED7_Pin,
-								GPIO_PIN_RESET);
-						radio[i].read(RF24buf);
-						sendThroughUSB(RF24buf, i, _pipe);
-						HAL_GPIO_WritePin(LED7_GPIO_Port, LED7_Pin,
-								GPIO_PIN_SET);
-						break;
-					case 7:
-						HAL_GPIO_WritePin(LED8_GPIO_Port, LED8_Pin,
-								GPIO_PIN_RESET);
-						radio[i].read(RF24buf);
-						sendThroughUSB(RF24buf, i, _pipe);
-						HAL_GPIO_WritePin(LED8_GPIO_Port, LED8_Pin,
-								GPIO_PIN_SET);
-						break;
+				if(activesRadios[i]){
+					if (radio[i].available()) {
+						_pipe = radio[i].available() - 1;
+						switch (i) {
+						case 0:
+							HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
+							radio[i].read(RF24buf);
+							CDC_Transmit_FS((uint8_t *)RF24buf, strlen((char*)RF24buf));
+							sendThroughUSB(RF24buf, i, _pipe);
+							HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
+							break;
+						case 1:
+							HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin,
+									GPIO_PIN_RESET);
+							radio[i].read(RF24buf);
+							sendThroughUSB(RF24buf, i, _pipe);
+							HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin,
+									GPIO_PIN_SET);
+							break;
+						case 2:
+							HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin,
+									GPIO_PIN_RESET);
+							radio[i].read(RF24buf);
+							sendThroughUSB(RF24buf, i, _pipe);
+							HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin,
+									GPIO_PIN_SET);
+							break;
+						case 3:
+							 HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin,
+							 		GPIO_PIN_RESET);
+							radio[i].read(RF24buf);
+							 sendThroughUSB(RF24buf, i, _pipe);
+							HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin,
+							 		GPIO_PIN_SET);
+							break;
+						case 4:
+							HAL_GPIO_WritePin(LED5_GPIO_Port, LED5_Pin,
+									GPIO_PIN_RESET);
+							radio[i].read(RF24buf);
+							sendThroughUSB(RF24buf, i, _pipe);
+							HAL_GPIO_WritePin(LED5_GPIO_Port, LED5_Pin,
+									GPIO_PIN_SET);
+							break;
+						case 5:
+							HAL_GPIO_WritePin(LED6_GPIO_Port, LED6_Pin,
+									GPIO_PIN_RESET);
+							radio[i].read(RF24buf);
+							sendThroughUSB(RF24buf, i, _pipe);
+							HAL_GPIO_WritePin(LED6_GPIO_Port, LED6_Pin,
+									GPIO_PIN_SET);
+							break;
+						case 6:
+							HAL_GPIO_WritePin(LED7_GPIO_Port, LED7_Pin,
+									GPIO_PIN_RESET);
+							radio[i].read(RF24buf);
+							sendThroughUSB(RF24buf, i, _pipe);
+							HAL_GPIO_WritePin(LED7_GPIO_Port, LED7_Pin,
+									GPIO_PIN_SET);
+							break;
+						case 7:
+							HAL_GPIO_WritePin(LED8_GPIO_Port, LED8_Pin,
+									GPIO_PIN_RESET);
+							radio[i].read(RF24buf);
+							sendThroughUSB(RF24buf, i, _pipe);
+							HAL_GPIO_WritePin(LED8_GPIO_Port, LED8_Pin,
+									GPIO_PIN_SET);
+							break;
+						}
 					}
 				}
 				if (indexUSB) {                  //If there's available USB data
@@ -390,10 +384,12 @@ int main(void) {
 						started = false;
 						radio[_radio].Flush();
 						for (int j = 0; j < 8; j++) {
-							for (int k = 0; k < 6; k++) {
-								if (radio[j].activePipes[k]) {
-									radio[j].sendInTheNextReceive("stop", 4, k);
-									HAL_Delay(1);
+							if(activesRadios[j]){
+								for (int k = 0; k < 6; k++) {
+									if (radio[j].activePipes[k]) {
+										radio[j].sendInTheNextReceive("stop", 4, k);
+										HAL_Delay(5);
+									}
 								}
 							}
 						}
