@@ -46,6 +46,19 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+struct line {
+	volatile uint32_t capacity;
+	volatile uint32_t *data;
+	volatile uint32_t first;
+	volatile uint32_t last;
+	volatile uint32_t nItens;
+};
+
+struct line accDataLine;
+
+void lineInit(struct line *f, uint32_t c );
+void lineInsert(struct line *f, uint32_t v);
+int lineRemove(struct line *f );
 
 /* USER CODE END PM */
 
@@ -125,9 +138,11 @@ int main(void)
   /* USER CODE BEGIN 2 */
   char RF24msg[32];
   uint8_t dataPackage[32];
+  uint32_t tempData[4];
   uint32_t sampleCounter = 0;
   volatile uint32_t convCounterAux = 0;
   bool aquisitionStarted = false;
+  lineInit(&accDataLine, 100);
 
   HAL_Delay(300);
   nRF24 radio = nRF24(&hspi2, 29, 25, 20);
@@ -156,17 +171,19 @@ int main(void)
       }
     }
     while(aquisitionStarted){
-      while(sampleCounter < convCounter){
-
-        convCounterAux = convCounter;
-
-        for(;(sampleCounter < convCounterAux) && (sampleCounter < 5); sampleCounter++){
-          dataPackage[0 + sampleCounter*6] = (uint8_t)(canais[sampleCounter*4] & 0xff);
-          dataPackage[1 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter*4] & 0x0f00)>>8) | ((canais[sampleCounter*4 + 1] & 0x0f)<<4));
-          dataPackage[2 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter*4 + 1] & 0xf0)>>4) | ((canais[sampleCounter*4 + 1] & 0x0f00)>>4));
-          dataPackage[3 + sampleCounter*6] = (uint8_t)(canais[sampleCounter*4 + 2] & 0xff);
-          dataPackage[4 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter*4 + 2] & 0x0f00)>>8) | ((canais[sampleCounter*4 + 3] & 0x0f)<<4));
-          dataPackage[5 + sampleCounter*6] = (uint8_t)(((canais[sampleCounter*4 + 3] & 0xf0)>>4) | ((canais[sampleCounter*4 + 3] & 0x0f00)>>4));
+      while(accDataLine.nItens){
+        
+        for(; accDataLine.nItens && (sampleCounter < 5); sampleCounter++){
+          tempData[0] = lineRemove(&accDataLine);
+          tempData[1] = lineRemove(&accDataLine);
+          tempData[2] = lineRemove(&accDataLine);
+          tempData[3] = lineRemove(&accDataLine);
+          dataPackage[0 + sampleCounter*6] = (uint8_t)(tempData[0] & 0xff);
+          dataPackage[1 + sampleCounter*6] = (uint8_t)(((tempData[0] & 0x0f00)>>8) | ((tempData[1] & 0x0f)<<4));
+          dataPackage[2 + sampleCounter*6] = (uint8_t)(((tempData[1] & 0xf0)>>4) | ((tempData[1] & 0x0f00)>>4));
+          dataPackage[3 + sampleCounter*6] = (uint8_t)(tempData[2] & 0xff);
+          dataPackage[4 + sampleCounter*6] = (uint8_t)(((tempData[2] & 0x0f00)>>8) | ((tempData[3] & 0x0f)<<4));
+          dataPackage[5 + sampleCounter*6] = (uint8_t)(((tempData[3] & 0xf0)>>4) | ((tempData[3] & 0x0f00)>>4));
         }
 
         if(sampleCounter == 5) {
@@ -178,10 +195,6 @@ int main(void)
               aquisitionStarted = false;
             }
           }
-
-          // prevConvCounter = convCounter - 5;
-          convCounter -= 5;
-          memmove(canais, canais + 20, convCounter*4*8);
           sampleCounter = 0;
         }
       }
@@ -517,18 +530,24 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	// 	convCounter = prevConvCounter;
 	// 	prevConvCounter = 0;
 	// }
-	canais[4*convCounter] = (ADCReadings[0])*ch0Ratio;
-	canais[4*convCounter + 1] = (ADCReadings[1])*ch1Ratio;
-	canais[4*convCounter + 2] = (ADCReadings[2])*ch2Ratio;
-	canais[4*convCounter + 3] = (ADCReadings[3])*ch3Ratio;
 
-	canais[4*convCounter] = (canais[4*convCounter] > 4095)?4095:canais[4*convCounter];
-	canais[4*convCounter + 1] = (canais[4*convCounter + 1] > 4095)?4095:canais[4*convCounter + 1];
-	canais[4*convCounter + 2] = (canais[4*convCounter + 2] > 4095)?4095:canais[4*convCounter + 2];
-	canais[4*convCounter + 3] = (canais[4*convCounter + 3] > 4095)?4095:canais[4*convCounter + 3];
+  lineInsert(&accDataLine, ((ADCReadings[0])*ch0Ratio)>4095?4095:((ADCReadings[0])*ch0Ratio));
+  lineInsert(&accDataLine, ((ADCReadings[1])*ch1Ratio)>4095?4095:((ADCReadings[1])*ch1Ratio));
+  lineInsert(&accDataLine, ((ADCReadings[2])*ch2Ratio)>4095?4095:((ADCReadings[2])*ch2Ratio));
+  lineInsert(&accDataLine, ((ADCReadings[3])*ch3Ratio)>4095?4095:((ADCReadings[3])*ch3Ratio));
 
-	convCounter++;
-	globalADC_counter++;
+	// canais[4*convCounter] = (ADCReadings[0])*ch0Ratio;
+	// canais[4*convCounter + 1] = (ADCReadings[1])*ch1Ratio;
+	// canais[4*convCounter + 2] = (ADCReadings[2])*ch2Ratio;
+	// canais[4*convCounter + 3] = (ADCReadings[3])*ch3Ratio;
+
+	// canais[4*convCounter] = (canais[4*convCounter] > 4095)?4095:canais[4*convCounter];
+	// canais[4*convCounter + 1] = (canais[4*convCounter + 1] > 4095)?4095:canais[4*convCounter + 1];
+	// canais[4*convCounter + 2] = (canais[4*convCounter + 2] > 4095)?4095:canais[4*convCounter + 2];
+	// canais[4*convCounter + 3] = (canais[4*convCounter + 3] > 4095)?4095:canais[4*convCounter + 3];
+
+	// convCounter++;
+	// globalADC_counter++;
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
@@ -555,6 +574,38 @@ void toggleSendLED(uint8_t delay = 0, uint8_t times = 1){
     if (delay)
     	HAL_Delay(delay);
   }
+}
+
+void lineInit( struct line *f, uint32_t c ) {
+
+	f->capacity = c;
+	f->data = (uint32_t*) malloc (f->capacity * sizeof(uint32_t));
+	f->first = 0;
+	f->last = -1;
+	f->nItens = 0;
+
+}
+
+void lineInsert(struct line *f, uint32_t v) {
+
+    if (f->last == f->capacity-1){
+        f->last = -1;
+    }
+    f->last++;
+    f->data[f->last] = v; // incrementa last e insere
+    f->nItens++; // mais um item inserido
+}
+
+int lineRemove( struct line *f ) { // pega o item do começo da line
+
+	uint32_t temp = f->data[f->first++]; // pega o valor e incrementa o first
+
+	if(f->first == f->capacity)
+		f->first = 0;
+
+	f->nItens--;  // um item retirado
+	return temp;
+
 }
 
 /* USER CODE END 4 */

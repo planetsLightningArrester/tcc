@@ -66,9 +66,9 @@ try:
                 acc[accIndex] = (data[4 + i*6] & 0xFF) + ((data[5 + i*6] & 0x0F)<<8)
                 accIndex = accIndex + 1
                 acc[accIndex] = ((data[5 + i*6] & 0xF0)>>4) + ((data[6 + i*6] & 0xFF)<<4)
-                # slave.write(str(acc[0]) + '\t' + str(acc[1]) + '\t' + str(acc[2]) + '\t' + str(acc[3]) + '\n')
-                print(acc)
-                print("********************")
+                slave.write(str(acc[0]) + '\t' + str(acc[1]) + '\t' + str(acc[2]) + '\t' + str(acc[3]) + '\n')
+                # print(acc)
+                # print("********************")
 except KeyboardInterrupt:
     master.write("stop")
     master.close()
