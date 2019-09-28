@@ -17,6 +17,7 @@ counter = 0
 # except KeyboardInterrupt:
 #     master.write("stop")
 #     master.close()
+#     slave.close()
 
 # try:
 #     master.write("start")
@@ -32,6 +33,7 @@ counter = 0
 # except KeyboardInterrupt:
 #     master.write("stop")
 #     master.close()
+#     slave.close()
 
 # try:
 #     master.write("start")
@@ -47,15 +49,18 @@ counter = 0
 # except KeyboardInterrupt:
 #     master.write("stop")
 #     master.close()
+#     slave.close()
 
 acc = [0 for i in range(4)]
 accIndex = 0
+counter = 0
 try:
     j = 0
     master.write("start")
     while True:
         if master.in_waiting > 30:
             data = bytearray(master.read(31))
+            counter += 1
             for i in range(4):
                 accIndex = 0
                 acc[accIndex] = (data[1 + i*6] & 0xFF) + ((data[2 + i*6] & 0x0F)<<8)
@@ -66,9 +71,13 @@ try:
                 acc[accIndex] = (data[4 + i*6] & 0xFF) + ((data[5 + i*6] & 0x0F)<<8)
                 accIndex = accIndex + 1
                 acc[accIndex] = ((data[5 + i*6] & 0xF0)>>4) + ((data[6 + i*6] & 0xFF)<<4)
-                slave.write(str(acc[0]) + '\t' + str(acc[1]) + '\t' + str(acc[2]) + '\t' + str(acc[3]) + '\n')
+
+            if(counter>25):
+                slave.write(str(acc[0]) + '\n')
+                # slave.write(str(acc[0]) + '\t' + str(acc[1]) + '\t' + str(acc[2]) + '\t' + str(acc[3]) + '\n')
                 # print(acc)
                 # print("********************")
+                counter = 0
 except KeyboardInterrupt:
     master.write("stop")
     master.close()

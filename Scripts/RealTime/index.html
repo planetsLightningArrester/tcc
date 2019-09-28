@@ -1,0 +1,97 @@
+<html>
+
+<head>
+    <title>Data display</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+</head>
+
+<body>
+    <!-- Change the size below -->
+    <canvas id="time" width="1600" height="400"></canvas>   
+    <canvas id="fft" width="1600" height="400"></canvas>
+    <script>
+
+        let ctxTime = document.getElementById('time').getContext('2d');
+        let time = new Chart(ctxTime, {
+            type: 'line',
+            data: {
+                label: "Time (s)",
+                labels: [1, 2, 3, 4],
+                datasets: [{
+                    label: "Acceleration (mg)",
+                    fill: false,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    data: [12, 9, 13, 13]
+                }]
+            },
+            options: {
+                animation: {
+                    duration: 0
+                },
+                hover: {
+                    animationDuration: 0
+                },
+                responsiveAnimationDuration: 0,
+                responsive: false,
+                title: {
+                    display: true,
+                    text: "Sensors"
+                },
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                }
+            }
+        });
+        let ctxFFT = document.getElementById('fft').getContext('2d');
+        let fft = new Chart(ctxFFT, {
+            type: 'line',
+            data: {
+                label: "Frequency (Hz)",
+                labels: [1, 2, 3, 4],
+                datasets: [{
+                    label: "Acceleration (mg)",
+                    fill: false,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    data: [12, 9, 13, 13]
+                }]
+            },
+            options: {
+                animation: {
+                    duration: 0
+                },
+                hover: {
+                    animationDuration: 0
+                },
+                responsiveAnimationDuration: 0,
+                responsive: false,
+                title: {
+                    display: true,
+                    text: "Sensor"
+                },
+                elements: {
+                    point: {
+                        radius: 0
+                    }
+                }
+            }
+        });
+
+        let socket = io('http://localhost:8013');
+
+        socket.on("time", function(data, _time){
+            time.data.labels = _time;
+            time.data.datasets[0].data = data;
+            time.update();
+        });
+        socket.on("fft", function(data, frequency){
+            fft.data.labels = frequency;
+            fft.data.datasets[0].data = data;
+            fft.update();
+        });
+    </script>
+</body>
+
+</html>

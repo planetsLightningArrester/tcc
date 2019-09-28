@@ -37,10 +37,14 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define ch0Ratio (4095.0/3703.0)
-#define ch1Ratio (4095.0/3616.0)
-#define ch2Ratio (4095.0/3556.0)
-#define ch3Ratio (4095.0/3616.0)
+#define ch0Ratio (3703.0/19.0)
+#define ch1Ratio (3616.0/19.0)
+#define ch2Ratio (3556.0/19.0)
+#define ch3Ratio (3616.0/19.0)
+// #define ch0Ratio (4095.0/3703.0)
+// #define ch1Ratio (4095.0/3616.0)
+// #define ch2Ratio (4095.0/3556.0)
+// #define ch3Ratio (4095.0/3616.0)
 
 /* USER CODE END PD */
 
@@ -72,6 +76,7 @@ TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
+float adcOffsetRatio[4];
 uint32_t ADCReadings[4];
 volatile uint32_t convComplete = 0;
 uint16_t canais[100];
@@ -79,6 +84,7 @@ volatile uint32_t convCounter = 0;
 volatile uint32_t prevConvCounter = 0;
 uint32_t tim1Counter = 0;
 uint32_t globalADC_counter = 0;
+bool aquisitionStarted = false;
 
 /* USER CODE END PV */
 
@@ -141,7 +147,7 @@ int main(void)
   uint32_t tempData[4];
   uint32_t sampleCounter = 0;
   volatile uint32_t convCounterAux = 0;
-  bool aquisitionStarted = false;
+  
   lineInit(&accDataLine, 100);
 
   HAL_Delay(300);
@@ -162,7 +168,6 @@ int main(void)
       if(radio.available()){
         radio.read(RF24msg);
         if(strncmp(RF24msg, "start", 5) == 0){
-          aquisitionStarted = true;
           toggleIdleLED();
           toggleSendLED(100, 6);
           HAL_ADC_Start_DMA(&hadc1, (uint32_t*) ADCReadings, 4);
@@ -530,11 +535,27 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	// 	convCounter = prevConvCounter;
 	// 	prevConvCounter = 0;
 	// }
+  if(!aquisitionStarted){
+    aquisitionStarted = true;
+    adcOffsetRatio[0] = (2047.0/((float)ADCReadings[0]));
+    adcOffsetRatio[1] = (2047.0/((float)ADCReadings[1]));
+    adcOffsetRatio[2] = (2047.0/((float)ADCReadings[2]));
+    adcOffsetRatio[3] = (2047.0/((float)ADCReadings[3]));
+  }
+    
 
-  lineInsert(&accDataLine, ((ADCReadings[0])*ch0Ratio)>4095?4095:((ADCReadings[0])*ch0Ratio));
-  lineInsert(&accDataLine, ((ADCReadings[1])*ch1Ratio)>4095?4095:((ADCReadings[1])*ch1Ratio));
-  lineInsert(&accDataLine, ((ADCReadings[2])*ch2Ratio)>4095?4095:((ADCReadings[2])*ch2Ratio));
-  lineInsert(&accDataLine, ((ADCReadings[3])*ch3Ratio)>4095?4095:((ADCReadings[3])*ch3Ratio));
+  // lineInsert(&accDataLine, ADCReadings[0]);
+  // lineInsert(&accDataLine, ADCReadings[1]);
+  // lineInsert(&accDataLine, ADCReadings[2]);
+  // lineInsert(&accDataLine, ADCReadings[3]);
+  lineInsert(&accDataLine, ADCReadings[0]*adcOffsetRatio[0]);
+  lineInsert(&accDataLine, ADCReadings[1]*adcOffsetRatio[1]);
+  lineInsert(&accDataLine, ADCReadings[2]*adcOffsetRatio[2]);
+  lineInsert(&accDataLine, ADCReadings[3]*adcOffsetRatio[3]);
+  // lineInsert(&accDataLine, ((ADCReadings[0])*ch0Ratio)>4095?4095:((ADCReadings[0])*ch0Ratio));
+  // lineInsert(&accDataLine, ((ADCReadings[1])*ch1Ratio)>4095?4095:((ADCReadings[1])*ch1Ratio));
+  // lineInsert(&accDataLine, ((ADCReadings[2])*ch2Ratio)>4095?4095:((ADCReadings[2])*ch2Ratio));
+  // lineInsert(&accDataLine, ((ADCReadings[3])*ch3Ratio)>4095?4095:((ADCReadings[3])*ch3Ratio));
 
 	// canais[4*convCounter] = (ADCReadings[0])*ch0Ratio;
 	// canais[4*convCounter + 1] = (ADCReadings[1])*ch1Ratio;
