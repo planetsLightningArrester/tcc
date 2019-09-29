@@ -22,6 +22,7 @@ SerialPort.list(function (err, ports) {
                     daqMaster.write("start");
                     timer = new Date();
                     daqMaster.on('data', function (data) {
+                        console.log(data.toString());
                         counter += data.length;
                         if (counter >= 31*1340) {
                             counter -= 31*1340;
@@ -50,7 +51,12 @@ process.on('SIGINT', function () {
         gotCtrlC = true;
         daqMaster.write("stop");
         setTimeout(function(){
-            daqMaster.close();
+            try{
+                daqMaster.close();
+            }
+            catch (error){
+                process.exit();
+            }
         }, 1)
     } else {
         process.exit();

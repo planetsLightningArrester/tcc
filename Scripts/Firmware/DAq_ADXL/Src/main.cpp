@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "ADXL345.h"
+#include "nRF24L01.h"
 
 /* USER CODE END Includes */
 
@@ -77,10 +78,10 @@ struct line accDataLine;
 struct inteiro adxl;
 struct flutuante angle;
 
-volatile bool nRf24_IRQ = false;
+volatile uint16_t nRf24_IRQ = 0;
 volatile uint32_t tim1Counter = 0;
 
-volatile uint32_t batLevel;
+uint32_t batLevel;
 
 /* USER CODE END PV */
 
@@ -132,7 +133,7 @@ int main(void)
 	uint8_t readsAvailables;
 
   /* USER CODE END 1 */
-  
+
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -161,9 +162,6 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   //LED blink
-  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, 0);
-  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 1);
-  HAL_Delay(100);
   HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
   HAL_Delay(100);
   HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
@@ -172,7 +170,10 @@ int main(void)
   HAL_Delay(100);
   HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
   HAL_Delay(100);
-  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, 0);
+  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+  HAL_Delay(100);
+  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+  HAL_Delay(100);
 
   lineInit(&accDataLine, 100);
 
@@ -181,12 +182,19 @@ int main(void)
 
   //Accelerometer initialization
   acel_init(&hspi1, 14);
-  //acel_range(16);
-  //acel_sample_rate(3200);
+  acel_range(range);
+  acel_sample_rate(sampleRate);
   //acel_measure(true);
 
   //Radio initialization
   nRF24 radio = nRF24(&hspi2, 30, 25, 20);
+/*
+  while(1){
+	  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+	  radio.send("Teste", 5, 0);
+	  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+	  HAL_Delay(1000);
+  }*/
 
   //Timer 3600Hz initialization
   //HAL_TIM_Base_Start_IT(&htim1);
@@ -202,12 +210,14 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  /*
+
 	while(!acquisitionStarted){
 		if(nRf24_IRQ){
+			toggleLED(100, 2);
+			//nRf24_IRQ = 0;
 			if(radio.available()){
-				radio.read(nRF24buf);
-				if(strncmp(nRF24buf, "start", 5) == 0){
+				radio.read(RF24msg);
+				if(strncmp(RF24msg, "start", 5) == 0){
 
 					//Blinks the LED and turn ir off
 					if(blinking) {
@@ -221,7 +231,7 @@ int main(void)
 					HAL_TIM_Base_Start_IT(&htim1);	//Timer 3600Hz initialization
 					HAL_ADC_Start_DMA(&hadc1, &batLevel, 1);	//Reads battery level
 					acquisitionStarted = true;	//Starts the acquisition
-				} else if (strncmp(nRF24buf, "blink", 5) == 0) {
+				} else if (strncmp(RF24msg, "blink", 5) == 0) {
 					if(blinking){
 						HAL_TIM_Base_Stop_IT(&htim2);
 						blinking = false;
@@ -229,20 +239,20 @@ int main(void)
 						HAL_TIM_Base_Start_IT(&htim2);
 						blinking = true;
 					}
-				} else if (strncmp(nRF24buf, "battery", 7) == 0){
+				} else if (strncmp(RF24msg, "battery", 7) == 0){
 					HAL_ADC_Start_DMA(&hadc1, &batLevel, 1);	//Reads battery level
 					HAL_Delay(1);
-					radio.send(batLevel);
-				} else if (strncmp(nRF24buf, "fs", 2) == 0){
-					sampleRate = atoi((const char*)(nRF24buf + 2));
-					acel_change_sample_rate(sampleRate);
+					radio.send((const char*) batLevel, 2, 0);
+				} else if (strncmp(RF24msg, "fs", 2) == 0){
+					sampleRate = atoi((const char*)(RF24msg + 2));
+					acel_sample_rate(sampleRate);
 
 					htim1.Init.Period = 500.0/(sampleRate/3600.0);
 					HAL_TIM_Base_Init(&htim1);
 
-				} else if (strncmp(nRF24buf, "range", 5) == 0){
-					range = atoi((const char*)(nRF24buf + 2));
-					acel_change_range(range);
+				} else if (strncmp(RF24msg, "range", 5) == 0){
+					range = atoi((const char*)(RF24msg + 2));
+					acel_range(range);
 
 					switch (range) {
 						case 2:
@@ -267,7 +277,7 @@ int main(void)
 	while(acquisitionStarted) {
 		if(accDataLine.nItens){
 
-			readsAvailables = accDataLine.nItens
+			readsAvailables = accDataLine.nItens;
 
 			for(; (packageIndex < readsAvailables) || (packageIndex == maxPackegeIndexPerSend); packageIndex++){
 
@@ -289,7 +299,7 @@ int main(void)
 				HAL_ADC_Start_DMA(&hadc1, &batLevel, 1);
 			}
 		}
-	}*/
+	}
 	if(tim1Counter == 3200){
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 		lineRemove(&accDataLine);
@@ -309,7 +319,7 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -322,7 +332,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -356,11 +366,12 @@ static void MX_ADC1_Init(void)
   /* USER CODE END ADC1_Init 0 */
 
   ADC_ChannelConfTypeDef sConfig = {0};
+  ADC_InjectionConfTypeDef sConfigInjected = {0};
 
   /* USER CODE BEGIN ADC1_Init 1 */
 
   /* USER CODE END ADC1_Init 1 */
-  /** Common config 
+  /** Common config
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
@@ -373,12 +384,26 @@ static void MX_ADC1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Regular Channel 
+  /** Configure Regular Channel
   */
   sConfig.Channel = ADC_CHANNEL_9;
   sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Injected Channel
+  */
+  sConfigInjected.InjectedChannel = ADC_CHANNEL_9;
+  sConfigInjected.InjectedRank = ADC_INJECTED_RANK_1;
+  sConfigInjected.InjectedNbrOfConversion = 1;
+  sConfigInjected.InjectedSamplingTime = ADC_SAMPLETIME_71CYCLES_5;
+  sConfigInjected.ExternalTrigInjecConv = ADC_INJECTED_SOFTWARE_START;
+  sConfigInjected.AutoInjectedConv = DISABLE;
+  sConfigInjected.InjectedDiscontinuousConvMode = DISABLE;
+  sConfigInjected.InjectedOffset = 0;
+  if (HAL_ADCEx_InjectedConfigChannel(&hadc1, &sConfigInjected) != HAL_OK)
   {
     Error_Handler();
   }
@@ -533,7 +558,7 @@ static void MX_TIM2_Init(void)
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 36000;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
   {
     Error_Handler();
@@ -600,11 +625,12 @@ static void MX_TIM3_Init(void)
 
 }
 
-/** 
+/**
   * Enable DMA controller clock
   */
-static void MX_DMA_Init(void) 
+static void MX_DMA_Init(void)
 {
+
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
 
@@ -674,19 +700,9 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : INT3_Pin */
   GPIO_InitStruct.Pin = INT3_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(INT3_GPIO_Port, &GPIO_InitStruct);
-
-  /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
-
-  HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI3_IRQn);
-
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
 
@@ -695,9 +711,9 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim == &htim1){
 		adxl = acel_burst_read();
-		//lineInsert(&accDataLine, adxl.X);
-		//lineInsert(&accDataLine, adxl.Y);
-		//lineInsert(&accDataLine, adxl.Z);
+		lineInsert(&accDataLine, adxl.X);
+		lineInsert(&accDataLine, adxl.Y);
+		lineInsert(&accDataLine, adxl.Z);
 		//tim1Counter++;
 	} else if(htim == &htim2) {
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
@@ -706,9 +722,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
 //External IRQ handle.
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-  if(GPIO_Pin == INT3_Pin){
+  //if(GPIO_Pin == INT3_Pin){
     nRf24_IRQ = 1;
-  }
+  //}
 }
 
 
@@ -776,7 +792,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */

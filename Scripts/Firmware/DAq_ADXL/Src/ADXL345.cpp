@@ -1,7 +1,8 @@
 /*Criado por Geraldo Pugialli - Kotchergenko Engenharia 2018*/
+//Alterado por Francisco Gomes - 2019
 
 #include "ADXL345.h"
-
+using namespace std;
 #define HIGH 1
 #define LOW 0
 
@@ -10,7 +11,7 @@ int ce_pin_acc;
 int csn_pin_acc;
 
 //------------------------------------Envio de 1 byte de dados ao registrador selecionado do ADXL345 [Endereï¿½o / Dado] (OK)
-void registerWrite(unsigned char address, unsigned char data) {
+void acel_register_write(unsigned char address, unsigned char data) {
 	HAL_SPI_Init(globalHSPIacc);
 	uint8_t dado[2];
 	dado[0] = 0b00000000 | address;
@@ -22,7 +23,7 @@ void registerWrite(unsigned char address, unsigned char data) {
 }
 
 //-----------------------------------------Leitura de 1 byte de dados do registrador selecionado do ADXL345 [Endereï¿½o] (OK)
-uint8_t registerRead(unsigned char address) {
+uint8_t acel_register_read(unsigned char address) {
 	HAL_SPI_Init(globalHSPIacc);
 	uint8_t dado = 0b10000000 | address;
 	uint8_t saida = 0;
@@ -35,7 +36,7 @@ uint8_t registerRead(unsigned char address) {
 }
 
 //-------------------------------------Leitura de 2 bytes de dados dos registradores selecionado do ADXL345 [Endereï¿½o] (OK)
-int16_t registerRead2Bytes(unsigned char address) {
+int16_t acel_register2_read(unsigned char address) {
 	uint8_t dado = 0b11000000 | address;
 	uint8_t aux[3];
 	int16_t saida = 0;
@@ -48,72 +49,41 @@ int16_t registerRead2Bytes(unsigned char address) {
 }
 
 //-------------------------------------------------------------------Configuraï¿½ï¿½o dos parï¿½metros do ADXL345 [2,4,8,16] (OK)
-void accInit(unsigned short range, SPI_HandleTypeDef* HSPI, int csn) {
+void acel_init(SPI_HandleTypeDef* HSPI, int csn) {
 	globalHSPIacc = HSPI;
 	csn_pin_acc = csn;
 
-    //Alterado por Francisco Gomes - 2019
-	// Data rate and power mode control
-	// registerWrite(BW_RATE, 0b00001111);
-
-	// Power-saving features control
-	// registerWrite(POWER_CTL, 0b00001000);
-
 	// Interrupt mapping control
-	registerWrite(INT_MAP, 0b01111111);
+	acel_register_write(INT_MAP, 0b01111111);
 
 	// Interrupt enable control
-	registerWrite(INT_ENABLE, 0b00000000);
-
-	// Data format control
-	// switch (range) {
-	// case 2: {
-	// 	registerWrite(DATA_FORMAT, 0b00001000);
-	// 	break;
-	// }
-	// case 4: {
-	// 	registerWrite(DATA_FORMAT, 0b00001001);
-	// 	break;
-	// }
-	// case 8: {
-	// 	registerWrite(DATA_FORMAT, 0b00001010);
-	// 	break;
-	// }
-	// case 16: {
-	// 	registerWrite(DATA_FORMAT, 0b00001011);
-	// 	break;
-	// }
-	// default: {
-	// 	registerWrite(DATA_FORMAT, 0b00001011);
-	// 	break;
-	// }
-	// }
+	acel_register_write(INT_ENABLE, 0b00000000);
 
 	// FIFO control
-	registerWrite(FIFO_CTL, 0b00000000);
+	acel_register_write(FIFO_CTL, 0b00000000);
 
 	digitalWrite(csn, HIGH);
 }
 
 //----------------------------------------------Leitura da aceleraï¿½ï¿½o em um eixo selecionado ['x','y','z','X','Y','Z'] (OK)
-double ADXL_axisRead(char eixo) {
+double acel_axis_read(char eixo) {
 	int16_t valor = 0;
 	double conversao = 0.0;
 	if (eixo == 'x' || eixo == 'X') {
-		valor = registerRead2Bytes(DATAX0);
+		valor = acel_register2_read(DATAX0);
 	}
 	if (eixo == 'y' || eixo == 'Y') {
-		valor = registerRead2Bytes(DATAY0);
+		valor = acel_register2_read(DATAY0);
 	}
 	if (eixo == 'z' || eixo == 'Z') {
-		valor = registerRead2Bytes(DATAZ0);
+		valor = acel_register2_read(DATAZ0);
 	}
 	conversao = valor * 0.00390625;				// Conversï¿½o do dado recebido
 	return conversao;
 }
 
 //--------------------------------------------------------------------------Leitura de todos os eixos de uma ï¿½nica vez (OK)
-struct inteiro ADXL_3axisRead(void) {
+struct inteiro acel_burst_read(void) {
 	HAL_SPI_Init(globalHSPIacc);
 	uint8_t dado = 0b11000000 | DATAX0;
 	uint8_t aux[7];
@@ -133,7 +103,7 @@ struct inteiro ADXL_3axisRead(void) {
 }
 
 //--------------------------------------------------------------Mediï¿½ï¿½o do ï¿½ngulo de deslocamento dos eixos de mediï¿½ï¿½o (OK)
-struct flutuante ADXL_3anglesRead(struct inteiro leitura) {
+struct flutuante acel_origin_angle(struct inteiro leitura) {
 	struct flutuante angulo;
 	double resultante;
 
@@ -145,7 +115,7 @@ struct flutuante ADXL_3anglesRead(struct inteiro leitura) {
 }
 
 //------------------------------------------------------------------Mediï¿½ï¿½o dos valores de offset dos eixos de mediï¿½ï¿½o (OK)
-struct flutuante ADXL_offsetCalibration(void) {
+struct flutuante acel_offset_callibration(void) {
 	struct flutuante media;
 	struct inteiro entrada;
 	int amostras = 0;
@@ -154,7 +124,7 @@ struct flutuante ADXL_offsetCalibration(void) {
 	media.Y = 0;
 	media.Z = 0;
 	while (amostras < 6000) {
-		entrada = ADXL_3axisRead(); // Leitura para inicializar a interrupï¿½ï¿½o do acelerometro
+		entrada = acel_burst_read(); // Leitura para inicializar a interrupï¿½ï¿½o do acelerometro
 		media.X += entrada.X;
 		media.Y += entrada.Y;
 		media.Z += entrada.Z;
@@ -168,23 +138,23 @@ struct flutuante ADXL_offsetCalibration(void) {
 }
 
 void acel_measure(bool onOff) {
-    registerWrite(POWER_CTL, (registerRead2Bytes(POWER_CTL) & 0xF7) | onOff );
+    acel_register_write(POWER_CTL, (acel_register2_read(POWER_CTL) & 0xF7) | onOff );
 }
 
-void acel_change_range(unsigned short range) {
-    registerWrite(DATA_FORMAT, (registerRead2Bytes(DATA_FORMAT) & 0xFC) | ((uint8_t) (log2(range) - 1)) );
+void acel_range(unsigned short range) {
+    acel_register_write(DATA_FORMAT, (acel_register2_read(DATA_FORMAT) & 0xFC) | ((uint8_t) (log2(range) - 1)) );
 }
 
 void acel_low_power(bool onOff) {
-    registerWrite(BW_RATE, (onOff<<4) | (registerRead2Bytes(BW_RATE) & 0xF));
+    acel_register_write(BW_RATE, (onOff<<4) | (acel_register2_read(BW_RATE) & 0xF));
 }
 
-void acel_change_sample_rate(unsigned int sampleRate) {
-    registerWrite(BW_RATE, (registerRead2Bytes(BW_RATE) & 0x10) | (log2(sampleRate/6.25) + 0b0110));
+void acel_sample_rate(unsigned int sampleRate) {
+    acel_register_write(BW_RATE, (acel_register2_read(BW_RATE) & 0x10) | (uint8_t)(log2(sampleRate/6.25) + 0b0110));
 }
 
 //UTILs
-void digitalWrite(uint8_t pin, bool highLow){
+void digitalWrite(uint8_t pin, GPIO_PinState highLow){
     switch(pin){
         case(2):
             HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, highLow);

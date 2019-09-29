@@ -9,8 +9,8 @@
 <!ATTLIST board id CDATA #REQUIRED>
 ]>
 <targetDefinitions>
-  <board id="DAq_Node">
-    <name>DAq_Node</name>
+  <board id="DAq_ADXL">
+    <name>DAq_ADXL</name>
     <dbgIF>SWD</dbgIF>
     <dbgDEV>ST-Link</dbgDEV>
     <mcuId>stm32f103c8tx</mcuId>

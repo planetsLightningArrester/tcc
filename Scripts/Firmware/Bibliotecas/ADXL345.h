@@ -41,10 +41,16 @@ struct inteiro{
 void acel_register_write(unsigned char address, unsigned char data);
 uint8_t acel_register_read(unsigned char address);
 int16_t acel_register2_read(unsigned char address);
-void acel_init(unsigned short range, SPI_HandleTypeDef* HSPI, int csn);
+void acel_init(SPI_HandleTypeDef* HSPI, int csn) ;
 double acel_axis_read(char eixo);
 struct inteiro acel_burst_read(void);
-struct inteiro acel_origin_angle(struct flutuante leitura);
+struct flutuante acel_origin_angle(struct inteiro leitura);
 struct flutuante acel_offset_callibration(void);
+
+//Adicionados por Francisco Gomes - 2019
+void acel_measure(bool onOff);
+void acel_range(unsigned short range);
+void acel_low_power(bool onOff);
+void acel_sample_rate(unsigned int sampleRate);
 void digitalWrite(uint8_t pin, bool highLow);
 //--------------------------------------------------------------------------------------------------------------------------
