@@ -10,7 +10,7 @@ int ce_pin_acc;
 int csn_pin_acc;
 
 //------------------------------------Envio de 1 byte de dados ao registrador selecionado do ADXL345 [Endereï¿½o / Dado] (OK)
-void acel_register_write(unsigned char address, unsigned char data) {
+void registerWrite(unsigned char address, unsigned char data) {
 	HAL_SPI_Init(globalHSPIacc);
 	uint8_t dado[2];
 	dado[0] = 0b00000000 | address;
@@ -22,7 +22,7 @@ void acel_register_write(unsigned char address, unsigned char data) {
 }
 
 //-----------------------------------------Leitura de 1 byte de dados do registrador selecionado do ADXL345 [Endereï¿½o] (OK)
-uint8_t acel_register_read(unsigned char address) {
+uint8_t registerRead(unsigned char address) {
 	HAL_SPI_Init(globalHSPIacc);
 	uint8_t dado = 0b10000000 | address;
 	uint8_t saida = 0;
@@ -35,7 +35,7 @@ uint8_t acel_register_read(unsigned char address) {
 }
 
 //-------------------------------------Leitura de 2 bytes de dados dos registradores selecionado do ADXL345 [Endereï¿½o] (OK)
-int16_t acel_register2_read(unsigned char address) {
+int16_t registerRead2Bytes(unsigned char address) {
 	uint8_t dado = 0b11000000 | address;
 	uint8_t aux[3];
 	int16_t saida = 0;
@@ -48,71 +48,72 @@ int16_t acel_register2_read(unsigned char address) {
 }
 
 //-------------------------------------------------------------------Configuraï¿½ï¿½o dos parï¿½metros do ADXL345 [2,4,8,16] (OK)
-void acel_init(unsigned short range, SPI_HandleTypeDef* HSPI, int csn) {
+void accInit(unsigned short range, SPI_HandleTypeDef* HSPI, int csn) {
 	globalHSPIacc = HSPI;
 	csn_pin_acc = csn;
 
+    //Alterado por Francisco Gomes - 2019
 	// Data rate and power mode control
-	acel_register_write(BW_RATE, 0b00001111);
+	// registerWrite(BW_RATE, 0b00001111);
 
 	// Power-saving features control
-	acel_register_write(POWER_CTL, 0b00001000);
+	// registerWrite(POWER_CTL, 0b00001000);
 
 	// Interrupt mapping control
-	acel_register_write(INT_MAP, 0b01111111);
+	registerWrite(INT_MAP, 0b01111111);
 
 	// Interrupt enable control
-	acel_register_write(INT_ENABLE, 0b00000000);
+	registerWrite(INT_ENABLE, 0b00000000);
 
 	// Data format control
-	switch (range) {
-	case 2: {
-		acel_register_write(DATA_FORMAT, 0b00001000);
-		break;
-	}
-	case 4: {
-		acel_register_write(DATA_FORMAT, 0b00001001);
-		break;
-	}
-	case 8: {
-		acel_register_write(DATA_FORMAT, 0b00001010);
-		break;
-	}
-	case 16: {
-		acel_register_write(DATA_FORMAT, 0b00001011);
-		break;
-	}
-	default: {
-		acel_register_write(DATA_FORMAT, 0b00001011);
-		break;
-	}
-	}
+	// switch (range) {
+	// case 2: {
+	// 	registerWrite(DATA_FORMAT, 0b00001000);
+	// 	break;
+	// }
+	// case 4: {
+	// 	registerWrite(DATA_FORMAT, 0b00001001);
+	// 	break;
+	// }
+	// case 8: {
+	// 	registerWrite(DATA_FORMAT, 0b00001010);
+	// 	break;
+	// }
+	// case 16: {
+	// 	registerWrite(DATA_FORMAT, 0b00001011);
+	// 	break;
+	// }
+	// default: {
+	// 	registerWrite(DATA_FORMAT, 0b00001011);
+	// 	break;
+	// }
+	// }
 
 	// FIFO control
-	acel_register_write(FIFO_CTL, 0b00000000);
+	registerWrite(FIFO_CTL, 0b00000000);
 
 	digitalWrite(csn, HIGH);
 }
 
 //----------------------------------------------Leitura da aceleraï¿½ï¿½o em um eixo selecionado ['x','y','z','X','Y','Z'] (OK)
-double acel_axis_read(char eixo) {
+double ADXL_axisRead(char eixo) {
 	int16_t valor = 0;
 	double conversao = 0.0;
 	if (eixo == 'x' || eixo == 'X') {
-		valor = acel_register2_read(DATAX0);
+		valor = registerRead2Bytes(DATAX0);
 	}
 	if (eixo == 'y' || eixo == 'Y') {
-		valor = acel_register2_read(DATAY0);
+		valor = registerRead2Bytes(DATAY0);
 	}
 	if (eixo == 'z' || eixo == 'Z') {
-		valor = acel_register2_read(DATAZ0);
+		valor = registerRead2Bytes(DATAZ0);
 	}
 	conversao = valor * 0.00390625;				// Conversï¿½o do dado recebido
 	return conversao;
 }
 
 //--------------------------------------------------------------------------Leitura de todos os eixos de uma ï¿½nica vez (OK)
-struct inteiro acel_burst_read(void) {
+struct inteiro ADXL_3axisRead(void) {
 	HAL_SPI_Init(globalHSPIacc);
 	uint8_t dado = 0b11000000 | DATAX0;
 	uint8_t aux[7];
@@ -132,7 +133,7 @@ struct inteiro acel_burst_read(void) {
 }
 
 //--------------------------------------------------------------Mediï¿½ï¿½o do ï¿½ngulo de deslocamento dos eixos de mediï¿½ï¿½o (OK)
-struct flutuante acel_origin_angle(struct inteiro leitura) {
+struct flutuante ADXL_3anglesRead(struct inteiro leitura) {
 	struct flutuante angulo;
 	double resultante;
 
@@ -144,7 +145,7 @@ struct flutuante acel_origin_angle(struct inteiro leitura) {
 }
 
 //------------------------------------------------------------------Mediï¿½ï¿½o dos valores de offset dos eixos de mediï¿½ï¿½o (OK)
-struct flutuante acel_offset_callibration(void) {
+struct flutuante ADXL_offsetCalibration(void) {
 	struct flutuante media;
 	struct inteiro entrada;
 	int amostras = 0;
@@ -153,7 +154,7 @@ struct flutuante acel_offset_callibration(void) {
 	media.Y = 0;
 	media.Z = 0;
 	while (amostras < 6000) {
-		entrada = acel_burst_read(); // Leitura para inicializar a interrupï¿½ï¿½o do acelerometro
+		entrada = ADXL_3axisRead(); // Leitura para inicializar a interrupï¿½ï¿½o do acelerometro
 		media.X += entrada.X;
 		media.Y += entrada.Y;
 		media.Z += entrada.Z;
@@ -166,7 +167,23 @@ struct flutuante acel_offset_callibration(void) {
 	return media;
 }
 
-//UTIL
+void acel_measure(bool onOff) {
+    registerWrite(POWER_CTL, (registerRead2Bytes(POWER_CTL) & 0xF7) | onOff );
+}
+
+void acel_change_range(unsigned short range) {
+    registerWrite(DATA_FORMAT, (registerRead2Bytes(DATA_FORMAT) & 0xFC) | ((uint8_t) (log2(range) - 1)) );
+}
+
+void acel_low_power(bool onOff) {
+    registerWrite(BW_RATE, (onOff<<4) | (registerRead2Bytes(BW_RATE) & 0xF));
+}
+
+void acel_change_sample_rate(unsigned int sampleRate) {
+    registerWrite(BW_RATE, (registerRead2Bytes(BW_RATE) & 0x10) | (log2(sampleRate/6.25) + 0b0110));
+}
+
+//UTILs
 void digitalWrite(uint8_t pin, bool highLow){
     switch(pin){
         case(2):

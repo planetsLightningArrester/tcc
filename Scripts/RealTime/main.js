@@ -1,5 +1,9 @@
+require('console-super');
 let SerialPort = require('serialport');
-let daqMaster;
+let daqMaster = 0;
+let gotCtrlC = false;
+let timer = 0;
+let counter = 0;
 
 process.stdin.resume();
 
@@ -16,27 +20,42 @@ SerialPort.list(function (err, ports) {
                     console.log("Conectado ao DAq Master");
 
                     daqMaster.write("start");
-
+                    timer = new Date();
                     daqMaster.on('data', function (data) {
-                        console.log(data);
+                        counter += data.length;
+                        if (counter >= 31*1340) {
+                            counter -= 31*1340;
+                            timer = (new Date()) - timer;
+                            console.inlineTimeTag(timer);
+                            timer = new Date();
+                        }
                     })
                     daqMaster.on("error", function (err) {
                         console.log(err.message)
                     })
                     daqMaster.on("close", function () {
                         console.log("Porta fechada");
+                        if (gotCtrlC) {
+                            process.exit();
+                        }
                     })
                 }
             });
         }
     });
 });
-process.on('uncaughtException', function () {
-    console.log("Fechando");
-    if (daqMaster) {
-        daqMaster.close();
+process.on('SIGINT', function () {
+    console.log("Closing app");
+    if (daqMaster != 0) {
+        gotCtrlC = true;
+        daqMaster.write("stop");
+        setTimeout(function(){
+            daqMaster.close();
+        }, 1)
+    } else {
+        process.exit();
     }
-});
+})
 
 // let fft = require("ezfft").fft
 // var express = require('express');
