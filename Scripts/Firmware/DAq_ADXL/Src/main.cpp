@@ -57,16 +57,15 @@ TIM_HandleTypeDef htim3;
 /* USER CODE BEGIN PV */
 struct line {
 	volatile uint32_t capacity;
-	volatile uint32_t *data;
-	volatile uint32_t first;
-	volatile uint32_t last;
+	volatile int16_t *data;
+	volatile int16_t first;
+	volatile int16_t last;
 	volatile uint32_t nItens;
 };
 
 struct line accDataLine;
 
-struct inteiro adxl;
-struct flutuante angle;
+ADXL adxl(&hspi1, 14);
 
 volatile uint16_t nRf24_IRQ = 0;
 volatile uint32_t tim1Counter = 0;
@@ -89,7 +88,7 @@ static void MX_TIM2_Init(void);
 void toggleLED(uint8_t delay, uint8_t times);
 void sleepTillNrfReceive();
 void lineInit(struct line *f, uint32_t c );
-void lineInsert(struct line *f, uint32_t v);
+void lineInsert(struct line *f, int16_t v);
 int lineRemove(struct line *f );
 
 /* USER CODE END PFP */
@@ -109,6 +108,7 @@ int main(void)
 
 	//Utils
 	bool blinking = false;
+	uint8_t mu;
 
 	//ADXL345 variables
 	uint8_t range = 16;
@@ -119,7 +119,7 @@ int main(void)
 	//nRF24 package variables
 	char RF24msg[32];
 	uint8_t dataPackage[32];
-	uint16_t tempData[4];
+	int16_t tempData[4];
 	uint8_t maxPackageIndexPerSend = 30;
 	uint8_t nBitsPerRead = 13;
 	uint8_t packageIndex;
@@ -174,9 +174,13 @@ int main(void)
   HAL_ADC_Start_DMA(&hadc1, &batLevel, 1);
 
 	//Accelerometer initialization
-	acel_init(&hspi1, 14);
-	acel_range(range);
-	acel_sample_rate(sampleRate);
+	adxl.measure(false);
+	adxl.fullResolutionMode(true);
+	adxl.range(range);
+	adxl.sampleRate(sampleRate);
+	adxl.disableAllInts();
+	adxl.intActiveLow(true);
+	adxl.setInt(DATA_READY, INT1);
 
   //Radio initialization
   nRF24 radio = nRF24(&hspi2, 30, 25, 20);
@@ -214,9 +218,9 @@ int main(void)
 					HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
 					//
 
-					acel_measure(true);
-					HAL_NVIC_DisableIRQ(EXTI3_IRQn);
-					HAL_TIM_Base_Start_IT(&htim1);	//Timer [sampleRate]Hz initialization
+					adxl.measure(true);
+					HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+					//HAL_TIM_Base_Start_IT(&htim1);	//Timer [sampleRate]Hz initialization
 					HAL_ADC_Start_DMA(&hadc1, &batLevel, 1);	//Reads battery level
 					acquisitionStarted = true;	//Starts the acquisition
 				} else if (strncmp(RF24msg, "blink", 5) == 0) {
@@ -234,14 +238,14 @@ int main(void)
 					radio.send((const char*) batLevel, 2, 0);
 				} else if (strncmp(RF24msg, "fs", 2) == 0){
 					sampleRate = atoi((const char*)(RF24msg + 2));
-					acel_sample_rate(sampleRate);
+					adxl.sampleRate(sampleRate);
 
 					htim1.Init.Period = 500.0/(sampleRate/3600.0);
 					HAL_TIM_Base_Init(&htim1);
 
 				} else if (strncmp(RF24msg, "range", 5) == 0){
 					range = atoi((const char*)(RF24msg + 2));
-					acel_range(range);
+					adxl.range(range);
 
 					switch (range) {
 						case 2:
@@ -256,11 +260,9 @@ int main(void)
 							maxPackageIndexPerSend = 27;
 							// nBitsPerRead = 12;
 							break;
-						case 16:
+						default:
 							maxPackageIndexPerSend = 30;
 							// nBitsPerRead = 13;
-							break;
-						default:
 							break;
 					}
 				}
@@ -272,10 +274,37 @@ int main(void)
 		}
 	}
 	while(acquisitionStarted) {
-		if(accDataLine.nItens){
+		if(adxl.available){
 
-			readsAvailables = accDataLine.nItens;
+			adxl.available = 0;
+			adxl.read3axes();
 
+      tempData[0] = adxl.X & 0x1FFF;		//Get X axis
+      tempData[1] = adxl.Y & 0x1FFF;		//Get Y axis
+      tempData[2] = adxl.Z & 0x1FFF;		//Get Z axis
+      
+			switch(range){
+				case 16:
+					break;
+				case 8:
+					break;
+				case 4:
+					break;
+				default:
+					break;
+
+			}
+
+			//readsAvailables = accDataLine.nItens;
+
+			// tempData[0] = lineRemove(&accDataLine);		//Get X axis
+			// tempData[1] = lineRemove(&accDataLine);		//Get Y axis
+			// tempData[2] = lineRemove(&accDataLine);		//Get Z axis
+			tempData[0] = adxl.X;		//Get X axis
+			tempData[1] = adxl.Y;		//Get Y axis
+			tempData[2] = adxl.Z;		//Get Z axis
+			packageIndex++;
+/*
 			for(; (packageIndex < readsAvailables) || (packageIndex < 5); packageIndex++){
 				tempData[0] = lineRemove(&accDataLine);		//Get X axis
 				tempData[1] = lineRemove(&accDataLine);		//Get Y axis
@@ -286,7 +315,7 @@ int main(void)
 				// dataPackage[3 + packageIndex*6] = (tempData[1] & 0xFF00);
 				// dataPackage[4 + packageIndex*6] = tempData[2] & 0xFF;
 				// dataPackage[5 + packageIndex*6] = (tempData[2] & 0xFF00);
-			}
+			}*/
 
 			if(packageIndex == 5) {
 			// if(packageIndex == maxPackageIndexPerSend) {
@@ -295,9 +324,9 @@ int main(void)
 				if(radio.send((const char *)dataPackage, 30, 0)){
 					radio.read(RF24msg);
 					if(strncmp(RF24msg, "stop", 4) == 0) {
-						acel_measure(false);
+						adxl.measure(false);
 						HAL_TIM_Base_Stop_IT(&htim1);
-						HAL_NVIC_EnableIRQ(EXTI3_IRQn);
+						HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 						toggleLED(100, 7);
 						acquisitionStarted = false;
 					}
@@ -306,11 +335,6 @@ int main(void)
 				HAL_ADC_Start_DMA(&hadc1, &batLevel, 1);
 			}
 		}
-	}
-	if(tim1Counter == 3200){
-		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-		lineRemove(&accDataLine);
-		tim1Counter = 0;
 	}
   }
   /* USER CODE END 3 */
@@ -679,11 +703,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LED_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : INT1_Pin */
-  GPIO_InitStruct.Pin = INT1_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  /*Configure GPIO pins : INT1_Pin INT3_Pin */
+  GPIO_InitStruct.Pin = INT1_Pin|INT3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(INT1_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : SPI1_CS_Pin SPI2_CE_Pin */
   GPIO_InitStruct.Pin = SPI1_CS_Pin|SPI2_CE_Pin;
@@ -694,7 +718,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : INT2_Pin */
   GPIO_InitStruct.Pin = INT2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(INT2_GPIO_Port, &GPIO_InitStruct);
 
@@ -704,12 +728,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(SPI2_CS_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : INT3_Pin */
-  GPIO_InitStruct.Pin = INT3_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(INT3_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
@@ -727,10 +745,10 @@ static void MX_GPIO_Init(void)
 //Timer IRQ handle. Timer set at 3600Hz.
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim == &htim1){
-		adxl = acel_burst_read();
-		lineInsert(&accDataLine, adxl.X);
-		lineInsert(&accDataLine, adxl.Y);
-		lineInsert(&accDataLine, adxl.Z);
+		//adxl.read3axes();
+		//lineInsert(&accDataLine, adxl.X);
+		//lineInsert(&accDataLine, adxl.Y);
+		//lineInsert(&accDataLine, adxl.Z);
 		//tim1Counter++;
 	} else if(htim == &htim2) {
 		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
@@ -739,7 +757,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
 //External IRQ handle.
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-  if(GPIO_Pin == INT3_Pin){
+  if(GPIO_Pin == INT1_Pin){
+	  adxl.available = true;
+	// lineInsert(&accDataLine, adxl.X);
+	// lineInsert(&accDataLine, adxl.Y);
+	// lineInsert(&accDataLine, adxl.Z);
+  }
+  else if(GPIO_Pin == INT3_Pin){
     nRf24_IRQ = 1;
   }
 }
@@ -763,14 +787,14 @@ void sleepTillNrfReceive(){
 void lineInit( struct line *f, uint32_t c ) {
 
 	f->capacity = c;
-	f->data = (uint32_t*) malloc (f->capacity * sizeof(uint32_t));
+	f->data = (int16_t*) malloc (f->capacity * sizeof(int16_t));
 	f->first = 0;
 	f->last = -1;
 	f->nItens = 0;
 
 }
 
-void lineInsert(struct line *f, uint32_t v) {
+void lineInsert(struct line *f, int16_t v) {
 
     if (f->last == f->capacity-1){
         f->last = -1;
@@ -782,7 +806,7 @@ void lineInsert(struct line *f, uint32_t v) {
 
 int lineRemove( struct line *f ) { // pega o item do começo da line
 
-	uint32_t temp = f->data[f->first++]; // pega o valor e incrementa o first
+	int16_t temp = f->data[f->first++]; // pega o valor e incrementa o first
 
 	if(f->first == f->capacity)
 		f->first = 0;
