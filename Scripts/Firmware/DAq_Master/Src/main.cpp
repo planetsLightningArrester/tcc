@@ -289,7 +289,7 @@ int main(void) {
 						}
 					}
 				} else {
-					_radio = atoi(bufUSB + 1);   //Get the destination pipe
+					_radio = atoi(bufUSB + 1);   //Get the destination radio
 					toggleLED(_radio + 1);
 					_pipe = atoi(bufUSB + 3);   //Get the destination pipe
 					bufUSB[indexUSB] = '\0'; //Ignores the next received USB

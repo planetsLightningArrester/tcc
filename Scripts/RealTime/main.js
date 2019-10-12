@@ -19,6 +19,7 @@ SerialPort.list(function (err, ports) {
                 } else {
                     console.log("Conectado ao DAq Master");
 
+                    // daqMaster.write("r3p0:blink");
                     daqMaster.write("start");
                     timer = new Date();
                     daqMaster.on('data', function (data) {

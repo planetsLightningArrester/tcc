@@ -219,7 +219,7 @@ nRF24::nRF24(SPI_HandleTypeDef *HSPI, int ce, int csn, uint8_t channel) {
   writeRegister(STATUS, 1 << RX_DR | 1 << TX_DS | 1 << MAX_RT);
 
   //set IRQ pin to set when receive data
-  aux = readRegister(CONFIG) | 1 << MASK_TX_DS | 1 << MASK_MAX_RT | 1 << MASK_RX_DR; // Removida tamb�m a interrup��o de RX data ready
+  aux = (readRegister(CONFIG) | 1 << MASK_TX_DS | 1 << MASK_MAX_RT) & (~(1 << MASK_RX_DR));
   writeRegister(CONFIG, aux) ;
 
   //set CRC enabled

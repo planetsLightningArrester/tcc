@@ -35,16 +35,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define fs3200 125
-#define fs1200 250
-#define fs00 100
-#define fs3600 100
-#define fs3600 100
-#define fs3600 100
-#define fs3600 100
-#define fs3600 100
-#define fs3600 100
-#define fs3600 100
 
 /* USER CODE END PD */
 
@@ -97,6 +87,7 @@ static void MX_TIM1_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 void toggleLED(uint8_t delay, uint8_t times);
+void sleepTillNrfReceive();
 void lineInit(struct line *f, uint32_t c );
 void lineInsert(struct line *f, uint32_t v);
 int lineRemove(struct line *f );
@@ -121,14 +112,16 @@ int main(void)
 
 	//ADXL345 variables
 	uint8_t range = 16;
-	double sampleRate = 3600.0;
+	double sampleRate = 3200.0;
 	bool lowPowerMode = false;
-	bool acquisitionStarted = false;
+	volatile bool acquisitionStarted = false;
 
 	//nRF24 package variables
 	char RF24msg[32];
 	uint8_t dataPackage[32];
-	uint8_t maxPackegeIndexPerSend = 30;
+	uint16_t tempData[4];
+	uint8_t maxPackageIndexPerSend = 30;
+	uint8_t nBitsPerRead = 13;
 	uint8_t packageIndex;
 	uint8_t readsAvailables;
 
@@ -180,11 +173,10 @@ int main(void)
   //Reads the battery level
   HAL_ADC_Start_DMA(&hadc1, &batLevel, 1);
 
-  //Accelerometer initialization
-  acel_init(&hspi1, 14);
-  acel_range(range);
-  acel_sample_rate(sampleRate);
-  //acel_measure(true);
+	//Accelerometer initialization
+	acel_init(&hspi1, 14);
+	acel_range(range);
+	acel_sample_rate(sampleRate);
 
   //Radio initialization
   nRF24 radio = nRF24(&hspi2, 30, 25, 20);
@@ -196,10 +188,7 @@ int main(void)
 	  HAL_Delay(1000);
   }*/
 
-  //Timer 3600Hz initialization
-  //HAL_TIM_Base_Start_IT(&htim1);
-
-  //HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+  sleepTillNrfReceive();
 
   /* USER CODE END 2 */
 
@@ -213,8 +202,6 @@ int main(void)
 
 	while(!acquisitionStarted){
 		if(nRf24_IRQ){
-			toggleLED(100, 2);
-			//nRf24_IRQ = 0;
 			if(radio.available()){
 				radio.read(RF24msg);
 				if(strncmp(RF24msg, "start", 5) == 0){
@@ -228,13 +215,15 @@ int main(void)
 					//
 
 					acel_measure(true);
-					HAL_TIM_Base_Start_IT(&htim1);	//Timer 3600Hz initialization
+					HAL_NVIC_DisableIRQ(EXTI3_IRQn);
+					HAL_TIM_Base_Start_IT(&htim1);	//Timer [sampleRate]Hz initialization
 					HAL_ADC_Start_DMA(&hadc1, &batLevel, 1);	//Reads battery level
 					acquisitionStarted = true;	//Starts the acquisition
 				} else if (strncmp(RF24msg, "blink", 5) == 0) {
 					if(blinking){
 						HAL_TIM_Base_Stop_IT(&htim2);
 						blinking = false;
+						HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
 					} else{
 						HAL_TIM_Base_Start_IT(&htim2);
 						blinking = true;
@@ -256,22 +245,30 @@ int main(void)
 
 					switch (range) {
 						case 2:
-							maxPackegeIndexPerSend = 30;
+							maxPackageIndexPerSend = 30;
+							// nBitsPerRead = 10;
 							break;
 						case 4:
-							maxPackegeIndexPerSend = 29;
+							maxPackageIndexPerSend = 29;
+							// nBitsPerRead = 11;
 							break;
 						case 8:
-							maxPackegeIndexPerSend = 27;
+							maxPackageIndexPerSend = 27;
+							// nBitsPerRead = 12;
 							break;
 						case 16:
-							maxPackegeIndexPerSend = 30;
+							maxPackageIndexPerSend = 30;
+							// nBitsPerRead = 13;
 							break;
 						default:
 							break;
 					}
 				}
 			}
+			nRf24_IRQ = 0;
+		}
+		if(!acquisitionStarted){
+			sleepTillNrfReceive();
 		}
 	}
 	while(acquisitionStarted) {
@@ -279,11 +276,20 @@ int main(void)
 
 			readsAvailables = accDataLine.nItens;
 
-			for(; (packageIndex < readsAvailables) || (packageIndex == maxPackegeIndexPerSend); packageIndex++){
-
+			for(; (packageIndex < readsAvailables) || (packageIndex < 5); packageIndex++){
+				tempData[0] = lineRemove(&accDataLine);		//Get X axis
+				tempData[1] = lineRemove(&accDataLine);		//Get Y axis
+				tempData[2] = lineRemove(&accDataLine);		//Get Z axis
+				// dataPackage[0 + packageIndex*6] = tempData[0] & 0xFF;
+				// dataPackage[1 + packageIndex*6] = (tempData[0] & 0xFF00);
+				// dataPackage[2 + packageIndex*6] = tempData[1] & 0xFF;
+				// dataPackage[3 + packageIndex*6] = (tempData[1] & 0xFF00);
+				// dataPackage[4 + packageIndex*6] = tempData[2] & 0xFF;
+				// dataPackage[5 + packageIndex*6] = (tempData[2] & 0xFF00);
 			}
 
-			if(packageIndex == maxPackegeIndexPerSend) {
+			if(packageIndex == 5) {
+			// if(packageIndex == maxPackageIndexPerSend) {
 				dataPackage[30] = (batLevel & 0xF00)>>8;
 				dataPackage[31] = batLevel & 0xFF;
 				if(radio.send((const char *)dataPackage, 30, 0)){
@@ -291,6 +297,7 @@ int main(void)
 					if(strncmp(RF24msg, "stop", 4) == 0) {
 						acel_measure(false);
 						HAL_TIM_Base_Stop_IT(&htim1);
+						HAL_NVIC_EnableIRQ(EXTI3_IRQn);
 						toggleLED(100, 7);
 						acquisitionStarted = false;
 					}
@@ -700,9 +707,19 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : INT3_Pin */
   GPIO_InitStruct.Pin = INT3_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(INT3_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI3_IRQn);
+
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 }
 
@@ -722,9 +739,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 
 //External IRQ handle.
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-  //if(GPIO_Pin == INT3_Pin){
+  if(GPIO_Pin == INT3_Pin){
     nRf24_IRQ = 1;
-  //}
+  }
 }
 
 
@@ -734,6 +751,12 @@ void toggleLED(uint8_t delay, uint8_t times){
     if (delay)
     	HAL_Delay(delay);
   }
+}
+
+void sleepTillNrfReceive(){
+	HAL_SuspendTick();
+	HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
+	HAL_ResumeTick();
 }
 
 //List functions

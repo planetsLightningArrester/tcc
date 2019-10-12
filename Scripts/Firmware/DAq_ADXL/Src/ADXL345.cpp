@@ -50,14 +50,46 @@ int16_t acel_register2_read(unsigned char address) {
 
 //-------------------------------------------------------------------Configuraï¿½ï¿½o dos parï¿½metros do ADXL345 [2,4,8,16] (OK)
 void acel_init(SPI_HandleTypeDef* HSPI, int csn) {
-	globalHSPIacc = HSPI;
+    globalHSPIacc = HSPI;
 	csn_pin_acc = csn;
+    uint8_t range = 16;
+	// Data rate and power mode control
+    acel_register_write(POWER_CTL, 0b11);
+    acel_register_write(DATA_FORMAT, 0b00001000);
+	//acel_register_write(BW_RATE, 0b00001111);
+
+	// Power-saving features control
+	//acel_register_write(POWER_CTL, 0b00001000);
 
 	// Interrupt mapping control
 	acel_register_write(INT_MAP, 0b01111111);
 
 	// Interrupt enable control
 	acel_register_write(INT_ENABLE, 0b00000000);
+
+	// Data format control
+	// switch (range) {
+	// case 2: {
+	// 	acel_register_write(DATA_FORMAT, 0b00001000);
+	// 	break;
+	// }
+	// case 4: {
+	// 	acel_register_write(DATA_FORMAT, 0b00001001);
+	// 	break;
+	// }
+	// case 8: {
+	// 	acel_register_write(DATA_FORMAT, 0b00001010);
+	// 	break;
+	// }
+	// case 16: {
+	// 	acel_register_write(DATA_FORMAT, 0b00001011);
+	// 	break;
+	// }
+	// default: {
+	// 	acel_register_write(DATA_FORMAT, 0b00001011);
+	// 	break;
+	// }
+	// }
 
 	// FIFO control
 	acel_register_write(FIFO_CTL, 0b00000000);
@@ -138,19 +170,19 @@ struct flutuante acel_offset_callibration(void) {
 }
 
 void acel_measure(bool onOff) {
-    acel_register_write(POWER_CTL, (acel_register2_read(POWER_CTL) & 0xF7) | onOff );
+    acel_register_write(POWER_CTL, (acel_register_read(POWER_CTL) & 0xF7) | (onOff<<3) );
 }
 
 void acel_range(unsigned short range) {
-    acel_register_write(DATA_FORMAT, (acel_register2_read(DATA_FORMAT) & 0xFC) | ((uint8_t) (log2(range) - 1)) );
+    acel_register_write(DATA_FORMAT, (acel_register_read(DATA_FORMAT) & 0xFC) | ((uint8_t) (log2(range) - 1)) );
 }
 
 void acel_low_power(bool onOff) {
-    acel_register_write(BW_RATE, (onOff<<4) | (acel_register2_read(BW_RATE) & 0xF));
+    acel_register_write(BW_RATE, (onOff<<4) | (acel_register_read(BW_RATE) & 0xF));
 }
 
 void acel_sample_rate(unsigned int sampleRate) {
-    acel_register_write(BW_RATE, (acel_register2_read(BW_RATE) & 0x10) | (uint8_t)(log2(sampleRate/6.25) + 0b0110));
+    acel_register_write(BW_RATE, (acel_register_read(BW_RATE) & 0x10) | (uint8_t)(log2(sampleRate/6.25) + 0b0110));
 }
 
 //UTILs

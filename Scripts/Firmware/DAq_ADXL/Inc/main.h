@@ -62,16 +62,19 @@ void Error_Handler(void);
 #define LED_GPIO_Port GPIOC
 #define INT1_Pin GPIO_PIN_3
 #define INT1_GPIO_Port GPIOA
+#define INT1_EXTI_IRQn EXTI3_IRQn
 #define SPI1_CS_Pin GPIO_PIN_4
 #define SPI1_CS_GPIO_Port GPIOA
 #define INT2_Pin GPIO_PIN_0
 #define INT2_GPIO_Port GPIOB
+#define INT2_EXTI_IRQn EXTI0_IRQn
 #define BAT_Pin GPIO_PIN_1
 #define BAT_GPIO_Port GPIOB
 #define SPI2_CS_Pin GPIO_PIN_12
 #define SPI2_CS_GPIO_Port GPIOB
 #define INT3_Pin GPIO_PIN_8
 #define INT3_GPIO_Port GPIOA
+#define INT3_EXTI_IRQn EXTI9_5_IRQn
 #define SPI2_CE_Pin GPIO_PIN_9
 #define SPI2_CE_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */

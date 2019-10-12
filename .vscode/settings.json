@@ -4,5 +4,8 @@
         "hal",
         "pin",
         "write"
-    ]
+    ],
+    "files.associations": {
+        "cmath": "cpp"
+    }
 }
