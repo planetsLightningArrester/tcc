@@ -130,6 +130,36 @@ void writePin(uint8_t pin, int highLow){
     }
 }
 
+_line::_line(uint8_t _capacity){
+    capacity = _capacity;
+	data = (int16_t*) malloc (capacity * sizeof(int16_t));
+	first = 0;
+	last = -1;
+	available = 0;
+}
+
+void _line::insertValue(int16_t value) {
+
+    if (last == capacity-1){
+        last = -1;
+    }
+    last++;
+    data[last] = value; // incrementa last e insere
+    available++; // mais um item inserido
+}
+
+int16_t _line::getValue() { // pega o item do comeÃ§o da line
+
+	int16_t temp = data[first++]; // pega o valor e incrementa o first
+
+	if(first == capacity)
+		first = 0;
+
+	available--;  // um item retirado
+	return temp;
+
+}
+
 //------------------------------------Envio de 1 byte de dados ao registrador selecionado do ADXL345 [Endereï¿½o / Dado] (OK)
 void ADXL::registerWrite(unsigned char address, unsigned char data) {
 	HAL_SPI_Init(globalHSPIacc);
@@ -178,13 +208,13 @@ ADXL::ADXL(SPI_HandleTypeDef* HSPI, int csn) {
 void ADXL::readAxis(char axis) {
 
 	if (axis == 'x' || axis == 'X') {
-		X = registerRead2(DATAX0);
+		X.insertValue(registerRead2(DATAX0));
 	}
 	if (axis == 'y' || axis == 'Y') {
-		Y = registerRead2(DATAY0);
+		Y.insertValue(registerRead2(DATAY0));
 	}
 	if (axis == 'z' || axis == 'Z') {
-		Z = registerRead2(DATAZ0);
+		Z.insertValue(registerRead2(DATAZ0));
 	}
 
 }
@@ -199,9 +229,9 @@ void ADXL::read3axes(void) {
 	HAL_SPI_TransmitReceive(globalHSPIacc, &dado, aux, 7, 500);
 	writePin(csn_pin_acc, HIGH);
 
-	X = ((aux[2] << 8) & 0xFF00) | (aux[1]);
-	Y = ((aux[4] << 8) & 0xFF00) | (aux[3]);
-	Z = ((aux[6] << 8) & 0xFF00) | (aux[5]);
+	X.insertValue(((aux[2] << 8) & 0xFF00) | (aux[1]));
+	Y.insertValue(((aux[4] << 8) & 0xFF00) | (aux[3]));
+	Z.insertValue(((aux[6] << 8) & 0xFF00) | (aux[5]));
 
 	HAL_SPI_DeInit(globalHSPIacc);
 }
@@ -209,11 +239,16 @@ void ADXL::read3axes(void) {
 //--------------------------------------------------------------Mediï¿½ï¿½o do ï¿½ngulo de deslocamento dos eixos de mediï¿½ï¿½o (OK)
 void ADXL::read3angles() {
 	double resultante;
+    int16_t x, y, z;
 
-	resultante = sqrt(pow(X, 2) + pow(Y, 2) + pow(Z, 2));
-	angX = acos(X / resultante) * (180 / M_PI);
-	angY = acos(Y / resultante) * (180 / M_PI);
-	angZ = acos(Z / resultante) * (180 / M_PI);
+    x = X.getValue();
+    y = Y.getValue();
+    z = Z.getValue();
+
+	resultante = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+	angX = acos(x / resultante) * (180 / M_PI);
+	angY = acos(y / resultante) * (180 / M_PI);
+	angZ = acos(z / resultante) * (180 / M_PI);
 }
 
 void ADXL::measure(bool onOff) {
@@ -298,4 +333,37 @@ void ADXL::wakeupSampleRate(uint8_t sampleRate) {
         break;
     }
 
+}
+
+void ADXL::fifoConfig(uint8_t fifoMode, uint8_t fifoQuantityToGenerateInterrupt = 16, uint8_t int1_or_int2 = INT2) {
+
+    if(fifoQuantityToGenerateInterrupt > 32) {
+        fifoQuantityToGenerateInterrupt = 32;
+    }
+
+    registerWrite(FIFO_CTL, (fifoMode << 6) | int1_or_int2 << 5 | fifoQuantityToGenerateInterrupt);
+
+}
+
+void ADXL::fifoRead(){
+    uint8_t fifoAvailableSize = (registerRead(FIFO_STATUS) & 0x3F);
+    uint8_t usCounter = 0;
+    uint8_t dado = 0b11000000 | DATAX0;
+    uint8_t aux[7];
+    uint8_t saida[33];
+
+    HAL_SPI_Init(globalHSPIacc);
+    writePin(csn_pin_acc, LOW);
+
+    for(uint8_t i = 0; i < fifoAvailableSize; i += 7) {
+        HAL_SPI_TransmitReceive(globalHSPIacc, &dado, aux, 7, 500);
+        usCounter = SysTick->VAL;
+        X.insertValue(((aux[2] << 8) & 0xFF00) | (aux[1]));
+        Y.insertValue(((aux[4] << 8) & 0xFF00) | (aux[3]));
+        Z.insertValue(((aux[6] << 8) & 0xFF00) | (aux[5]));
+        while((SysTick->VAL - usCounter) < 360); //Count 360 cycles of 72MHz = 5us
+    }
+    
+    writePin(csn_pin_acc, HIGH);
+    HAL_SPI_DeInit(globalHSPIacc);
 }

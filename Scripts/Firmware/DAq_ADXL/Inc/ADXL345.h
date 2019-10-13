@@ -26,6 +26,7 @@
 #define DATAZ0		0x36 // Z-Axis Data 0
 #define DATAZ1		0x37 // Z-Axis Data 1
 #define FIFO_CTL	0x38 // FIFO control
+#define FIFO_STATUS	0x39 // FIFO status
 //Bits para verificacao de interrupcoes
 #define DATA_READY	7		
 #define SINGLE_TAP	6		
@@ -38,6 +39,11 @@
 //Defines
 #define INT1 0
 #define INT2 1
+//Possibilidades de fifos
+#define BYPASS 0
+#define FIFO 1
+#define STREAM 2
+#define TRIGGER 3
 
 //--------------------------------------------------------------------------------------------------------------------------
 
@@ -73,15 +79,29 @@ struct inteiro{
 // void digitalWrite(uint8_t pin, bool highLow);
 // bool acel_eventHappened(uint8_t event);
 
-class ADXL {
+class _line {
+	private:
+		volatile uint8_t capacity;
+		volatile int16_t *data;
+		volatile int16_t first;
+		volatile int16_t last;
 
+	public:
+		volatile uint8_t available;
+
+		int16_t getValue();
+		void insertValue(int16_t value);
+		_line(uint8_t _capacity);
+};
+
+class ADXL {
 
 	public:
 		bool available = false;
 
-		int16_t X;
-		int16_t Y;
-		int16_t Z;
+		_line X = _line(100);
+		_line Y = _line(100);
+		_line Z = _line(100);
 
 		double angX;
 		double angY;
@@ -107,6 +127,8 @@ class ADXL {
 		void intActiveLow(bool onOff);
 		void fullResolutionMode(bool onOff);
 		void wakeupSampleRate(uint8_t sampleRate);
+		void fifoConfig(uint8_t fifoMode, uint8_t fifoQuantityToGenerateInterrupt = 16, uint8_t int1_or_int2 = INT2);
+		void fifoRead();
 };
 
 

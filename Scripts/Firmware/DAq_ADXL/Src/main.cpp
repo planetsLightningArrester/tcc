@@ -87,6 +87,8 @@ static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 void toggleLED(uint8_t delay, uint8_t times);
 void sleepTillNrfReceive();
+void enableNrfIntPin();
+void disableNrfIntPin();
 void lineInit(struct line *f, uint32_t c );
 void lineInsert(struct line *f, int16_t v);
 int lineRemove(struct line *f );
@@ -180,7 +182,18 @@ int main(void)
 	adxl.sampleRate(sampleRate);
 	adxl.disableAllInts();
 	adxl.intActiveLow(true);
-	adxl.setInt(DATA_READY, INT1);
+	//adxl.setInt(DATA_READY, INT1);
+	adxl.fifoConfig(FIFO, 32, INT2);
+
+	//
+
+	adxl.measure(true);
+
+	while(1) {
+
+	}
+
+	//
 
   //Radio initialization
   nRF24 radio = nRF24(&hspi2, 30, 25, 20);
@@ -219,7 +232,7 @@ int main(void)
 					//
 
 					adxl.measure(true);
-					HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+					disableNrfIntPin();
 					//HAL_TIM_Base_Start_IT(&htim1);	//Timer [sampleRate]Hz initialization
 					HAL_ADC_Start_DMA(&hadc1, &batLevel, 1);	//Reads battery level
 					acquisitionStarted = true;	//Starts the acquisition
@@ -279,9 +292,9 @@ int main(void)
 			adxl.available = 0;
 			adxl.read3axes();
 
-      tempData[0] = adxl.X & 0x1FFF;		//Get X axis
-      tempData[1] = adxl.Y & 0x1FFF;		//Get Y axis
-      tempData[2] = adxl.Z & 0x1FFF;		//Get Z axis
+      //tempData[0] = adxl.X & 0x1FFF;		//Get X axis
+      //tempData[1] = adxl.Y & 0x1FFF;		//Get Y axis
+      //tempData[2] = adxl.Z & 0x1FFF;		//Get Z axis
       
 			switch(range){
 				case 16:
@@ -300,9 +313,9 @@ int main(void)
 			// tempData[0] = lineRemove(&accDataLine);		//Get X axis
 			// tempData[1] = lineRemove(&accDataLine);		//Get Y axis
 			// tempData[2] = lineRemove(&accDataLine);		//Get Z axis
-			tempData[0] = adxl.X;		//Get X axis
-			tempData[1] = adxl.Y;		//Get Y axis
-			tempData[2] = adxl.Z;		//Get Z axis
+			//tempData[0] = adxl.X;		//Get X axis
+			//tempData[1] = adxl.Y;		//Get Y axis
+			//tempData[2] = adxl.Z;		//Get Z axis
 			packageIndex++;
 /*
 			for(; (packageIndex < readsAvailables) || (packageIndex < 5); packageIndex++){
@@ -326,7 +339,7 @@ int main(void)
 					if(strncmp(RF24msg, "stop", 4) == 0) {
 						adxl.measure(false);
 						HAL_TIM_Base_Stop_IT(&htim1);
-						HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+						enableNrfIntPin();
 						toggleLED(100, 7);
 						acquisitionStarted = false;
 					}
@@ -763,6 +776,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	// lineInsert(&accDataLine, adxl.Y);
 	// lineInsert(&accDataLine, adxl.Z);
   }
+  else if (GPIO_Pin == INT2_Pin){
+	  adxl.available = true;
+
+  }
   else if(GPIO_Pin == INT3_Pin){
     nRf24_IRQ = 1;
   }
@@ -781,6 +798,14 @@ void sleepTillNrfReceive(){
 	HAL_SuspendTick();
 	HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
 	HAL_ResumeTick();
+}
+
+void enableNrfIntPin(){
+	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+}
+
+void disableNrfIntPin(){
+	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 }
 
 //List functions
