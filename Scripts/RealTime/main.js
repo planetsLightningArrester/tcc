@@ -4,6 +4,9 @@ let daqMaster = 0;
 let gotCtrlC = false;
 let timer = 0;
 let counter = 0;
+let counterError = 0;
+let packageCounter = 0;
+let previousPackageCounter = -1;
 
 process.stdin.resume();
 
@@ -23,14 +26,23 @@ SerialPort.list(function (err, ports) {
                     daqMaster.write("start");
                     timer = new Date();
                     daqMaster.on('data', function (data) {
-                        console.log(data.toString());
-                        counter += data.length;
-                        if (counter >= 31*1340) {
-                            counter -= 31*1340;
-                            timer = (new Date()) - timer;
-                            console.inlineTimeTag(timer);
-                            timer = new Date();
+                        //console.log(data.toString());
+                        packageCounter = data[31];
+                        if((previousPackageCounter == (packageCounter - 1)) || (packageCounter == 0)){
+                            counter += data.length;
+                        } else {
+                            counterError++
+                            //console.log("Dado perdido: " + packageCounter.toString() + " " + previousPackageCounter.toString());
                         }
+                        if (counter >= 32*1340*4) {
+                            counter -= 32*1340*4;
+                            //timer = (new Date()) - timer;
+                            //console.inlineTimeTag(timer);
+                            console.inlineTimeTag(counterError);
+                            counterError = 0;
+                            //timer = new Date();
+                        }
+                        previousPackageCounter = packageCounter;
                     })
                     daqMaster.on("error", function (err) {
                         console.log(err.message)

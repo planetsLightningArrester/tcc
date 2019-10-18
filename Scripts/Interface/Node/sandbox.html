@@ -1,0 +1,177 @@
+<HTML>
+    <head>
+        <title>DAq KOT</title>
+        <meta charset="UTF-8">
+        <!--meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"-->
+        <meta name="viewport" content="height=device-height, initial-scale=1.0">
+
+        <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+        <link rel="preload" href="./art/logo_kot.png" as="image">
+        <link rel="preload" href="./art/nome_logo_kot.png" as="image">
+        <link rel="preload" href="./art/checkIcon.png" as="image">
+        <link rel="preload" href="./art/uncheckIcon.png" as="image">
+        <link rel="preload" href="./art/reload.png" as="image">
+        <link rel="preload" href="./art/plus.png" as="image">
+        <link rel="preload" href="./art/half-battery.png" as="image">
+        <link rel="preload" href="./art/remove.png" as="image">
+        <link rel="preload" href="./art/line.png" as="image">
+
+        <script src="./js/Chart.bundle.min.js"></script>
+        <script src="./js/jquery.min.js"></script>
+        <script src="./js/socket.io.dev.js"></script>
+        <script src="./js/velocity.min.js"></script>
+
+        <script>if (window.module) module = window.module;</script>
+
+        <style>
+            @import url('./css/sideBar.css');
+            @import url('./css/initialButtons.css');
+            @import url('./css/blinkButton.css');
+            @import url('./css/accStyles.css');
+            @import url('./css/daqStyles.css');
+            @import url('./css/bottomRightKotBackgroundImage.css');
+            @import url('./css/titleBar.css');
+
+            body{
+                overflow: hidden;
+                font-family: "Lato", sans-serif;
+                /* -ms-overflow-style: scrollbar;*/
+            }
+            upperBar{
+                position: absolute;
+                height: 20px;
+                width: 100%;
+                -webkit-app-region:drag;
+            }
+            container{
+                background: #7d7d7d;
+            }
+            
+            @media screen and (max-height: 450px) {
+                .sidenav {padding-top: 15px;}
+                .sidenav a {font-size: 18px;}
+            }
+
+            input[type="submit"],
+            input[type="reset"],
+            input[type="button"],
+            input[type="text"],
+            button,
+            div,
+            a,
+            textarea {
+                -webkit-app-region: no-drag;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <script src = "./js/mo.js"></script>
+        <script src = "./js/moObjects.js"></script>
+        <script src = "./js/socketConfig.js"></script>
+        <script src = "./js/analogVibration.js"></script>
+        <script src = "./js/initialScreen.js"></script>
+        <script src = "./js/digitalVibration.js"></script>
+
+        <upperBar>
+            <div class="titleBarLine"></div>
+            <div class="titleAppName">DAq KOT v0.1.3</div>
+            <div class="flex" style="position: absolute; right: 135px; top: -8px"><a class="windowButton" id = "minimizeButton" style="padding: 0px 0px" onclick="minimizeCmd()">_</a></div>
+            <div class="flex" style="position: absolute; right: 94px; top: -8px"><a class="windowButton" id = "maximizeResizeButton" onclick="maximizeResizeCmd()">□</a></div>
+            <div class="flex" style="position: absolute; right: 53px; top: -8px"><a class="windowButton" id = "closeButton" style="padding: 0px 0px" onclick="closeCmd()">✕</a></div>
+        </upperBar>
+
+        
+        <!--div id="sideNav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a id = "vibrationInsideSideNav" href="#" onclick="expandVibrationMenu()">Vibração</a>
+                <a href="#">Extensometria</a>
+        </div>
+        
+        <div id = "initialConainer" style="position: absolute; top: 35%; left: 40%">
+            <div id = "blankBackground" style="background:#ffffff; width: 117px; height: 100px"></div>
+            <div id = "kotName"><img height = "100" class="kotNameClass" src="./art/nome_logo_kot.png"\></div>
+            
+            <div id = "kotButton"><img height = "200" class="kotLogoClass" src="./art/logo_kot.png"\></div>
+        
+            <a id = "initialVibrationButton" class="testButton" onclick="vibrationButtonClick()" style="animation: vibrationButtonShowUp 1500ms 3s forwards">Vibração</a>
+            <a id = "initialExtensometryButton" class="testButton" onclick="extensometryButtonClick()" style="animation: extensometryButtonShowUp 1500ms 3s forwards">Extensometria</a>
+
+            <a id = "initialDigitalButton" class = "testButton">Digital</a>
+            <a id = "initialAnalogButton" class = "testButton">Analógico</a>
+
+        </div-->
+
+        <script>
+            let axisDisplayng = "sample";
+
+            $(document).ready(function(){
+                //loadIntroScreen();
+                digitalVibration();
+                //analogVibration();
+                //loadAquisitionScreen("analog");
+                //analogVibration();
+            });
+
+            function axisTimeChange(value) {
+                axisDisplayng = value;
+             }
+
+            function expandVibrationMenu(){
+                
+                    $('#vibrationInsideSideNav').click(function(){shrinkVibrationMenu()});
+
+                    $("<ul><a id = \"analogSideNav\" href = \"#\">Analógico</a><a id = \"digitalSideNav\" href = \"#\">Digital</a></ul>").insertAfter('#vibrationInsideSideNav');
+
+                    $('#analogSideNav').css("opacity", "0");
+                    $('#digitalSideNav').css("opacity", "0");
+
+                    $('#analogSideNav').animate({opacity: 1}, 200);
+                    $('#digitalSideNav').animate({opacity: 1}, 200);
+
+                    $('#analogSideNav').click(function(){
+                        $('#vibrationInsideSideNav').click(function(){expandVibrationMenu()});
+                        $('#analogSideNav').detach();
+                        $('#digitalSideNav').detach();
+                        closeNav();
+                    });
+                    $('#digitalSideNav').click(function(){
+                        $('#vibrationInsideSideNav').click(function(){expandVibrationMenu()});
+                        $('#analogSideNav').detach();
+                        $('#digitalSideNav').detach();
+                        closeNav();
+                    });
+                
+            }
+
+            function shrinkVibrationMenu(){
+                $('#vibrationInsideSideNav').click(function(){expandVibrationMenu()});
+                $('#analogSideNav').detach();
+                $('#digitalSideNav').detach();
+            }
+
+            function minimizeCmd(){
+                socket.emit('window', 'minimize');
+            }
+            
+            function maximizeResizeCmd(){
+                socket.emit('window', 'maximize');
+            }
+
+            function closeCmd(){
+                socket.emit('window', 'close');
+            }
+
+            socket.on('close', function(){
+                if(confirm("Deseja sair?"))
+                    socket.emit('close', true);
+                else
+                    socket.emit('close', false);
+            });
+
+        </script>
+    </body>
+</HTML>

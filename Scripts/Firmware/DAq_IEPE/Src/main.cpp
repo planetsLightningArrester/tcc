@@ -37,10 +37,14 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define ch0Ratio (3703.0/19.0)
-#define ch1Ratio (3616.0/19.0)
-#define ch2Ratio (3556.0/19.0)
-#define ch3Ratio (3616.0/19.0)
+#define ch0Ratio (19.0/3703.0)
+#define ch1Ratio (19.0/3616.0)
+#define ch2Ratio (19.0/3556.0)
+#define ch3Ratio (19.0/3616.0)
+//#define ch0Ratio (3703.0/19.0)
+//#define ch1Ratio (3616.0/19.0)
+//#define ch2Ratio (3556.0/19.0)
+//#define ch3Ratio (3616.0/19.0)
 // #define ch0Ratio (4095.0/3703.0)
 // #define ch1Ratio (4095.0/3616.0)
 // #define ch2Ratio (4095.0/3556.0)
@@ -73,6 +77,7 @@ DMA_HandleTypeDef hdma_adc1;
 SPI_HandleTypeDef hspi2;
 
 TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
 
 /* USER CODE BEGIN PV */
@@ -86,6 +91,8 @@ uint32_t tim1Counter = 0;
 uint32_t globalADC_counter = 0;
 bool aquisitionStarted = false;
 
+volatile uint32_t secondsElapsed = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -95,6 +102,7 @@ static void MX_DMA_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 void toggleIdleLED(uint8_t delay = 0, uint8_t times = 1);
@@ -140,14 +148,19 @@ int main(void)
   MX_SPI2_Init();
   MX_ADC1_Init();
   MX_TIM1_Init();
+  MX_TIM2_Init();
   MX_TIM3_Init();
+
   /* USER CODE BEGIN 2 */
-  char RF24msg[32];
+  char RF24msg[100];
   uint8_t dataPackage[32];
   uint32_t tempData[4];
   uint32_t sampleCounter = 0;
+  uint8_t packageCounter = 0;
   volatile uint32_t convCounterAux = 0;
   
+  bool blinking = false;
+
   lineInit(&accDataLine, 100);
 
   HAL_Delay(300);
@@ -167,18 +180,94 @@ int main(void)
     while(!aquisitionStarted){
       if(radio.available()){
         radio.read(RF24msg);
-        if(strncmp(RF24msg, "start", 5) == 0){
+        if(strncmp(RF24msg, "start", 5) == 0) {
+
+        	//Blinks the LED and turn ir off
+			if(blinking) {
+				HAL_TIM_Base_Stop_IT(&htim2);
+			}
+			//
+
           toggleIdleLED();
           toggleSendLED(100, 6);
+
+          //
+          aquisitionStarted = true;
+          //
+
           HAL_ADC_Start_DMA(&hadc1, (uint32_t*) ADCReadings, 4);
           //HAL_TIM_Base_Start_IT(&htim1);
-        }
+        } else if (strncmp(RF24msg, "blink", 5) == 0) {
+			if(blinking) {
+				HAL_TIM_Base_Stop_IT(&htim2);
+				blinking = false;
+				HAL_GPIO_WritePin(idleLed_GPIO_Port, idleLed_Pin, GPIO_PIN_SET);
+			} else {
+				HAL_TIM_Base_Start_IT(&htim2);
+				blinking = true;
+			}
+		} else if (strncmp(RF24msg, "calibration", 11) == 0) {
+			sprintf(RF24msg, "%.5lf,%.5lf,%.5lf,%.5lf", ch0Ratio, ch1Ratio, ch2Ratio, ch3Ratio);
+			radio.send(RF24msg, 31, 0);
+		} else if (strncmp(RF24msg, "offset", 6) == 0) {
+			tempData[0] = 0;
+			tempData[1] = 0;
+			tempData[2] = 0;
+			tempData[3] = 0;
+
+			if(blinking) {
+				HAL_TIM_Base_Stop_IT(&htim2);
+			}
+
+			sampleCounter = 0;
+
+			HAL_GPIO_WritePin(idleLed_GPIO_Port, idleLed_Pin, GPIO_PIN_RESET);
+
+			HAL_ADC_Start_DMA(&hadc1, (uint32_t*) ADCReadings, 4);
+			HAL_TIM_Base_Start_IT(&htim2);
+
+			secondsElapsed = 0;
+
+			while(secondsElapsed < 1) {
+				if(accDataLine.nItens) {
+					tempData[0] += lineRemove(&accDataLine);
+					tempData[1] += lineRemove(&accDataLine);
+					tempData[2] += lineRemove(&accDataLine);
+					tempData[3] += lineRemove(&accDataLine);
+					sampleCounter++;
+				}
+			}
+
+			HAL_ADC_Stop_DMA(&hadc1);
+			HAL_TIM_Base_Stop_IT(&htim2);
+			HAL_GPIO_WritePin(idleLed_GPIO_Port, idleLed_Pin, GPIO_PIN_SET);
+
+			while(accDataLine.nItens) {
+				lineRemove(&accDataLine);
+			}
+
+			adcOffsetRatio[0] = tempData[0]/sampleCounter;
+			adcOffsetRatio[1] = tempData[1]/sampleCounter;
+			adcOffsetRatio[2] = tempData[2]/sampleCounter;
+			adcOffsetRatio[3] = tempData[3]/sampleCounter;
+
+			tempData[0] = 0;
+			tempData[1] = 0;
+			tempData[2] = 0;
+			tempData[3] = 0;
+
+			secondsElapsed = 0;
+			sampleCounter = 0;
+
+			sprintf(RF24msg, "%.0f,%.0f,%.0f,%.0f", adcOffsetRatio[0], adcOffsetRatio[1], adcOffsetRatio[2], adcOffsetRatio[3]);
+			radio.send(RF24msg, 31, 0);
+		}
       }
     }
     while(aquisitionStarted){
       while(accDataLine.nItens){
         
-        for(; accDataLine.nItens && (sampleCounter < 5); sampleCounter++){
+        for(; accDataLine.nItens && (sampleCounter < 5); sampleCounter++) {
           tempData[0] = lineRemove(&accDataLine);
           tempData[1] = lineRemove(&accDataLine);
           tempData[2] = lineRemove(&accDataLine);
@@ -192,7 +281,8 @@ int main(void)
         }
 
         if(sampleCounter == 5) {
-          if(radio.send((const char *)dataPackage, 30, 0)){
+          dataPackage[30] = packageCounter;
+          if(radio.send((const char *)dataPackage, 31, 0)){
             radio.read(RF24msg);
             if(strncmp(RF24msg, "stop", 4) == 0) {
               HAL_ADC_Stop_DMA(&hadc1);
@@ -201,6 +291,11 @@ int main(void)
             }
           }
           sampleCounter = 0;
+          if(packageCounter < 254){
+        	  packageCounter++;
+          } else {
+        	  packageCounter = 0;
+          }
         }
       }
     }
@@ -378,9 +473,9 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 19999;
+  htim1.Init.Prescaler = 1199;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 1800;
+  htim1.Init.Period = 60;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
@@ -402,6 +497,51 @@ static void MX_TIM1_Init(void)
   /* USER CODE BEGIN TIM1_Init 2 */
 
   /* USER CODE END TIM1_Init 2 */
+
+}
+
+/**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 9999;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 7200;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
 
 }
 
@@ -535,23 +675,23 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	// 	convCounter = prevConvCounter;
 	// 	prevConvCounter = 0;
 	// }
-  if(!aquisitionStarted){
-    aquisitionStarted = true;
-    adcOffsetRatio[0] = (2047.0/((float)ADCReadings[0]));
-    adcOffsetRatio[1] = (2047.0/((float)ADCReadings[1]));
-    adcOffsetRatio[2] = (2047.0/((float)ADCReadings[2]));
-    adcOffsetRatio[3] = (2047.0/((float)ADCReadings[3]));
-  }
+  //if(!aquisitionStarted){
+    //aquisitionStarted = true;
+    //adcOffsetRatio[0] = (2047.0/((float)ADCReadings[0]));
+    //adcOffsetRatio[1] = (2047.0/((float)ADCReadings[1]));
+    //adcOffsetRatio[2] = (2047.0/((float)ADCReadings[2]));
+    //adcOffsetRatio[3] = (2047.0/((float)ADCReadings[3]));
+  //}
     
 
-  // lineInsert(&accDataLine, ADCReadings[0]);
-  // lineInsert(&accDataLine, ADCReadings[1]);
-  // lineInsert(&accDataLine, ADCReadings[2]);
-  // lineInsert(&accDataLine, ADCReadings[3]);
-  lineInsert(&accDataLine, ADCReadings[0]*adcOffsetRatio[0]);
-  lineInsert(&accDataLine, ADCReadings[1]*adcOffsetRatio[1]);
-  lineInsert(&accDataLine, ADCReadings[2]*adcOffsetRatio[2]);
-  lineInsert(&accDataLine, ADCReadings[3]*adcOffsetRatio[3]);
+  lineInsert(&accDataLine, ADCReadings[0]);
+  lineInsert(&accDataLine, ADCReadings[1]);
+  lineInsert(&accDataLine, ADCReadings[2]);
+  lineInsert(&accDataLine, ADCReadings[3]);
+  //lineInsert(&accDataLine, ADCReadings[0]*adcOffsetRatio[0]);
+  //lineInsert(&accDataLine, ADCReadings[1]*adcOffsetRatio[1]);
+  //lineInsert(&accDataLine, ADCReadings[2]*adcOffsetRatio[2]);
+  //lineInsert(&accDataLine, ADCReadings[3]*adcOffsetRatio[3]);
   // lineInsert(&accDataLine, ((ADCReadings[0])*ch0Ratio)>4095?4095:((ADCReadings[0])*ch0Ratio));
   // lineInsert(&accDataLine, ((ADCReadings[1])*ch1Ratio)>4095?4095:((ADCReadings[1])*ch1Ratio));
   // lineInsert(&accDataLine, ((ADCReadings[2])*ch2Ratio)>4095?4095:((ADCReadings[2])*ch2Ratio));
@@ -572,13 +712,18 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 }
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	tim1Counter++;
-	if(tim1Counter == 10){
-		globalADC_counter /= 10;
-		tim1Counter = 0;
-		globalADC_counter = 0;
+	if(htim == &htim1){
+		tim1Counter++;
+		if(tim1Counter == 10){
+			globalADC_counter /= 10;
+			tim1Counter = 0;
+			globalADC_counter = 0;
+		}
+	} else if (htim == &htim2) {
+		secondsElapsed++;
+		//toggleIdleLED();
+		HAL_GPIO_TogglePin(idleLed_GPIO_Port, idleLed_Pin);
 	}
-
 }
 
 void toggleIdleLED(uint8_t delay = 0, uint8_t times = 1){

@@ -62,7 +62,10 @@
 /* Private variables ---------------------------------------------------------*/
 SPI_HandleTypeDef hspi1;
 
+TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
+
+
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
@@ -73,6 +76,7 @@ TIM_HandleTypeDef htim3;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_SPI1_Init(void);
+static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
 
 /* USER CODE BEGIN PFP */
@@ -87,14 +91,20 @@ static void MX_TIM3_Init(void);
 bool mode = ANALOG;
 unsigned int indexUSB;
 char bufUSB[100];
+volatile uint32_t secondsElapsed = 0;
+
+uint8_t pipeData[640];  //Buffer with data received + pipe
+uint16_t pipeIndex = 0;
 
 void sendThroughUSB(char* buf, int radioIndex, int pipe) {
-	uint8_t pipeData[100];  //Buffer with data received + pipe
 
 	//sprintf((char *) pipeData, "r%d,p%d:", radioIndex, pipe); //Insert pipe
-	pipeData[0] = ((radioIndex & 0xF)<<4) | (pipe & 0xF);
+	pipeData[pipeIndex] = ((radioIndex & 0xF)<<4) | (pipe & 0xF);
+
+	pipeIndex++;
 
 	if (mode == DIGITAL) {
+
 		pipeData[1] = buf[0];           //Acx
 		pipeData[2] = buf[1];           //^
 		pipeData[3] = buf[2];           //Acy
@@ -107,11 +117,17 @@ void sendThroughUSB(char* buf, int radioIndex, int pipe) {
 		pipeData[10] = buf[9];          //^
 		pipeData[11] = buf[10];         //^
 		CDC_Transmit_FS(pipeData, 12);      //Transmit data through USB
+
 	} else {
-		for(uint8_t i = 0; i<30; i++){
-			pipeData[i+1] = buf[i];
+
+		for(int j = 0; j<31; pipeIndex++, j++){
+			pipeData[pipeIndex] = buf[j];
 		}
-		CDC_Transmit_FS(pipeData, 31);      //Transmit data through USB
+
+		if(usbReady() == USBD_OK){
+			CDC_Transmit_FS(pipeData, pipeIndex);
+			pipeIndex = 0;
+		}
 	}
 }
 
@@ -224,6 +240,7 @@ int main(void) {
 	MX_GPIO_Init();
 	MX_SPI1_Init();
 	MX_USB_DEVICE_Init();
+	MX_TIM2_Init();
 	MX_TIM3_Init();
 	/* USER CODE BEGIN 2 */
 	HAL_Delay(200);
@@ -257,6 +274,18 @@ int main(void) {
 	// 		CDC_Transmit_FS((uint8_t *)rf, strlen((char*)rf));
 	// 	}
 	// }
+	/*
+	uint32_t counter = 0;
+	char teste[] = "teste1teste2teste4teste1teste2teste4teste1teste2teste4";
+	unsigned char t[200];
+
+	while(1) {
+		sprintf((char*) t, "%s, %lu\n", teste, counter++);
+		//USBD_LL_Transmit(&hUsbDeviceFS, CDC_IN_EP, t, strlen((char *) t));
+		//USBD_CDC_TransmitPacket(&hUsbDeviceFS);
+		//while(!hUsbDeviceFS.pClass->EP0_TxSent);
+		while(CDC_Transmit_FS((uint8_t *)t, strlen((char *)t))==USBD_BUSY);
+	}*/
 
 	while (1) {
 		//Config routine
@@ -277,6 +306,54 @@ int main(void) {
 					mode = DIGITAL;
 				} else if (!strncmp((char *) bufUSB, "analog", 6)) { //Change to analog mode
 					mode = ANALOG;
+				} else if (!strncmp((char *) bufUSB, "getOffset", 9)) { //Get the offset of each channel
+					_radio = atoi((const char*) (bufUSB + 10));
+
+					radio[_radio].send("offset", 6, 0);
+
+					secondsElapsed = 0;
+					HAL_TIM_Base_Start_IT(&htim2);
+					for(uint32_t i = secondsElapsed; secondsElapsed < 3 && !radio[_radio].available();){
+						if(secondsElapsed - i) {
+							testLEDs();
+							radio[_radio].send("offset", 6, 0);
+							i = secondsElapsed;
+						}
+					}
+					HAL_TIM_Base_Stop_IT(&htim2);
+					secondsElapsed = 0;
+
+					if(radio[_radio].available()){
+						radio[_radio].read(RF24buf);
+						CDC_Transmit_FS((unsigned char *)RF24buf, strlen(RF24buf));
+					} else {
+						CDC_Transmit_FS((unsigned char *)"TIMEOUT", 7);
+					}
+				} else if (!strncmp((char *) bufUSB, "getCalibration", 14)) { //Get the offset of each channel
+					_radio = atoi((const char*) (bufUSB + 15));
+
+					radio[_radio].send("calibration", 11, 0);
+					radio[_radio].available();
+
+					secondsElapsed = 0;
+					HAL_TIM_Base_Start_IT(&htim2);
+					for(uint32_t i = secondsElapsed; (secondsElapsed < 3) && (!radio[_radio].available());){
+						if(secondsElapsed - i) {
+							testLEDs();
+							radio[_radio].send("calibration", 6, 0);
+							i = secondsElapsed;
+
+						}
+					}
+					HAL_TIM_Base_Stop_IT(&htim2);
+					secondsElapsed = 0;
+
+					if(radio[_radio].available()) {
+						radio[_radio].read(RF24buf);
+						CDC_Transmit_FS((unsigned char *)RF24buf, strlen(RF24buf));
+					} else {
+						CDC_Transmit_FS((unsigned char *)"TIMEOUT", 7);
+					}
 				} else if (!strncmp(bufUSB, "start", 5)) {
 					testLEDs();
 					started = true;
@@ -426,9 +503,9 @@ int main(void) {
 }
 
 /**
- * @brief System Clock Configuration
- * @retval None
- */
+  * @brief System Clock Configuration
+  * @retval None
+  */
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -504,6 +581,51 @@ static void MX_SPI1_Init(void)
   /* USER CODE BEGIN SPI1_Init 2 */
 
   /* USER CODE END SPI1_Init 2 */
+
+}
+
+/**
+  * @brief TIM2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM2_Init(void)
+{
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 9999;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 7200;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
 
 }
 
@@ -607,7 +729,14 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
+
 /* USER CODE BEGIN 4 */
+//Timer IRQ handle
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
+	if(htim == &htim2) {
+		secondsElapsed++;
+	}
+}
 
 /* USER CODE END 4 */
 

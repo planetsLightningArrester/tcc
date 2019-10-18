@@ -871,4 +871,3 @@ void nRF24::selectSlave(){
 void nRF24::deselectSlave(){
 	digitalWrite(csn_pin, HIGH);
 }
-

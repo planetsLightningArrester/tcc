@@ -121,7 +121,7 @@ for r,d,f in os.walk(path):
                         acc[1][i] = (acc[1][i] - offset[1])*bits2g[1]
                         acc[2][i] = (acc[2][i] - offset[2])*bits2g[2]
                         acc[3][i] = (acc[3][i] - offset[3])*bits2g[3]
-                        accData += str(acc[0][i]) + "\t" + str(acc[1][i]) + "\t" + str(acc[2][i]) + "\t" + str(acc[3][i]) + "\n" 
+                        accData += str(acc[0][i]) + "," + str(acc[1][i]) + "," + str(acc[2][i]) + "," + str(acc[3][i]) + "\n" 
                         
                     if(not _fileOutput):
                         _fileOutput = open(outputPath + file, "w")

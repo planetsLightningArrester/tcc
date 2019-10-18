@@ -1,0 +1,218 @@
+<HTML>
+    <head>
+        <title>DAq KOT</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="./js/Chart.bundle.min.js"></script>
+        <script src="./js/jquery.min.js"></script>
+
+        <script>if (window.module) module = window.module;</script>
+
+        <style>
+            @import url('./css/sideBar.css');
+
+            body{
+                overflow: hidden;
+                font-family: "Lato", sans-serif;
+            }
+
+            container{
+                background: #7d7d7d;
+            }
+
+            .kotLogo{
+                position: absolute;
+                top: 0%;
+                left: 0%;
+                z-index: -1;
+                filter: contrast(1);
+                animation: logoAnimation 1s forwards;
+            }
+
+            @keyframes logoAnimation {
+                to{filter: brightness(0);}
+            }
+            
+            @media screen and (max-height: 450px) {
+                .sidenav {padding-top: 15px;}
+                .sidenav a {font-size: 18px;}
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <script src="./js/mo.js"></script>
+        <script src="./js/moObjects.js"></script>
+        
+        <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a id = "vibrationInsideSideNav" href="#" onclick="expandVibrationMenu()">Vibração</a>
+                <a href="#">Extensiometria</a>
+        </div>
+
+        <span id = "kotButton" class="kotLogoClass" onclick="openNav()"><img src="./art/logo_kot.png" height="50"\></span>
+
+        <canvas id="myChart" style="
+            position: relative;
+            height: 400px;
+            width: 600px;
+            top: 10%;
+            left: 15%">
+        </canvas>
+
+        <select style = "position: relative; top: 80px; left: 400px;" onchange = "axisTimeChange(this.value)" name = "Eixo X">
+            <option value="sample" selected>Amostras</option> 
+            <option value="time">Tempo</option>
+            <option value="realTime">Horario</option>
+        </select>
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "250px";
+                $('#kotButton').css('animation', 'onOpen 1s forwards');
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                $('#kotButton').css('animation', 'onClose 1s forwards');
+            }
+
+            let axisDisplayng = "sample";
+
+            function axisTimeChange(value) {
+                axisDisplayng = value;
+             }
+
+            function expandVibrationMenu(){
+                if(document.getElementById("analogSideNav") == null){
+                    //setTimeout(function(){$('#vibrationInsideSideNav').click(shrinkVibrationMenu())}, 2000);
+                    $("<ul><a id = \"analogSideNav\" href = \"#\">Analogico</a><a id = \"digitalSideNav\" href = \"#\">Digital</a></ul>").insertAfter('#vibrationInsideSideNav');
+
+                    $('#analogSideNav').css("opacity", "0");
+                    $('#digitalSideNav').css("opacity", "0");
+
+                    $('#analogSideNav').animate({opacity: 1}, 200);
+                    $('#digitalSideNav').animate({opacity: 1}, 200);
+
+                    $('#analogSideNav').click(function(){
+                        //$('#vibrationInsideSideNav').click(expandVibrationMenu());
+                        $('#analogSideNav').detach();
+                        $('#digitalSideNav').detach();
+                        closeNav();
+                    });
+                    $('#digitalSideNav').click(function(){
+                        //$('#vibrationInsideSideNav').click(expandVibrationMenu());
+                        $('#analogSideNav').detach();
+                        $('#digitalSideNav').detach();
+                        closeNav();
+                    });
+                }
+            }
+
+            function shrinkVibrationMenu(){
+                $('#vibrationInsideSideNav').click(expandVibrationMenu());
+                $('#analogSideNav').detach();
+                $('#digitalSideNav').detach();
+            }
+
+        </script>
+
+        <script>
+
+            let portPath = "COM17";
+
+            var serialport = require("serialport");
+
+            var arduinoPort = new serialport(portPath, {
+                baudRate: 115200,
+                parser: new serialport.parsers.Readline("\n")
+            }, function(err) {
+                if(err){	
+                    alert((err.message).toString());
+                }
+                
+            });
+
+            arduinoPort.on('data', function(data) {
+                updateChart(data);
+            });
+
+            var _y = 0,
+                _x = 0;
+
+
+            function addData(chart, label, data) {
+                chart.data.labels.push(label);
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.push(data);
+                });
+                chart.update();
+            }
+
+            function removeData(chart) {
+                chart.data.labels.shift();
+                chart.data.datasets.forEach((dataset) => {
+                    dataset.data.shift();
+                });
+                chart.update();
+            }
+
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                    labels: _x,//["January", "February", "March", "April", "May", "June", "July"],
+                    datasets: [{
+                        label: "Aceleração (g)",
+                        fill: false,
+                        borderColor: 'rgb(0, 0, 0)',
+                        data: _y,
+                    }]
+                },
+
+                // Configuration options go here
+                options: {
+                    animation: {duration: 0},
+                    hover: {animationDuration: 0},
+                    responsiveAnimationDuration: 0,
+                    responsive: false
+                }
+            });
+
+            sampleCounter = 0;
+            millisecondsCounter = +new Date();
+
+            function updateChart(data){
+                sampleCounter++;
+                if(axisDisplayng == "sample"){
+                    addData(chart, sampleCounter, data);
+                }
+                else if(axisDisplayng == "realTime"){
+                    let realTimeClock = new Date();
+                    addData(chart, (realTimeClock.getHours()<10?("0").concat(getHours().toString()):realTimeClock.getHours().toString()).concat(":").concat(realTimeClock.getMinutes()<10?("0").concat(getMinutes().toString()):realTimeClock.getMinutes().toString()).concat(":").concat(realTimeClock.getSeconds()<10?("0").concat(realTimeClock.getSeconds().toString()):realTimeClock.getSeconds().toString()), data);
+                }
+                else if(axisDisplayng == "time"){
+                    let realTimeClock = +new Date();
+                    addData(chart, realTimeClock - millisecondsCounter, data);
+                }
+                if(sampleCounter>20)
+                    removeData(chart);
+            }
+
+        
+        </script>
+
+
+
+    </body>
+</HTML>
