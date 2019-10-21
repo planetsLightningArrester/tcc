@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.8)  20 OCT 2019 18:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (MiKTeX 2.9.7140 64-bit) (preloaded format=pdflatex 2019.9.8)  21 OCT 2019 00:35
 entering extended mode
 **C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex
 (C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex
@@ -1130,943 +1130,991 @@ l.199
 
 ] [12
 
-] [13] [14
+] [13
+
+] [14
 
 ] [15] [16
 
-] [17] [18
+]
+
+LaTeX Warning: Citation `pib' on page 17 undefined on input line 334.
+
+
+LaTeX Warning: Citation `mineracaoUFMG' on page 17 undefined on input line 342.
+
+
+
+LaTeX Warning: Citation `mariana' on page 17 undefined on input line 344.
+
+
+LaTeX Warning: Citation `brumadinho' on page 17 undefined on input line 344.
+
+
+LaTeX Warning: Citation `iepeCircuit' on page 17 undefined on input line 367.
+
+[17
 
 ]
 
-LaTeX Warning: Citation `pib' on page 19 undefined on input line 328.
+LaTeX Warning: Citation `kot' on page 18 undefined on input line 387.
 
-
-LaTeX Warning: Citation `mineracaoUFMG' on page 19 undefined on input line 336.
-
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[19
-
-] [20]
-
-LaTeX Warning: Citation `artElectronics' on page 21 undefined on input line 385
-.
-
-
-LaTeX Warning: File `../../Fotos/Diagramas/sinalFaaADC/sinalFaaADC.png' not fou
-nd on input line 389.
-
-
-C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:389: Package pdftex.def E
-rror: File `../../Fotos/Diagramas/sinalFaaADC/sinalFaaADC.png' not found: using
- draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.389 ...os/Diagramas/sinalFaaADC/sinalFaaADC.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 389.
-
-
-("C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd"
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Underfull \vbox (badness 7759) has occurred while \output is active []
-
- [21
-
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.405 
-      ]
-
-LaTeX Warning: Citation `ctc' on page 22 undefined on input line 425.
-
- [22]
-
-LaTeX Warning: File `../../Fotos/Diagramas/iepe.png' not found on input line 43
-0.
-
-
-
-C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:430: Package pdftex.def E
-rror: File `../../Fotos/Diagramas/iepe.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.430 ...inewidth]{../../Fotos/Diagramas/iepe.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <17.28> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 435.
-
-LaTeX Warning: Citation `nyquist' on page 23 undefined on input line 443.
-
-
-LaTeX Warning: Reference `fig:exemploAliasing250' on page 23 undefined on input
- line 450.
-
- [23pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
-2}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.452 
-      ]
-
-LaTeX Warning: Reference `fig:exemploAliasing200' on page 24 undefined on input
- line 460.
-
- [24]
-
-LaTeX Warning: File `../../Fotos/aliasingFs250.png' not found on input line 470
-.
-
-
-
-C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:470: Package pdftex.def E
-rror: File `../../Fotos/aliasingFs250.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.470 ...linewidth]{../../Fotos/aliasingFs250.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `../../Fotos/aliasingFs200.png' not found on input line 477
-.
-
-
-
-C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:477: Package pdftex.def E
-rror: File `../../Fotos/aliasingFs200.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.477 ...linewidth]{../../Fotos/aliasingFs200.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [25pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
-3}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.481 
-      ]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [26pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
-4}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.483 
-      ]
-
-LaTeX Warning: Reference `fig:filtroIdeal' on page 27 undefined on input line 4
-88.
-
-
-LaTeX Warning: File `../../Fotos/Diagramas/sinalFaaADC/filtroIdeal.png' not fou
-nd on input line 494.
-
-
-
-C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:494: Package pdftex.def E
-rror: File `../../Fotos/Diagramas/sinalFaaADC/filtroIdeal.png' not found: using
- draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.494 ...os/Diagramas/sinalFaaADC/filtroIdeal.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `../../Fotos/Diagramas/sinalFaaADC/filtroReal.png' not foun
-d on input line 501.
-
-
-
-C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:501: Package pdftex.def E
-rror: File `../../Fotos/Diagramas/sinalFaaADC/filtroReal.png' not found: using 
-draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.501 ...tos/Diagramas/sinalFaaADC/filtroReal.png}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
- [27pdfTeX warning (ext4): destination with the same identifier (name{figure.2.
-5}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.539 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.
-2.6}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.539 
-      ] [28]
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 554.
-
+[18]
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 391.
 
 ("C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\ts1lmr.fd"
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [29
+) [19] [20
 
 ]
 
-LaTeX Warning: Citation `ctc' on page 30 undefined on input line 599.
+LaTeX Warning: Citation `artElectronics' on page 21 undefined on input line 407
+.
 
- [30]
-<../Fotos/Diagramas/sinalFaaADC/sinalFaaADC.png, id=185, 672.5125pt x 151.56625
+<../Fotos/Diagramas/sinalFaaADC/sinalFaaADC.png, id=128, 672.5125pt x 151.56625
 pt>
 File: ../Fotos/Diagramas/sinalFaaADC/sinalFaaADC.png Graphic file (type png)
 <use ../Fotos/Diagramas/sinalFaaADC/sinalFaaADC.png>
 Package pdftex.def Info: ../Fotos/Diagramas/sinalFaaADC/sinalFaaADC.png  used o
-n input line 659.
+n input line 411.
 (pdftex.def)             Requested size: 455.0pt x 102.54562pt.
- [31pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-7}) has been already used, duplicate ignored
+
+LaTeX Warning: Citation `iepeCircuit' on page 21 undefined on input line 423.
+
+<../Fotos/Diagramas/iepe.png, id=130, 543.53062pt x 167.87718pt>
+File: ../Fotos/Diagramas/iepe.png Graphic file (type png)
+<use ../Fotos/Diagramas/iepe.png>
+Package pdftex.def Info: ../Fotos/Diagramas/iepe.png  used on input line 443.
+(pdftex.def)             Requested size: 455.0pt x 140.53941pt.
+
+Underfull \vbox (badness 3895) has occurred while \output is active []
+
+[21pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1
+}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.682 				\item E
-                 xcurs√£o total do sinal ($\pm5V$): $V_{i(pp)} = 10V$. <C:/code
-Cave/03-TCC/Fotos/Diagramas/sinalFaaADC/sinalFaaADC.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 726--730
+l.447 
+       <C:/codeCave/03-TCC/Fotos/Diagramas/sinalFaaADC/sinalFaaADC.png>]
 
- []
+LaTeX Warning: Citation `ctc' on page 22 undefined on input line 453.
 
- [32]
-LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <14.4> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 759.
- [33]
-<../Fotos/aliasingFs500.png, id=209, 1028.34187pt x 497.60907pt>
-File: ../Fotos/aliasingFs500.png Graphic file (type png)
-<use ../Fotos/aliasingFs500.png>
-Package pdftex.def Info: ../Fotos/aliasingFs500.png  used on input line 776.
-(pdftex.def)             Requested size: 455.0pt x 220.17111pt.
-<../Fotos/aliasingFs200.png, id=210, 828.84656pt x 443.40656pt>
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <17.28> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 455.
+
+LaTeX Warning: Citation `nyquist' on page 22 undefined on input line 463.
+
+
+LaTeX Warning: Reference `fig:exemploAliasing250' on page 22 undefined on input
+ line 470.
+
+
+LaTeX Warning: Reference `fig:exemploAliasing200' on page 22 undefined on input
+ line 480.
+
+[22pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.486 		\newpage
+                 <C:/codeCave/03-TCC/Fotos/Diagramas/iepe.png>]
+<../Fotos/aliasingFs250.png, id=148, 828.84656pt x 443.40656pt>
+File: ../Fotos/aliasingFs250.png Graphic file (type png)
+<use ../Fotos/aliasingFs250.png>
+Package pdftex.def Info: ../Fotos/aliasingFs250.png  used on input line 490.
+(pdftex.def)             Requested size: 455.0pt x 243.40752pt.
+<../Fotos/aliasingFs200.png, id=149, 828.84656pt x 443.40656pt>
 File: ../Fotos/aliasingFs200.png Graphic file (type png)
 <use ../Fotos/aliasingFs200.png>
-Package pdftex.def Info: ../Fotos/aliasingFs200.png  used on input line 793.
+Package pdftex.def Info: ../Fotos/aliasingFs200.png  used on input line 497.
 (pdftex.def)             Requested size: 455.0pt x 243.40752pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-8}) has been already used, duplicate ignored
+[23pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3
+}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.796 
-       <C:/codeCave/03-TCC/Fotos/aliasingFs500.png (PNG copy)>]
-<../Fotos/aliasingFs500Reconstruido.png, id=216, 1028.34187pt x 497.60907pt>
-File: ../Fotos/aliasingFs500Reconstruido.png Graphic file (type png)
-<use ../Fotos/aliasingFs500Reconstruido.png>
-Package pdftex.def Info: ../Fotos/aliasingFs500Reconstruido.png  used on input 
-line 827.
-(pdftex.def)             Requested size: 455.0pt x 220.17111pt.
- [35pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-9}) has been already used, duplicate ignored
+l.503 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+2.4}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.840 
-       <C:/codeCave/03-TCC/Fotos/aliasingFs200.png>]
-<../Fotos/aliasingFs1500.png, id=224, 1028.34187pt x 497.60907pt>
-File: ../Fotos/aliasingFs1500.png Graphic file (type png)
-<use ../Fotos/aliasingFs1500.png>
-Package pdftex.def Info: ../Fotos/aliasingFs1500.png  used on input line 843.
-(pdftex.def)             Requested size: 455.0pt x 220.17111pt.
+l.503 
+       <C:/codeCave/03-TCC/Fotos/aliasingFs250.png> <C:/codeCave/03-TCC/Fotos/a
+liasingFs200.png>]
 
-Underfull \vbox (badness 3525) has occurred while \output is active []
+LaTeX Warning: Reference `fig:filtroIdeal' on page 24 undefined on input line 5
+05.
 
- [36pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-10}) has been already used, duplicate ignored
+<../Fotos/Diagramas/sinalFaaADC/filtroIdeal.png, id=157, 416.55624pt x 440.6462
+6pt>
+File: ../Fotos/Diagramas/sinalFaaADC/filtroIdeal.png Graphic file (type png)
+<use ../Fotos/Diagramas/sinalFaaADC/filtroIdeal.png>
+Package pdftex.def Info: ../Fotos/Diagramas/sinalFaaADC/filtroIdeal.png  used o
+n input line 511.
+(pdftex.def)             Requested size: 145.59833pt x 154.02005pt.
+<../Fotos/Diagramas/sinalFaaADC/filtroReal.png, id=158, 449.68pt x 449.68pt>
+File: ../Fotos/Diagramas/sinalFaaADC/filtroReal.png Graphic file (type png)
+<use ../Fotos/Diagramas/sinalFaaADC/filtroReal.png>
+Package pdftex.def Info: ../Fotos/Diagramas/sinalFaaADC/filtroReal.png  used on
+ input line 518.
+(pdftex.def)             Requested size: 181.99722pt x 181.99588pt.
+[24pdfTeX warning (ext4): destination with the same identifier (name{figure.2.5
+}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.852 
+l.552 		\end{gather*}
+                     pdfTeX warning (ext4): destination with the same identifie
+r (name{figure.2.6}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.552 		\end{gather*}
+                      <C:/codeCave/03-TCC/Fotos/Diagramas/sinalFaaADC/filtroIde
+al.png> <C:/codeCave/03-TCC/Fotos/Diagramas/sinalFaaADC/filtroReal.png>]
+
+LaTeX Warning: Citation `artElectronics' on page 25 undefined on input line 571
+.
+
+[25] [26
+
+]
+
+LaTeX Warning: Citation `ctc' on page 27 undefined on input line 590.
+
+[27]
+
+LaTeX Warning: Reference `fig:condicionamentoSinal' on page 28 undefined on inp
+ut line 648.
+
+[28]
+
+LaTeX Warning: Reference `ape:calculoADC' on page 29 undefined on input line 66
+3.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 667.
+
+
+LaTeX Warning: Command \c invalid in math mode on input line 667.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 667.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 668.
+
+
+LaTeX Warning: Command \c invalid in math mode on input line 668.
+
+
+LaTeX Warning: Command \~ invalid in math mode on input line 668.
+
+
+LaTeX Warning: Reference `fig:circuitoFAA' on page 29 undefined on input line 7
+01.
+
+
+LaTeX Warning: Reference `fig:faaDiagramaBode' on page 29 undefined on input li
+ne 702.
+
+
+LaTeX Warning: Reference `fig:faaDiagramaBodeZoom' on page 29 undefined on inpu
+t line 702.
+
+
+Overfull \hbox (0.4671pt too wide) in paragraph at lines 699--707
+[]\T1/lmr/m/n/12 Para o pro-jeto do fil-tro, utilizou-se o \T1/lmr/m/it/12 soft
+-ware \T1/lmr/m/n/12 FilterPro$[]$ da Te-xas Instruments$[]$.
+ []
+
+<../Fotos/filterPro.png, id=189, 770.88pt x 141.52875pt>
+File: ../Fotos/filterPro.png Graphic file (type png)
+<use ../Fotos/filterPro.png>
+Package pdftex.def Info: ../Fotos/filterPro.png  used on input line 710.
+(pdftex.def)             Requested size: 455.0pt x 83.53362pt.
+<../Fotos/filterProGF.png, id=190, 919.93687pt x 255.20343pt>
+File: ../Fotos/filterProGF.png Graphic file (type png)
+<use ../Fotos/filterProGF.png>
+Package pdftex.def Info: ../Fotos/filterProGF.png  used on input line 717.
+(pdftex.def)             Requested size: 455.0pt x 126.22678pt.
+<../Fotos/filterProZoom.png, id=191, 919.18407pt x 251.43938pt>
+File: ../Fotos/filterProZoom.png Graphic file (type png)
+<use ../Fotos/filterProZoom.png>
+Package pdftex.def Info: ../Fotos/filterProZoom.png  used on input line 724.
+(pdftex.def)             Requested size: 455.0pt x 124.46478pt.
+
+LaTeX Warning: Reference `ape:calculoADC' on page 29 undefined on input line 73
+0.
+
+[29]
+
+LaTeX Warning: Reference `ape:calculoADC' on page 30 undefined on input line 73
+9.
+
+
+LaTeX Warning: Reference `fig:faaDiagramaBodeZoom' on page 30 undefined on inpu
+t line 745.
+
+[30pdfTeX warning (ext4): destination with the same identifier (name{figure.3.7
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.753 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+3.8}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.753 
+      pdfTeX warning (ext4): destination with the same identifier (name{figure.
+3.9}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.753 
+       <C:/codeCave/03-TCC/Fotos/filterPro.png> <C:/codeCave/03-TCC/Fotos/filte
+rProGF.png> <C:/codeCave/03-TCC/Fotos/filterProZoom.png>] [31]
+
+LaTeX Warning: Reference `fig:topologiaFonteCorrente' on page 32 undefined on i
+nput line 764.
+
+<../Fotos/fonteCorrenteClean2.jpg, id=214, 292.84406pt x 590.95781pt>
+File: ../Fotos/fonteCorrenteClean2.jpg Graphic file (type jpg)
+<use ../Fotos/fonteCorrenteClean2.jpg>
+Package pdftex.def Info: ../Fotos/fonteCorrenteClean2.jpg  used on input line 7
+68.
+(pdftex.def)             Requested size: 87.85388pt x 177.2887pt.
+
+LaTeX Warning: Reference `ape:calculoCorrente' on page 32 undefined on input li
+ne 773.
+
+<../Fotos/fonteCorrente2.jpg, id=215, 642.14906pt x 637.63219pt>
+File: ../Fotos/fonteCorrente2.jpg Graphic file (type jpg)
+<use ../Fotos/fonteCorrente2.jpg>
+Package pdftex.def Info: ../Fotos/fonteCorrente2.jpg  used on input line 780.
+(pdftex.def)             Requested size: 192.6462pt x 191.29112pt.
+
+LaTeX Warning: Citation `stm' on page 32 undefined on input line 789.
+
+[32pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1
+0}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.790 
       pdfTeX warning (ext4): destination with the same identifier (name{figure.
 3.11}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.852 
-       <C:/codeCave/03-TCC/Fotos/aliasingFs500Reconstruido.png (PNG copy)> <C:/
-codeCave/03-TCC/Fotos/aliasingFs1500.png (PNG copy)>]
-<../Fotos/Diagramas/sinalFaaADC/filtroIdeal.png, id=231, 416.55624pt x 440.6462
-6pt>
-File: ../Fotos/Diagramas/sinalFaaADC/filtroIdeal.png Graphic file (type png)
-<use ../Fotos/Diagramas/sinalFaaADC/filtroIdeal.png>
-Package pdftex.def Info: ../Fotos/Diagramas/sinalFaaADC/filtroIdeal.png  used o
-n input line 857.
-(pdftex.def)             Requested size: 145.59833pt x 154.02005pt.
-<../Fotos/Diagramas/sinalFaaADC/filtroReal.png, id=232, 449.68pt x 449.68pt>
-File: ../Fotos/Diagramas/sinalFaaADC/filtroReal.png Graphic file (type png)
-<use ../Fotos/Diagramas/sinalFaaADC/filtroReal.png>
-Package pdftex.def Info: ../Fotos/Diagramas/sinalFaaADC/filtroReal.png  used on
- input line 863.
-(pdftex.def)             Requested size: 181.99722pt x 181.99588pt.
- [37pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+l.790 
+       <C:/codeCave/03-TCC/Fotos/fonteCorrenteClean2.jpg> <C:/codeCave/03-TCC/F
+otos/fonteCorrente2.jpg>]
+
+LaTeX Warning: Reference `fig:consumoSTM' on page 33 undefined on input line 82
+0.
+
+<../Fotos/stmConsumo.jpg, id=224, 419.31656pt x 511.9125pt>
+File: ../Fotos/stmConsumo.jpg Graphic file (type jpg)
+<use ../Fotos/stmConsumo.jpg>
+Package pdftex.def Info: ../Fotos/stmConsumo.jpg  used on input line 824.
+(pdftex.def)             Requested size: 251.59186pt x 307.14987pt.
+
+LaTeX Warning: Citation `nrf' on page 33 undefined on input line 840.
+
+[33]
+<../Fotos/nrf.jpg, id=230, 376.40625pt x 215.30438pt>
+File: ../Fotos/nrf.jpg Graphic file (type jpg)
+<use ../Fotos/nrf.jpg>
+Package pdftex.def Info: ../Fotos/nrf.jpg  used on input line 865.
+(pdftex.def)             Requested size: 225.84547pt x 129.18361pt.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 869.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 869.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 869.
+C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:869: Missing $ inserted.
+<inserted text> 
+                $
+l.869 ...fh57AvzXe_G-VazRLq9TNdDFuKDC3GAKIlGzYnw}}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:869: Extra }, or forgotte
+n $.
+<argument> ...AvzXe_G-VazRLq9TNdDFuKDC3GAKIlGzYnw}
+                                                  
+l.869 ...fh57AvzXe_G-VazRLq9TNdDFuKDC3GAKIlGzYnw}}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:869: Extra }, or forgotte
+n $.
+<argument> ...zXe_G-VazRLq9TNdDFuKDC3GAKIlGzYnw}}}
+                                                  \@finalstrut \strutbox 
+l.869 ...fh57AvzXe_G-VazRLq9TNdDFuKDC3GAKIlGzYnw}}
+                                                  
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:869: Missing $ inserted.
+<inserted text> 
+                $
+l.869 ...fh57AvzXe_G-VazRLq9TNdDFuKDC3GAKIlGzYnw}}
+                                                  
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (69.67607pt too wide) in paragraph at lines 869--869
+ [][] [][][]\T1/lmr/m/n/10 Acessado(03/06/2018): https://encrypted-tbn0.gstatic
+.com/images?q=tbn:ANd9GcRXHSBnOgBZ1kmfh57AvzXe$[] \OMS/lmsy/m/n/10  
+ []
+
+
+C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:869: Missing } inserted.
+<inserted text> 
+                }
+l.869 ...fh57AvzXe_G-VazRLq9TNdDFuKDC3GAKIlGzYnw}}
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+C:/codeCave/03-TCC/Monografia/TCC_Francisco_Gomes.tex:869: Missing } inserted.
+<inserted text> 
+                }
+l.869 ...fh57AvzXe_G-VazRLq9TNdDFuKDC3GAKIlGzYnw}}
+                                                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+ [34pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
 12}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.907 
-      pdfTeX warning (ext4): destination with the same identifier (name{figure.
-3.13}) has been already used, duplicate ignored
+l.877 
+       <C:/codeCave/03-TCC/Fotos/stmConsumo.jpg>] [35pdfTeX warning (ext4): des
+tination with the same identifier (name{figure.3.13}) has been already used, du
+plicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.907 
-       <C:/codeCave/03-TCC/Fotos/Diagramas/sinalFaaADC/filtroIdeal.png> <C:/cod
-eCave/03-TCC/Fotos/Diagramas/sinalFaaADC/filtroReal.png>]
-<../Fotos/fonteCorrenteClean2.jpg, id=241, 292.84406pt x 590.95781pt>
-File: ../Fotos/fonteCorrenteClean2.jpg Graphic file (type jpg)
-<use ../Fotos/fonteCorrenteClean2.jpg>
-Package pdftex.def Info: ../Fotos/fonteCorrenteClean2.jpg  used on input line 9
-35.
-(pdftex.def)             Requested size: 87.85388pt x 177.2887pt.
+l.913 		\end{gather*}
+                      <C:/codeCave/03-TCC/Fotos/nrf.jpg>]
+
+LaTeX Warning: Citation `stm' on page 36 undefined on input line 956.
+
+ [36]
+File: ../Fotos/stmConsumo.jpg Graphic file (type jpg)
+<use ../Fotos/stmConsumo.jpg>
+Package pdftex.def Info: ../Fotos/stmConsumo.jpg  used on input line 997.
+(pdftex.def)             Requested size: 251.59186pt x 307.14987pt.
+
+Overfull \hbox (23.0912pt too wide) detected at line 1011
+[]
+ []
+
+
+LaTeX Warning: Citation `nrf' on page 37 undefined on input line 1013.
+
+ [37]
+File: ../Fotos/nrf.jpg Graphic file (type jpg)
+<use ../Fotos/nrf.jpg>
+Package pdftex.def Info: ../Fotos/nrf.jpg  used on input line 1032.
+(pdftex.def)             Requested size: 225.84547pt x 129.18361pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1036--1036
+ [][] [][][]\T1/lmr/m/n/10 Acessado(03/06/2018): https://www.epictinker.com/IT-
+NRF24L01-PA-LNA-p/it-nrf24l01-pa-
+ []
+
  [38pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
 14}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.941 			\begin{gather*}
-                         <C:/codeCave/03-TCC/Fotos/fonteCorrenteClean2.jpg>]
-<../Fotos/fonteCorrente2.jpg, id=248, 642.14906pt x 637.63219pt>
-File: ../Fotos/fonteCorrente2.jpg Graphic file (type jpg)
-<use ../Fotos/fonteCorrente2.jpg>
-Package pdftex.def Info: ../Fotos/fonteCorrente2.jpg  used on input line 971.
-(pdftex.def)             Requested size: 192.6462pt x 191.29112pt.
+l.1048 
+       ]
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <14.4> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 1069.
+
+
+Overfull \hbox (0.4671pt too wide) in paragraph at lines 1076--1083
+[]\T1/lmr/m/n/12 Para o pro-jeto do fil-tro, utilizou-se o \T1/lmr/m/it/12 soft
+-ware \T1/lmr/m/n/12 FilterPro$[]$ da Te-xas Instruments$[]$.
+ []
+
+<../Fotos/filterPro.jpg, id=269, 760.34062pt x 141.52875pt>
+File: ../Fotos/filterPro.jpg Graphic file (type jpg)
+<use ../Fotos/filterPro.jpg>
+Package pdftex.def Info: ../Fotos/filterPro.jpg  used on input line 1086.
+(pdftex.def)             Requested size: 455.0pt x 84.69547pt.
+<../Fotos/filterProGF.jpg, id=270, 942.52126pt x 252.19218pt>
+File: ../Fotos/filterProGF.jpg Graphic file (type jpg)
+<use ../Fotos/filterProGF.jpg>
+Package pdftex.def Info: ../Fotos/filterProGF.jpg  used on input line 1092.
+(pdftex.def)             Requested size: 455.0pt x 121.74738pt.
+<../Fotos/filterProZoom.jpg, id=271, 904.1278pt x 255.20343pt>
+File: ../Fotos/filterProZoom.jpg Graphic file (type jpg)
+<use ../Fotos/filterProZoom.jpg>
+Package pdftex.def Info: ../Fotos/filterProZoom.jpg  used on input line 1098.
+(pdftex.def)             Requested size: 455.0pt x 128.42694pt.
  [39pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
 15}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.983 		\subsection
-                   {Microcontrolador} <C:/codeCave/03-TCC/Fotos/fonteCorrente2.
-jpg>]
-
-LaTeX Warning: Citation `stm' on page 40 undefined on input line 990.
-
-<../Fotos/stmConsumo.jpg, id=255, 419.31656pt x 511.9125pt>
-File: ../Fotos/stmConsumo.jpg Graphic file (type jpg)
-<use ../Fotos/stmConsumo.jpg>
-Package pdftex.def Info: ../Fotos/stmConsumo.jpg  used on input line 1031.
-(pdftex.def)             Requested size: 251.59186pt x 307.14987pt.
- [40]
-Overfull \hbox (23.0912pt too wide) detected at line 1045
-[]
- []
-
-
-LaTeX Warning: Citation `nrf' on page 41 undefined on input line 1047.
-
-<../Fotos/nrf.jpg, id=261, 376.40625pt x 215.30438pt>
-File: ../Fotos/nrf.jpg Graphic file (type jpg)
-<use ../Fotos/nrf.jpg>
-Package pdftex.def Info: ../Fotos/nrf.jpg  used on input line 1066.
-(pdftex.def)             Requested size: 225.84547pt x 129.18361pt.
- [41pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-16}) has been already used, duplicate ignored
+l.1108 			\begin{gather*}
+                         ] [40pdfTeX warning (ext4): destination with the same 
+identifier (name{figure.3.16}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1068 			\end{figure}
-                       <C:/codeCave/03-TCC/Fotos/stmConsumo.jpg>]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 1070.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 1070.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 1070.
-
-Underfull \hbox (badness 10000) in paragraph at lines 1070--1070
- [][] [][][]\T1/lmr/m/n/10 Acessado(03/06/2018): https://www.epictinker.com/IT-
-NRF24L01-PA-LNA-p/it-nrf24l01-pa-
- []
-
- [42pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-17}) has been already used, duplicate ignored
+l.1122 
+       pdfTeX warning (ext4): destination with the same identifier (name{figure
+.3.17}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1109 
-        <C:/codeCave/03-TCC/Fotos/nrf.jpg>]
-Overfull \hbox (0.4671pt too wide) in paragraph at lines 1110--1117
-[]\T1/lmr/m/n/12 Para o pro-jeto do fil-tro, utilizou-se o \T1/lmr/m/it/12 soft
--ware \T1/lmr/m/n/12 FilterPro$[]$ da Te-xas Instruments$[]$.
- []
-
-<../Fotos/filterPro.jpg, id=279, 760.34062pt x 141.52875pt>
-File: ../Fotos/filterPro.jpg Graphic file (type jpg)
-<use ../Fotos/filterPro.jpg>
-Package pdftex.def Info: ../Fotos/filterPro.jpg  used on input line 1120.
-(pdftex.def)             Requested size: 455.0pt x 84.69547pt.
-<../Fotos/filterProGF.jpg, id=280, 942.52126pt x 252.19218pt>
-File: ../Fotos/filterProGF.jpg Graphic file (type jpg)
-<use ../Fotos/filterProGF.jpg>
-Package pdftex.def Info: ../Fotos/filterProGF.jpg  used on input line 1126.
-(pdftex.def)             Requested size: 455.0pt x 121.74738pt.
-<../Fotos/filterProZoom.jpg, id=281, 904.1278pt x 255.20343pt>
-File: ../Fotos/filterProZoom.jpg Graphic file (type jpg)
-<use ../Fotos/filterProZoom.jpg>
-Package pdftex.def Info: ../Fotos/filterProZoom.jpg  used on input line 1132.
-(pdftex.def)             Requested size: 455.0pt x 128.42694pt.
- [43pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-18}) has been already used, duplicate ignored
+l.1122 
+       pdfTeX warning (ext4): destination with the same identifier (name{figure
+.3.18}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1142 			\begin{gather*}
-                         pdfTeX warning (ext4): destination with the same ident
-ifier (name{figure.3.19}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1142 			\begin{gather*}
-                         pdfTeX warning (ext4): destination with the same ident
-ifier (name{figure.3.20}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1142 			\begin{gather*}
-                          <C:/codeCave/03-TCC/Fotos/filterPro.jpg> <C:/codeCave
-/03-TCC/Fotos/filterProGF.jpg> <C:/codeCave/03-TCC/Fotos/filterProZoom.jpg>] [4
-4]
+l.1122 
+        <C:/codeCave/03-TCC/Fotos/filterPro.jpg> <C:/codeCave/03-TCC/Fotos/filt
+erProGF.jpg> <C:/codeCave/03-TCC/Fotos/filterProZoom.jpg>] [41]
 <../Fotos/fonte.jpg, id=295, 732.48656pt x 363.60844pt>
 File: ../Fotos/fonte.jpg Graphic file (type jpg)
 <use ../Fotos/fonte.jpg>
-Package pdftex.def Info: ../Fotos/fonte.jpg  used on input line 1237.
+Package pdftex.def Info: ../Fotos/fonte.jpg  used on input line 1203.
 (pdftex.def)             Requested size: 455.0pt x 225.86766pt.
- [45]
-<../Fotos/fonteCorrenteEsquematico.jpg, id=304, 686.565pt x 408.77719pt>
+<../Fotos/fonteCorrenteEsquematico.jpg, id=296, 686.565pt x 408.77719pt>
 File: ../Fotos/fonteCorrenteEsquematico.jpg Graphic file (type jpg)
 <use ../Fotos/fonteCorrenteEsquematico.jpg>
 Package pdftex.def Info: ../Fotos/fonteCorrenteEsquematico.jpg  used on input l
-ine 1262.
+ine 1228.
 (pdftex.def)             Requested size: 455.0pt x 270.90404pt.
+ [42]
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <12> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 1266.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 1232.
 
- [46pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-21}) has been already used, duplicate ignored
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1277 				\begin{landscape}
-                             <C:/codeCave/03-TCC/Fotos/fonte.jpg>] [47pdfTeX wa
-rning (ext4): destination with the same identifier (name{figure.3.22}) has been
- already used, duplicate ignored
+Underfull \vbox (badness 2503) has occurred while \output is active []
+
+ [43pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+19}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1277 				\begin{landscape}
-                             <C:/codeCave/03-TCC/Fotos/fonteCorrenteEsquematico
-.jpg>]
-<../Fotos/FAAesquematico.jpg, id=317, 924.45375pt x 166.37157pt>
+l.1238 				O
+            s capacitores de $100nF$ diminuem a influ√™ncia dapdfTeX warning (e
+xt4): destination with the same identifier (name{figure.3.20}) has been already
+ used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1238 				O
+            s capacitores de $100nF$ diminuem a influ√™ncia da <C:/codeCave/03-
+TCC/Fotos/fonte.jpg> <C:/codeCave/03-TCC/Fotos/fonteCorrenteEsquematico.jpg>] [
+44]
+<../Fotos/FAAesquematico.jpg, id=315, 924.45375pt x 166.37157pt>
 File: ../Fotos/FAAesquematico.jpg Graphic file (type jpg)
 <use ../Fotos/FAAesquematico.jpg>
-Package pdftex.def Info: ../Fotos/FAAesquematico.jpg  used on input line 1282.
+Package pdftex.def Info: ../Fotos/FAAesquematico.jpg  used on input line 1248.
 (pdftex.def)             Requested size: 739.56401pt x 133.09741pt.
 
-Overfull \hbox (31.56401pt too wide) in paragraph at lines 1282--1283
+Overfull \hbox (31.56401pt too wide) in paragraph at lines 1248--1249
  [][] 
  []
 
- [48
+ [45
 
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3.23})
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.21})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1288 				\end{landscape}
+l.1254 				\end{landscape}
                            <C:/codeCave/03-TCC/Fotos/FAAesquematico.jpg>]
-<../Fotos/stmEsquematico.jpg, id=323, 588.69937pt x 428.35031pt>
+<../Fotos/stmEsquematico.jpg, id=321, 588.69937pt x 428.35031pt>
 File: ../Fotos/stmEsquematico.jpg Graphic file (type jpg)
 <use ../Fotos/stmEsquematico.jpg>
-Package pdftex.def Info: ../Fotos/stmEsquematico.jpg  used on input line 1310.
+Package pdftex.def Info: ../Fotos/stmEsquematico.jpg  used on input line 1276.
 (pdftex.def)             Requested size: 455.0pt x 331.0726pt.
-<../Fotos/bootTable.jpg, id=324, 743.02594pt x 182.93344pt>
+<../Fotos/bootTable.jpg, id=322, 743.02594pt x 182.93344pt>
 File: ../Fotos/bootTable.jpg Graphic file (type jpg)
 <use ../Fotos/bootTable.jpg>
-Package pdftex.def Info: ../Fotos/bootTable.jpg  used on input line 1320.
+Package pdftex.def Info: ../Fotos/bootTable.jpg  used on input line 1286.
 (pdftex.def)             Requested size: 455.0pt x 112.02467pt.
- [49
+ [46
 
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3.24})
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.22})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1337 
+l.1303 
         <C:/codeCave/03-TCC/Fotos/stmEsquematico.jpg>]
-<../Fotos/nrfEsquematico.jpg, id=333, 1090.82532pt x 249.18094pt>
+<../Fotos/nrfEsquematico.jpg, id=331, 1090.82532pt x 249.18094pt>
 File: ../Fotos/nrfEsquematico.jpg Graphic file (type jpg)
 <use ../Fotos/nrfEsquematico.jpg>
-Package pdftex.def Info: ../Fotos/nrfEsquematico.jpg  used on input line 1360.
+Package pdftex.def Info: ../Fotos/nrfEsquematico.jpg  used on input line 1326.
 (pdftex.def)             Requested size: 455.0pt x 103.93666pt.
 
-LaTeX Warning: Citation `ipc' on page 50 undefined on input line 1365.
+LaTeX Warning: Citation `ipc' on page 47 undefined on input line 1331.
 
- [50pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-25}) has been already used, duplicate ignored
+ [47pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+23}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1367 			A
+l.1333 			A
             placa foi desenhada em dois \textit{layers}, com componentespdfTeX 
-warning (ext4): destination with the same identifier (name{figure.3.26}) has be
+warning (ext4): destination with the same identifier (name{figure.3.24}) has be
 en already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1367 			A
+l.1333 			A
             placa foi desenhada em dois \textit{layers}, com componentes <C:/co
 deCave/03-TCC/Fotos/bootTable.jpg> <C:/codeCave/03-TCC/Fotos/nrfEsquematico.jpg
 >]
-<../Fotos/pcbLayers.png, id=341, 946.53625pt x 863.225pt>
+<../Fotos/pcbLayers.png, id=340, 946.53625pt x 863.225pt>
 File: ../Fotos/pcbLayers.png Graphic file (type png)
 <use ../Fotos/pcbLayers.png>
-Package pdftex.def Info: ../Fotos/pcbLayers.png  used on input line 1378.
+Package pdftex.def Info: ../Fotos/pcbLayers.png  used on input line 1344.
 (pdftex.def)             Requested size: 455.0pt x 414.9492pt.
- [51pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-27}) has been already used, duplicate ignored
+ [48pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+25}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1393 
+l.1359 
         <C:/codeCave/03-TCC/Fotos/pcbLayers.png>]
-<../Fotos/analogDigitalFonte.png, id=349, 961.5925pt x 871.255pt>
+<../Fotos/analogDigitalFonte.png, id=348, 961.5925pt x 871.255pt>
 File: ../Fotos/analogDigitalFonte.png Graphic file (type png)
 <use ../Fotos/analogDigitalFonte.png>
-Package pdftex.def Info: ../Fotos/analogDigitalFonte.png  used on input line 14
-04.
+Package pdftex.def Info: ../Fotos/analogDigitalFonte.png  used on input line 13
+70.
 (pdftex.def)             Requested size: 455.0pt x 412.25511pt.
-<../Fotos/capNrf.jpg, id=350, 465.23813pt x 560.0925pt>
+<../Fotos/capNrf.jpg, id=349, 465.23813pt x 560.0925pt>
 File: ../Fotos/capNrf.jpg Graphic file (type jpg)
 <use ../Fotos/capNrf.jpg>
-Package pdftex.def Info: ../Fotos/capNrf.jpg  used on input line 1416.
+Package pdftex.def Info: ../Fotos/capNrf.jpg  used on input line 1382.
 (pdftex.def)             Requested size: 325.66446pt x 392.06207pt.
- [52pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-28}) has been already used, duplicate ignored
+ [49pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+26}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1418 			\end{figure}
+l.1384 			\end{figure}
                        <C:/codeCave/03-TCC/Fotos/analogDigitalFonte.png>]
-<../Fotos/resAmp.jpg, id=357, 578.91281pt x 417.05812pt>
+<../Fotos/resAmp.jpg, id=356, 578.91281pt x 417.05812pt>
 File: ../Fotos/resAmp.jpg Graphic file (type jpg)
 <use ../Fotos/resAmp.jpg>
-Package pdftex.def Info: ../Fotos/resAmp.jpg  used on input line 1427.
+Package pdftex.def Info: ../Fotos/resAmp.jpg  used on input line 1393.
 (pdftex.def)             Requested size: 405.2362pt x 291.93869pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [53pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-29}) has been already used, duplicate ignored
+ [50pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+27}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1430 
+l.1396 
         <C:/codeCave/03-TCC/Fotos/capNrf.jpg>]
-Overfull \hbox (20.97156pt too wide) in paragraph at lines 1431--1439
+Overfull \hbox (20.97156pt too wide) in paragraph at lines 1397--1405
 []\T1/lmr/m/n/12 A Fi-gura 25 apre-senta uma vista ge-ral da placa. Com di-men-
 sıes de $\OT1/lmr/m/n/12 88\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 8\OML/lmm/m/it/12
  mmx\OT1/lmr/m/n/12 77\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 72\OML/lmm/m/it/12 mm$
 \T1/lmr/m/n/12 ,
  []
 
-<../Fotos/placaTotal.jpg, id=364, 763.35187pt x 593.21625pt>
+<../Fotos/placaTotal.jpg, id=362, 763.35187pt x 593.21625pt>
 File: ../Fotos/placaTotal.jpg Graphic file (type jpg)
 <use ../Fotos/placaTotal.jpg>
-Package pdftex.def Info: ../Fotos/placaTotal.jpg  used on input line 1442.
+Package pdftex.def Info: ../Fotos/placaTotal.jpg  used on input line 1408.
 (pdftex.def)             Requested size: 455.0pt x 353.58809pt.
-<../Fotos/parteTras.jpg, id=365, 2569.6pt x 1445.4pt>
+<../Fotos/parteTras.jpg, id=363, 2569.6pt x 1445.4pt>
 File: ../Fotos/parteTras.jpg Graphic file (type jpg)
 <use ../Fotos/parteTras.jpg>
-Package pdftex.def Info: ../Fotos/parteTras.jpg  used on input line 1464.
+Package pdftex.def Info: ../Fotos/parteTras.jpg  used on input line 1430.
 (pdftex.def)             Requested size: 455.0pt x 255.92621pt.
-<../Fotos/parteCima.jpg, id=366, 2569.6pt x 1445.4pt>
+<../Fotos/parteCima.jpg, id=364, 2569.6pt x 1445.4pt>
 File: ../Fotos/parteCima.jpg Graphic file (type jpg)
 <use ../Fotos/parteCima.jpg>
-Package pdftex.def Info: ../Fotos/parteCima.jpg  used on input line 1470.
+Package pdftex.def Info: ../Fotos/parteCima.jpg  used on input line 1436.
 (pdftex.def)             Requested size: 334.05972pt x 187.9086pt.
-<../Fotos/vistaSuperior.jpg, id=367, 2080.77374pt x 1356.06625pt>
+<../Fotos/vistaSuperior.jpg, id=365, 2080.77374pt x 1356.06625pt>
 File: ../Fotos/vistaSuperior.jpg Graphic file (type jpg)
 <use ../Fotos/vistaSuperior.jpg>
-Package pdftex.def Info: ../Fotos/vistaSuperior.jpg  used on input line 1476.
+Package pdftex.def Info: ../Fotos/vistaSuperior.jpg  used on input line 1442.
 (pdftex.def)             Requested size: 455.0pt x 296.5146pt.
- [54pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
-30}) has been already used, duplicate ignored
+ [51pdfTeX warning (ext4): destination with the same identifier (name{figure.3.
+28}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1484 \chapter
-               {Resultados} <C:/codeCave/03-TCC/Fotos/resAmp.jpg>] [55pdfTeX wa
-rning (ext4): destination with the same identifier (name{figure.3.31}) has been
- already used, duplicate ignored
+l.1451 
+        <C:/codeCave/03-TCC/Fotos/resAmp.jpg>] [52pdfTeX warning (ext4): destin
+ation with the same identifier (name{figure.3.29}) has been already used, dupli
+cate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1484 \chapter
-               {Resultados} <C:/codeCave/03-TCC/Fotos/placaTotal.jpg>] [56pdfTe
-X warning (ext4): destination with the same identifier (name{figure.3.32}) has 
+l.1465 \chapter
+               {Resultados} <C:/codeCave/03-TCC/Fotos/placaTotal.jpg>] [53pdfTe
+X warning (ext4): destination with the same identifier (name{figure.3.30}) has 
 been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1484 \chapter
+l.1465 \chapter
                {Resultados}pdfTeX warning (ext4): destination with the same ide
-ntifier (name{figure.3.33}) has been already used, duplicate ignored
+ntifier (name{figure.3.31}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1484 \chapter
+l.1465 \chapter
                {Resultados} <C:/codeCave/03-TCC/Fotos/parteTras.jpg> <C:/codeCa
-ve/03-TCC/Fotos/parteCima.jpg>] [57pdfTeX warning (ext4): destination with the 
-same identifier (name{figure.3.34}) has been already used, duplicate ignored
+ve/03-TCC/Fotos/parteCima.jpg>] [54pdfTeX warning (ext4): destination with the 
+same identifier (name{figure.3.32}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1484 \chapter
-               {Resultados} <C:/codeCave/03-TCC/Fotos/vistaSuperior.jpg>] [58
-
-]
-<../Fotos/diagramaTelemetria.png, id=394, 653.44125pt x 902.37125pt>
+l.1465 \chapter
+               {Resultados} <C:/codeCave/03-TCC/Fotos/vistaSuperior.jpg>]
+<../Fotos/diagramaTelemetria.png, id=390, 653.44125pt x 902.37125pt>
 File: ../Fotos/diagramaTelemetria.png Graphic file (type png)
 <use ../Fotos/diagramaTelemetria.png>
 Package pdftex.def Info: ../Fotos/diagramaTelemetria.png  used on input line 14
-99.
+80.
 (pdftex.def)             Requested size: 307.11743pt x 424.11455pt.
- [59pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-35}) has been already used, duplicate ignored
+ [55
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4.33})
+ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1511 
+l.1492 
         <C:/codeCave/03-TCC/Fotos/diagramaTelemetria.png>]
-<../Fotos/antesFiltro33.jpg, id=403, 2569.6pt x 1445.4pt>
+<../Fotos/antesFiltro33.jpg, id=398, 2569.6pt x 1445.4pt>
 File: ../Fotos/antesFiltro33.jpg Graphic file (type jpg)
 <use ../Fotos/antesFiltro33.jpg>
-Package pdftex.def Info: ../Fotos/antesFiltro33.jpg  used on input line 1516.
+Package pdftex.def Info: ../Fotos/antesFiltro33.jpg  used on input line 1497.
 (pdftex.def)             Requested size: 181.99722pt x 102.35725pt.
-<../Fotos/depoisFiltro33.jpg, id=404, 2569.6pt x 1445.4pt>
+<../Fotos/depoisFiltro33.jpg, id=399, 2569.6pt x 1445.4pt>
 File: ../Fotos/depoisFiltro33.jpg Graphic file (type jpg)
 <use ../Fotos/depoisFiltro33.jpg>
-Package pdftex.def Info: ../Fotos/depoisFiltro33.jpg  used on input line 1522.
+Package pdftex.def Info: ../Fotos/depoisFiltro33.jpg  used on input line 1503.
 (pdftex.def)             Requested size: 181.99722pt x 102.35725pt.
-<../Fotos/antesFiltro19.jpg, id=405, 2569.6pt x 1445.4pt>
+<../Fotos/antesFiltro19.jpg, id=400, 2569.6pt x 1445.4pt>
 File: ../Fotos/antesFiltro19.jpg Graphic file (type jpg)
 <use ../Fotos/antesFiltro19.jpg>
-Package pdftex.def Info: ../Fotos/antesFiltro19.jpg  used on input line 1531.
+Package pdftex.def Info: ../Fotos/antesFiltro19.jpg  used on input line 1512.
 (pdftex.def)             Requested size: 181.99722pt x 102.35725pt.
-<../Fotos/depoisFiltro19.jpg, id=406, 2569.6pt x 1445.4pt>
+<../Fotos/depoisFiltro19.jpg, id=401, 2569.6pt x 1445.4pt>
 File: ../Fotos/depoisFiltro19.jpg Graphic file (type jpg)
 <use ../Fotos/depoisFiltro19.jpg>
-Package pdftex.def Info: ../Fotos/depoisFiltro19.jpg  used on input line 1537.
+Package pdftex.def Info: ../Fotos/depoisFiltro19.jpg  used on input line 1518.
 (pdftex.def)             Requested size: 181.99722pt x 102.35725pt.
-<../Fotos/osc33.jpg, id=407, 2569.6pt x 1445.4pt>
+<../Fotos/osc33.jpg, id=402, 2569.6pt x 1445.4pt>
 File: ../Fotos/osc33.jpg Graphic file (type jpg)
 <use ../Fotos/osc33.jpg>
-Package pdftex.def Info: ../Fotos/osc33.jpg  used on input line 1551.
+Package pdftex.def Info: ../Fotos/osc33.jpg  used on input line 1532.
 (pdftex.def)             Requested size: 455.0pt x 255.92621pt.
-<../Fotos/tensaoAcc.jpg, id=408, 2569.6pt x 1445.4pt>
+<../Fotos/tensaoAcc.jpg, id=403, 2569.6pt x 1445.4pt>
 File: ../Fotos/tensaoAcc.jpg Graphic file (type jpg)
 <use ../Fotos/tensaoAcc.jpg>
-Package pdftex.def Info: ../Fotos/tensaoAcc.jpg  used on input line 1566.
+Package pdftex.def Info: ../Fotos/tensaoAcc.jpg  used on input line 1547.
 (pdftex.def)             Requested size: 2569.59377pt x 1445.39648pt.
-<../Fotos/tensaoAccG.jpg, id=409, 2569.6pt x 1445.4pt>
+<../Fotos/tensaoAccG.jpg, id=404, 2569.6pt x 1445.4pt>
 File: ../Fotos/tensaoAccG.jpg Graphic file (type jpg)
 <use ../Fotos/tensaoAccG.jpg>
-Package pdftex.def Info: ../Fotos/tensaoAccG.jpg  used on input line 1572.
+Package pdftex.def Info: ../Fotos/tensaoAccG.jpg  used on input line 1553.
 (pdftex.def)             Requested size: 2569.59377pt x 1445.39648pt.
- [60pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-36}) has been already used, duplicate ignored
+ [56pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+34}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1582 			\newpage
+l.1563 			\newpage
+                  pdfTeX warning (ext4): destination with the same identifier (
+name{figure.4.35}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1563 			\newpage
+                  pdfTeX warning (ext4): destination with the same identifier (
+name{figure.4.36}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1563 			\newpage
                   pdfTeX warning (ext4): destination with the same identifier (
 name{figure.4.37}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1582 			\newpage
-                  pdfTeX warning (ext4): destination with the same identifier (
-name{figure.4.38}) has been already used, duplicate ignored
+l.1563 			\newpage
+                   <C:/codeCave/03-TCC/Fotos/antesFiltro33.jpg> <C:/codeCave/03
+-TCC/Fotos/depoisFiltro33.jpg> <C:/codeCave/03-TCC/Fotos/antesFiltro19.jpg> <C:
+/codeCave/03-TCC/Fotos/depoisFiltro19.jpg>]
+
+LaTeX Warning: Text page 57 contains only floats.
+
+ [57pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+38}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1582 			\newpage
+l.1563 			\newpage
                   pdfTeX warning (ext4): destination with the same identifier (
 name{figure.4.39}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1582 			\newpage
-                   <C:/codeCave/03-TCC/Fotos/antesFiltro33.jpg> <C:/codeCave/03
--TCC/Fotos/depoisFiltro33.jpg> <C:/codeCave/03-TCC/Fotos/antesFiltro19.jpg> <C:
-/codeCave/03-TCC/Fotos/depoisFiltro19.jpg>]
-
-LaTeX Warning: Text page 61 contains only floats.
-
- [61pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-40}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1582 			\newpage
+l.1563 			\newpage
                   pdfTeX warning (ext4): destination with the same identifier (
-name{figure.4.41}) has been already used, duplicate ignored
+name{figure.4.40}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1582 			\newpage
-                  pdfTeX warning (ext4): destination with the same identifier (
-name{figure.4.42}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1582 			\newpage
+l.1563 			\newpage
                    <C:/codeCave/03-TCC/Fotos/osc33.jpg> <C:/codeCave/03-TCC/Fot
-os/tensaoAcc.jpg> <C:/codeCave/03-TCC/Fotos/tensaoAccG.jpg>] [62]
-<../Fotos/stlink.jpg, id=432, 2569.6pt x 1445.4pt>
+os/tensaoAcc.jpg> <C:/codeCave/03-TCC/Fotos/tensaoAccG.jpg>] [58]
+<../Fotos/stlink.jpg, id=427, 2569.6pt x 1445.4pt>
 File: ../Fotos/stlink.jpg Graphic file (type jpg)
 <use ../Fotos/stlink.jpg>
-Package pdftex.def Info: ../Fotos/stlink.jpg  used on input line 1592.
+Package pdftex.def Info: ../Fotos/stlink.jpg  used on input line 1573.
 (pdftex.def)             Requested size: 455.0pt x 255.92621pt.
-<../Fotos/consumo0.jpg, id=433, 1186.4325pt x 1987.425pt>
+<../Fotos/consumo0.jpg, id=428, 1186.4325pt x 1987.425pt>
 File: ../Fotos/consumo0.jpg Graphic file (type jpg)
 <use ../Fotos/consumo0.jpg>
-Package pdftex.def Info: ../Fotos/consumo0.jpg  used on input line 1607.
+Package pdftex.def Info: ../Fotos/consumo0.jpg  used on input line 1588.
 (pdftex.def)             Requested size: 181.99722pt x 304.8635pt.
 
-Underfull \hbox (badness 1189) in paragraph at lines 1608--1608
+Underfull \hbox (badness 1189) in paragraph at lines 1589--1589
 [][]\T1/lmr/m/n/12 Placa sem ace-lerÙ-me-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1608--1608
+Underfull \hbox (badness 10000) in paragraph at lines 1589--1589
 \T1/lmr/m/n/12 tros co-nec-ta-dos, em
  []
 
-<../Fotos/consumo1.jpg, id=434, 1026.83624pt x 1876.00874pt>
+<../Fotos/consumo1.jpg, id=429, 1026.83624pt x 1876.00874pt>
 File: ../Fotos/consumo1.jpg Graphic file (type jpg)
 <use ../Fotos/consumo1.jpg>
-Package pdftex.def Info: ../Fotos/consumo1.jpg  used on input line 1613.
+Package pdftex.def Info: ../Fotos/consumo1.jpg  used on input line 1594.
 (pdftex.def)             Requested size: 167.4371pt x 305.89264pt.
 
-Underfull \hbox (badness 2671) in paragraph at lines 1614--1614
+Underfull \hbox (badness 2671) in paragraph at lines 1595--1595
 \T1/lmr/m/n/12 tro co-nec-tado, amos-
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [63pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-43}) has been already used, duplicate ignored
+ [59pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+41}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1617 			
+l.1598 			
            <C:/codeCave/03-TCC/Fotos/stlink.jpg>]
-<../Fotos/consumo2.jpg, id=441, 986.68625pt x 1962.33125pt>
+<../Fotos/consumo2.jpg, id=437, 986.68625pt x 1962.33125pt>
 File: ../Fotos/consumo2.jpg Graphic file (type jpg)
 <use ../Fotos/consumo2.jpg>
-Package pdftex.def Info: ../Fotos/consumo2.jpg  used on input line 1622.
+Package pdftex.def Info: ../Fotos/consumo2.jpg  used on input line 1603.
 (pdftex.def)             Requested size: 145.59833pt x 289.54616pt.
-<../Fotos/consumo4.jpg, id=442, 1335.99126pt x 1994.45125pt>
+<../Fotos/consumo4.jpg, id=438, 1335.99126pt x 1994.45125pt>
 File: ../Fotos/consumo4.jpg Graphic file (type jpg)
 <use ../Fotos/consumo4.jpg>
-Package pdftex.def Info: ../Fotos/consumo4.jpg  used on input line 1628.
+Package pdftex.def Info: ../Fotos/consumo4.jpg  used on input line 1609.
 (pdftex.def)             Requested size: 181.99722pt x 271.67392pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [64pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-44}) has been already used, duplicate ignored
+ [60pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+42}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1632 
+l.1613 
        pdfTeX warning (ext4): destination with the same identifier (name{figure
-.4.45}) has been already used, duplicate ignored
+.4.43}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1632 
+l.1613 
         <C:/codeCave/03-TCC/Fotos/consumo0.jpg> <C:/codeCave/03-TCC/Fotos/consu
-mo1.jpg>] [65pdfTeX warning (ext4): destination with the same identifier (name{
-figure.4.46}) has been already used, duplicate ignored
+mo1.jpg>] [61pdfTeX warning (ext4): destination with the same identifier (name{
+figure.4.44}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1641 		\newpage
+l.1622 		\newpage
                  pdfTeX warning (ext4): destination with the same identifier (n
-ame{figure.4.47}) has been already used, duplicate ignored
+ame{figure.4.45}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1641 		\newpage
+l.1622 		\newpage
                   <C:/codeCave/03-TCC/Fotos/consumo2.jpg> <C:/codeCave/03-TCC/F
 otos/consumo4.jpg>]
-<../Fotos/cdaq.jpg, id=456, 1941.2525pt x 814.04124pt>
+<../Fotos/cdaq.jpg, id=451, 1941.2525pt x 814.04124pt>
 File: ../Fotos/cdaq.jpg Graphic file (type jpg)
 <use ../Fotos/cdaq.jpg>
-Package pdftex.def Info: ../Fotos/cdaq.jpg  used on input line 1657.
+Package pdftex.def Info: ../Fotos/cdaq.jpg  used on input line 1638.
 (pdftex.def)             Requested size: 181.99722pt x 76.31618pt.
 
-Underfull \hbox (badness 1102) in paragraph at lines 1658--1658
+Underfull \hbox (badness 1102) in paragraph at lines 1639--1639
 [][]\T1/lmr/m/n/12 MÛdulos de aqui-si-Á„o
  []
 
-<../Fotos/peneiraLateralZoom.jpg, id=457, 2569.6pt x 1445.4pt>
+<../Fotos/peneiraLateralZoom.jpg, id=452, 2569.6pt x 1445.4pt>
 File: ../Fotos/peneiraLateralZoom.jpg Graphic file (type jpg)
 <use ../Fotos/peneiraLateralZoom.jpg>
 Package pdftex.def Info: ../Fotos/peneiraLateralZoom.jpg  used on input line 16
-63.
+44.
 (pdftex.def)             Requested size: 181.99722pt x 102.35725pt.
-<../Fotos/configSignalExpress.png, id=458, 854.44218pt x 463.7325pt>
+<../Fotos/configSignalExpress.png, id=453, 854.44218pt x 463.7325pt>
 File: ../Fotos/configSignalExpress.png Graphic file (type png)
 <use ../Fotos/configSignalExpress.png>
 Package pdftex.def Info: ../Fotos/configSignalExpress.png  used on input line 1
-676.
+657.
 (pdftex.def)             Requested size: 181.99722pt x 98.77357pt.
 
-Underfull \hbox (badness 2460) in paragraph at lines 1677--1677
+Underfull \hbox (badness 2460) in paragraph at lines 1658--1658
 [][]\T1/lmr/m/n/12 ConfiguraÁıes da lei-
  []
 
-<../Fotos/signalExpress3g.png, id=459, 855.94781pt x 460.72125pt>
+<../Fotos/signalExpress3g.png, id=454, 855.94781pt x 460.72125pt>
 File: ../Fotos/signalExpress3g.png Graphic file (type png)
 <use ../Fotos/signalExpress3g.png>
-Package pdftex.def Info: ../Fotos/signalExpress3g.png  used on input line 1682.
+Package pdftex.def Info: ../Fotos/signalExpress3g.png  used on input line 1663.
 
 (pdftex.def)             Requested size: 181.99722pt x 97.95645pt.
-<../Fotos/sinal3g.jpg, id=460, 871.00406pt x 430.60875pt>
+<../Fotos/sinal3g.jpg, id=455, 871.00406pt x 430.60875pt>
 File: ../Fotos/sinal3g.jpg Graphic file (type jpg)
 <use ../Fotos/sinal3g.jpg>
-Package pdftex.def Info: ../Fotos/sinal3g.jpg  used on input line 1698.
+Package pdftex.def Info: ../Fotos/sinal3g.jpg  used on input line 1679.
 (pdftex.def)             Requested size: 181.99722pt x 89.97055pt.
-<../Fotos/pulsante.jpg, id=461, 878.53218pt x 434.37282pt>
+<../Fotos/pulsante.jpg, id=456, 878.53218pt x 434.37282pt>
 File: ../Fotos/pulsante.jpg Graphic file (type jpg)
 <use ../Fotos/pulsante.jpg>
-Package pdftex.def Info: ../Fotos/pulsante.jpg  used on input line 1704.
+Package pdftex.def Info: ../Fotos/pulsante.jpg  used on input line 1685.
 (pdftex.def)             Requested size: 181.99722pt x 89.98154pt.
- [66pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-48}) has been already used, duplicate ignored
+ [62pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+46}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1713 \chapter
+l.1694 \chapter
+               {Conclus√µes}pdfTeX warning (ext4): destination with the same id
+entifier (name{figure.4.47}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1694 \chapter
+               {Conclus√µes}pdfTeX warning (ext4): destination with the same id
+entifier (name{figure.4.48}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.1694 \chapter
                {Conclus√µes}pdfTeX warning (ext4): destination with the same id
 entifier (name{figure.4.49}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1713 \chapter
-               {Conclus√µes}pdfTeX warning (ext4): destination with the same id
-entifier (name{figure.4.50}) has been already used, duplicate ignored
+l.1694 \chapter
+               {Conclus√µes} <C:/codeCave/03-TCC/Fotos/cdaq.jpg> <C:/codeCave/0
+3-TCC/Fotos/peneiraLateralZoom.jpg> <C:/codeCave/03-TCC/Fotos/configSignalExpre
+ss.png> <C:/codeCave/03-TCC/Fotos/signalExpress3g.png>] [63pdfTeX warning (ext4
+): destination with the same identifier (name{figure.4.50}) has been already us
+ed, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1713 \chapter
+l.1694 \chapter
                {Conclus√µes}pdfTeX warning (ext4): destination with the same id
 entifier (name{figure.4.51}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.1713 \chapter
-               {Conclus√µes} <C:/codeCave/03-TCC/Fotos/cdaq.jpg> <C:/codeCave/0
-3-TCC/Fotos/peneiraLateralZoom.jpg> <C:/codeCave/03-TCC/Fotos/configSignalExpre
-ss.png> <C:/codeCave/03-TCC/Fotos/signalExpress3g.png>] [67pdfTeX warning (ext4
-): destination with the same identifier (name{figure.4.52}) has been already us
-ed, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1713 \chapter
-               {Conclus√µes}pdfTeX warning (ext4): destination with the same id
-entifier (name{figure.4.53}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1713 \chapter
+l.1694 \chapter
                {Conclus√µes} <C:/codeCave/03-TCC/Fotos/sinal3g.jpg> <C:/codeCav
-e/03-TCC/Fotos/pulsante.jpg>] [68
+e/03-TCC/Fotos/pulsante.jpg>] [64
 
 ]
 No file TCC_Francisco_Gomes.bbl.
- [69] [70
+ [65] [66
 
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\uppercase' on input line 1762.
+(hyperref)                removing `\uppercase' on input line 1743.
 
- [71
+ [67
 
-] [72] [73
+] [68]
+Underfull \hbox (badness 10000) in paragraph at lines 1778--1782
 
-] [74
+ []
 
-] [75] [76
+ [69
+
+] [70] [71
+
+] [72
 
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\uppercase' on input line 1788.
+(hyperref)                removing `\uppercase' on input line 1866.
 
- [77
+ [73
 
-] [78] [79
+] [74] [75
 
-] [80
+] [76
 
-] [81] [82
+] [77] [78
 
-] [83]
+] [79]
 \tf@lof=\write5
 \openout5 = `TCC_Francisco_Gomes.lof'.
 
@@ -2076,59 +2124,60 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 \tf@toc=\write7
 \openout7 = `TCC_Francisco_Gomes.toc'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1806.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1806.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1884.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1884.
 
 (TCC_Francisco_Gomes.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1806.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1806.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1884.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1884.
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1806.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1884.
  ) 
 Here is how much of TeX's memory you used:
- 14251 strings out of 492895
- 215194 string characters out of 3123736
- 339950 words of memory out of 3000000
- 17691 multiletter control sequences out of 15000+200000
- 84662 words of font info for 57 fonts, out of 3000000 for 9000
+ 14232 strings out of 492895
+ 214881 string characters out of 3123736
+ 340950 words of memory out of 3000000
+ 17681 multiletter control sequences out of 15000+200000
+ 84344 words of font info for 56 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,13n,37p,798b,524s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.en
-c}{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathe
-x.enc}{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-m
-athsy.enc}{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
-lm-rm.enc}{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
-lm-mathit.enc}{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips
+ 39i,13n,37p,798b,527s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathe
+x.enc}{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-e
+c.enc}{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-r
+m.enc}{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-m
+athit.enc}{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/
+lm-mathsy.enc}{C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips
 /lm/lm-ts1.enc}<C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
 blic/lm/lmbx12.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/type
 1/public/lm/lmex10.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/
-type1/public/lm/lmmi12.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fo
-nts/type1/public/lm/lmmi6.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9
-/fonts/type1/public/lm/lmmi8.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX 
-2.9/fonts/type1/public/lm/lmr10.pfb><C:/Users/franc/AppData/Local/Programs/MiKT
-eX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/franc/AppData/Local/Programs/M
-iKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Users/franc/AppData/Local/Programs
-/MiKTeX 2.9/fonts/type1/public/lm/lmr7.pfb><C:/Users/franc/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/franc/AppData/Local/Prog
-rams/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Users/franc/AppData/Local/
-Programs/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Users/franc/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmss12.pfb><C:/Users/franc/AppDat
-a/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmss17.pfb><C:/Users/franc/Ap
-pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/fr
-anc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsso12.pfb><C:/Use
-rs/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsso17.pfb><C
-:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pf
-b><C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy8
+type1/public/lm/lmmi10.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fo
+nts/type1/public/lm/lmmi12.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX 2.
+9/fonts/type1/public/lm/lmmi6.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/type1/public/lm/lmmi7.pfb><C:/Users/franc/AppData/Local/Programs/MiK
+TeX 2.9/fonts/type1/public/lm/lmmi8.pfb><C:/Users/franc/AppData/Local/Programs/
+MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Users/franc/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/franc/AppData/Local/Pro
+grams/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Users/franc/AppData/Local/P
+rograms/MiKTeX 2.9/fonts/type1/public/lm/lmr7.pfb><C:/Users/franc/AppData/Local
+/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/franc/AppData/Loc
+al/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Users/franc/AppData
+/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmri12.pfb><C:/Users/franc/App
+Data/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmss12.pfb><C:/Users/franc
+/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmss17.pfb><C:/Users/f
+ranc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmssbx10.pfb><C:/U
+sers/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsso12.pfb>
+<C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsso17
 .pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lm
-tt12.pfb>
-Output written on TCC_Francisco_Gomes.pdf (85 pages, 15610702 bytes).
+sy10.pfb><C:/Users/franc/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/l
+m/lmsy8.pfb>
+Output written on TCC_Francisco_Gomes.pdf (81 pages, 15601745 bytes).
 PDF statistics:
- 837 PDF objects out of 1000 (max. 8388607)
+ 852 PDF objects out of 1000 (max. 8388607)
  202 named destinations out of 1000 (max. 500000)
- 676 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 726 words of extra memory for PDF output out of 10000 (max. 10000000)
 
