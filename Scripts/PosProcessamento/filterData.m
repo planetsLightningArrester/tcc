@@ -1,4 +1,4 @@
-dado = csvread('C:\\codeCave\\03-TCC\\Scripts\\Data\\Output\\20191018_00_35_55.txt',0,0);
+dado = csvread('C:\\codeCave\\03-TCC\\Scripts\\PosProcessamento\\20191018_13_43_13.txt',0,0);
 
 %%
 %Filtro media móvel - correntes
@@ -7,8 +7,9 @@ b = (1/windowSize)*ones(1,windowSize);
 a = 1;
 
 %%
+fs = 6500;
 dado = dado(:,4);
 
-dado = filter(b,a,dado);
+dado = bandpass(dado,[40 50],fs);
 
 plot(dado)
