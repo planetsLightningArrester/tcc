@@ -1,0 +1,1 @@
+texify -p -c -q --run-viewer TCC_Francisco_Gomes.tex

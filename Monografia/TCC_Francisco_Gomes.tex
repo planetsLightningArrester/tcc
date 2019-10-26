@@ -290,6 +290,7 @@
 	\item[USB] Universal Serial Bus
 	\item[JTAG] Joint Test Access Group
 	\item[PCB] Printed Circuit Board
+	\item[PCI] Placas de Circuitos Impressos
 	\item[DRC] Design Rule Check
 	\item[PLL] Phase-Locked Loop
 	\item[FAA] Filtro Anti-Aliasing
@@ -535,8 +536,8 @@
 
 		Assim, pode-se dimensionar a ordem de um filtro anti-\textit{aliasing} a partir do número de bits de seu conversor ADC. A banda de rejeição é caracterizada por ter atenuação
 		suficiente para que as frequências inseridas naquela banda possuam amplitude
-		inferior ao LSB do ADC. Assim, o ganho na banda de rejeição $H(f_{SB})$ é
-		dada por:
+		inferior ao LSB do ADC. Logo, o ganho na banda de rejeição $H(f_{SB})$ é
+		dado por:
 		\begin{gather*}
 			H(f_{SB}) = LSB/V_{o(max)}\\
 			H(f_{SB}) = \frac{LSV}{2^n\times LSV}\\
@@ -546,13 +547,13 @@
 		\end{gather*}
 		Em que $n$ é o número de bits do conversor ADC. Assim, para $n=12$, têm-se que a atenuação para a banda de rejeição deve ser de:
 		\begin{gather*}
-			H(f_{SB})_{[db]} = -72,25 dB
+			H(f_{SB})_{[dB]} = -72,25 dB
 		\end{gather*}
 		Os filtros analógicos, a partir da frequência de corte $f_c$, possuem atenuação dada por:
 		\begin{gather*}
 			H(f) = -m\times 20 dB/dec, para f>f_c
 		\end{gather*}
-		Em que $m$ é um número inteiro diferente de zero e representa a ordem do filtro. Logo, se a banda de transição deve ser igual a uma década a atenuação na banda de rejeição deve ser de $-72,25 dB$, a ordem do filtro deve ser de, no mínimo:
+		Em que $m$ é um número inteiro diferente de zero e representa a ordem do filtro. Logo, se a banda de transição deve ser igual a uma década e a atenuação na banda de rejeição deve ser de $-72,25 dB$, então a ordem do filtro deve ser de, no mínimo:
 		\begin{gather*}
 			m = -\frac{H(f_sb)}{20 dB/dec} = 3,6\\
 			m = 4
@@ -582,11 +583,11 @@
 %#Endregion
 
 % ----------------------------------------------------------
-%#Region Capítulo 3 - Materiais e Métodos
+%#Region Capítulo 3 - Materiais, Métodos e Desenvolvimento
 % ----------------------------------------------------------
-\chapter{Materiais e Métodos}
+\chapter{Materiais, Métodos e Desenvolvimento}
 	\section{Levantamento de requisitos}
-		Os sensores de vibração que serão utilizados são do modelo CTC AC102, cedidos pela empresa supervisora. Estes operam quando aplicado uma corrente de excitação fixa, além da alimentação. Tal sensor irá basear o projeto do circuito de condicionamento do sinal.
+		Os sensores de vibração que serão utilizados são do modelo CTC AC102, cedidos pela empresa supervisora. Estes acelerômetros necessitam de uma corrente de excitação fixa, além da alimentação. Tal sensor irá basear o projeto do circuito de condicionamento do sinal.
 		
 		As principais características do transdutor AC102 são apresentadas
 		abaixo.\cite{ctc}
@@ -604,14 +605,13 @@
 
 		\begin{itemize}
 			\item O sistema deve ser capaz de amostrar dados de vibração da
-			estrutura e enviar remotamente para um computador com uma outra
-			placa, que será brevemente descrita neste relatório. O alcance
+			estrutura e enviar remotamente para um módulo receptor conectado a um computador. O alcance
 			deve ser superior à 20 metros em área livre. Em geral, essa é a distância em que é possível posicionar-se um computador em relação ao ponto de medição.
 			
 			\item Possuir quatro canais com entradas para conectores BNC. Estes são os conectores padrão dos medidores IEPE e também do transdutor AC 102. Com quatro canais, torna-se possível realizar a medição de um ponto de forma triaxial ou medir o desbalanceamento de uma peneira com quatro pontos de medição.
 			
 			\item Ser capaz de amostrar sinais de $250Hz$ com uma resolução de $100mg$, sendo $g$
-			a aceleração da gravidade. Tal frequência abrange praticamente todas medições de máquinas de grande porte, as quais possuem constantes de tempo muito elevadas.
+			a aceleração da gravidade. Tal frequência abrange praticamente todas as medições de máquinas de grande porte, as quais possuem constantes de tempo muito elevadas.
 			
 			\item Ser capaz de operar por 2h com um \textit{powerbank} modelo CB078 com saída de $5V$
 			e capacidade de $2200mAh$. A utilização de um \textit{powerbank} não só facilita e reduz custos do projeto como também permite que o sistema possa ser utilizado diretamente no computador, nos casos em que a telemetria não é necessária.
@@ -638,7 +638,7 @@
 		utilizado comercialmente é $4mA$, por ter um consumo intermediário e não trabalhar
 		muito próximo dos valores máximos e mínimos absolutos.
 
-		Quando excitado, o medidor IEPE possui tensão média de saída entre $10V$ e $14V$. Com uma tensão média de, por exemplo, $14V$, o sinal de $\pm 5V$ irá excursionar de $7V$ a $17V$. Assim, como o sinal varia sobre uma tensão positiva, não há a necessidade de utilização de fontes simétricas. Dessa forma, o filtro
+		Quando excitado, o medidor IEPE possui tensão média de saída entre $10V$ e $14V$. Com uma tensão média de, por exemplo, $12V$, o sinal de $\pm 5V$ irá excursionar de $7V$ a $17V$. Assim, como o sinal varia sobre uma tensão positiva, não há a necessidade de utilização de fontes simétricas. Dessa forma, o filtro
 		anti-\textit{aliasing} deve possuir amplificadores operacionais	capazes de operar com alimentação não-simétrica de 19V.
 		
 		Todos os valores acima citados definem as condições de contorno do
@@ -651,7 +651,7 @@
 		têm-se os seguintes dados.
 		\begin{itemize}
 			
-			\item Tensão média de entrada: $V_{i(av)} = 14V$;
+			\item Tensão média de entrada: $V_{i(av)} = 12V$;
 			\item Excursão total do sinal ($\pm5V$): $V_{i(pp)} = 10V$.
 			
 		\end{itemize}
@@ -666,8 +666,8 @@
 
 		\begin{itemize}	
 			\item $n = 12 bits$
-			\item $G = 0,1737 V/V, se a tensão de alimentação do ADC for de 3,3V$
-			\item $G = 0,263 V/V, se a tensão de alimentação do ADC for de 5V$
+			\item $G = 0,1737 V/V$, se a tensão de alimentação do ADC for de $3,3V$
+			\item $G = 0,263 V/V$, se a tensão de alimentação do ADC for de $5V$
 		\end{itemize}	
 
 	\section{Dimensionamento do FAA}
@@ -676,11 +676,10 @@
 		suficiente para que as frequências inseridas naquela banda possuam amplitude
 		inferior ao LSB do ADC. Como já calculado anteriormente, $n=12$. Assim:
 		\begin{gather*}
-			H(f_{SB})_{[db]} = -72,25 dB
+			H(f_{SB})_{[dB]} = -72,25 dB
 		\end{gather*}
 
-		Os ensaio de vibração que baseiam o projeto possuem, em sua grande
-		maioria, excitações de frequência fixa com eventuais picos. O que
+		Os ensaio de vibração que se baseia o projeto, apresenta na maior parte do tempo, excitações de frequência fixa com eventuais picos. O que
 		interessa para a análise da estrutura é se a amplitude em
 		determinada frequência é maior que a prevista no modelo. Ou se a
 		estrutura sofreu algum impacto cuja amplitude ultrapassa determinado
@@ -688,7 +687,7 @@
 
 		Com isso, optou-se pelo filtro de topologia
 		\textit{Chebyshev}, que apresenta rápido decaimento na banda de transição em troca de oscilações na banda de passagem. O filtro ainda é caracterizado por ser de sexta ordem, com
-		frequência de corte de $265kHz$. Esta frequência foi escolhida um
+		frequência de corte de $265Hz$. Esta frequência foi escolhida um
 		pouco acima da frequência de interesse, que é se $250Hz$.
 
 		Os amplificadores operacionais utilizados no FAA devem
@@ -781,6 +780,7 @@
 			\centering
 			\includegraphics[scale = 0.3]{../Fotos/fonteCorrente2.jpg}
 			\caption{Fonte de corrente com medições}
+			\label{fig:topologiaFonteCorrenteValores}
 		\end{figure}
 
 	\section{Microcontrolador}
@@ -834,9 +834,9 @@
 		tenha uma taxa de transferência de:
 
 		\begin{gather*}
-			f_s = 1kHz
-			Total de bytes por amostra = 4\times 12 = 48 bits = 6 bytes
-			B/s = 6\times 1000 = 6kB/s
+			f_s = 1kHz\\
+			Total\:de\:bytes\:por\:amostra = 4\times 12 = 48 bits = 6 bytes\\
+			B/s = 6\times 1000 = 6kB/s\\
 		\end{gather*}
 
 		O módulo nRF24L01+\cite{nrf} possui taxa de comunicação de até $2Mbps$,
@@ -852,7 +852,7 @@
 			\item Alcance de comunicação de até $1km$ (ideal)
 		\end{itemize}
 
-		Outro ponto importante é que a o rádio utiliza uma frequência que pode ser utilizada sem a necessidade de concessão, que é a frequência de $2,4GHz$.
+		Outro ponto importante é que a o rádio utiliza a frequência de $2,4GHz$, a qual pode ser utilizada sem a necessidade de concessão.
 
 		Assim, esse módulo se torna ideal para que a placa receptora consiga
 		obter dados de até 6 placas de 4 canais, possibilitando a leitura de
@@ -923,7 +923,7 @@
 
 	\section{Projeto}
 		Para o desenvolvimento da placa, utilizou-se o \textit{software}
-		EasyEda \cite{easyEda}. Este é grátis e funciona via \textit{Browser}. Possui uma
+		EasyEda \cite{easyEda}. Este ambiente de desenvolvimento de Placas de Circuitos Impressos (PCIs) é gratuito e funciona via navegadores (\textit{browsers}). Possui uma
 		vasta biblioteca de \textit{footprints} por operar de forma
 		colaborativa, ou seja, todo componente criado por um usuário fica
 		disponível para toda comunidade que utiliza a ferramenta.
@@ -950,7 +950,7 @@
 				frequência de corte e de $10kHz$, atenuando o
 				\textit{ripple} de altas frequências. Além disso, os
 				indutores ainda possuem a função de melhorar o plano de
-				terra, isolando do terra da alimentação. É importante
+				terra, isolando o terra da alimentação. É importante
 				ressaltar que a frequência de ressonância do circuito LC é
 				significativamente menor que a frequência de chaveamento do
 				conversor \textit{boost}, que opera em $400kHz$. Isso evita
@@ -973,7 +973,7 @@
 
 			\subsubsection{Filtro anti-\textit{aliasing}}
 
-				A Figura ~\ref{fig:esquematicoFontesCorrente} apresenta os resistores que compõe o ganho G,
+				A Figura ~\ref{fig:esquematicoFAA} apresenta os resistores que compõe o ganho G,
 				posicionados na saída do FAA. O BAV99 atua como grampeador,
 				protegendo a entrada do ADC.
 
@@ -1065,7 +1065,7 @@
 			corrente de $200mA$ e comprimento de $10cm$, a temperatura da
 			trilha subiria apenas 1\textdegree C se usado uma espessura de
 			trilha de $5,2 mils$, quando em temperatura ambiente de
-			$25\textdegree C$. Assim, para diminuir a queda de tensão terminal e diminuir a indutância das trilhas, optou-se por utilizar trilhas de $8 mils$.
+			25\textdegree C. Assim, para diminuir a queda de tensão terminal e diminuir a indutância das trilhas, optou-se por utilizar trilhas de $8 mils$.
 
 			Os componentes foram posicionados de forma que circuitos
 			digitais de alta frequência ficassem distantes de circuitos
@@ -1148,7 +1148,7 @@
 	de amplitude de aceleração. O ensaio e os resultados serão
 	apresentados nas seções seguintes.
 
-	Também não será possível descrever os códigos desenvolvidos por
+	Não será possível descrever os códigos desenvolvidos por
 	questões da quantidade de linhas geradas. Para ilustrar e sumarizar a rotina do módulo,
 	a Figura ~\ref{fig:FSM} apresenta a máquina de estados finitos simplificada do
 	microcontrolador.
@@ -1217,7 +1217,7 @@
 			tensão do sinal quando em uma superfície sem vibração e
 			obteve-se um valor médio de $11,76V$. A tensão medida após o
 			condicionamento do sinal foi de 1,992V. Assim, o ganho $G$
-			medido foi de $G = 0,1694V/V$, próximo do valor calculado.
+			medido foi de $G = 0,1694V/V$, próximo do valor calculado de $0,1737V/V$ na seção 3.3 desta monografia. Assim, consegue-se atenuar o sinal para níveis de tensão dentro da faixa de medição do ADC.
 
 			\begin{figure}[!ht]
 				\centering
@@ -1256,19 +1256,9 @@
 
 		Utilizando a fonte Hikari HF-3203S, alimentou-se a fonte com $5V$
 		regulados e analisou o desempenho traduzido no consumo de
-		corrente do circuito em diferentes condições de operação. Os
-		desempenhos são apresentados nas Figuras abaixo. Segundo o
-		manual da fonte de alimentação utilizada, a corrente possui
-		precisão de $1\% + 3mA$.
+		corrente do circuito em diferentes condições de operação.
 
-		\begin{figure}[!ht]
-			\centering
-			\includegraphics[width = \linewidth]{../Fotos/consumo4.jpg}
-			\caption[Placa com 4 acelerômetros]{Placa com 4 acelerômetros conectados, amostrando e enviando os dados remotamente}
-			\label{fig:accConectadosConsumo}
-		\end{figure}
-
-		Pode-se notar um aumento de aproximadamente $15$ a $20mA$ no consumo
+		Pôde-se notar um aumento de aproximadamente $15$ a $20mA$ no consumo
 		de corrente por canal, não ultrapassando $270mA$. A potência da
 		placa ficou maior que a estimada, com $1,35W$. Isso ocorreu devido
 		a presença dos LEDs que foram utilizados para indicar quando a
@@ -1278,56 +1268,87 @@
 
 		\newpage
 
-	\section{Ensaio}
-		O ensaio consiste em utilizar um acelerômetro com base magnética
-		posicionado na lateral da peneira, como apresentado na Figura
-		~\ref{fig:accNaLateral}. Este sinal foi aquisitado pelo sistema de aquisição NI
-		cDAQ-9178 em conjunto com o NI 9233, apresentados na Figura ~\ref{fig:modulosNI}.
-		Estes módulos fazem interface com o computador através do
-		\textit{software} SignalExpress da National
-		Instruments\textsuperscript{TM}, cedido sob licença da empresa
-		supervisora.
+	\section{Ensaios}
+		Dois ensaios foram realizados. O primeiro ensaio consiste em utilizar um acelerômetro com base magnética posicionado na parte superior da peneira, como apresentado na Figura ~\ref{fig:accNaVertical}. O segundo ensaio também consistem em posicionar um acelerômetro com base magnética na peneira, porém na parte lateral, como apresentado na Figura ~\ref{fig:accNaLateral}, obtendo valores mais baixos de aceleração e frequência. O objetivo dos ensaios é avaliar a medição de sinais diferentes tanto em frequência quanto em amplitude, a fim de validar a linearidade da medição ao longo de parte da escala.
+		
+		Em um primeiro momento, o sinal foi aquisitado pelo sistema de aquisição NI	cDAQ-9178 em conjunto com o NI-9234, cedidos pela empresa supervisora, apresentados na Figura ~\ref{fig:modulosNI}. Acionou-se a peneira em $50\%$ de sua potência máxima. Coletou-se os dados para o acelerômetro na vertical e na lateral por 10 segundos cada.
 
 		\begin{figure}[!ht]
 			\centering
 			\begin{minipage}{0.4\linewidth}
 				\centering
+				\includegraphics[width = \linewidth, angle = 270, origin = c]{../Fotos/accVertical.jpg}
+				\caption{Posição do acelerômetro na parte superior da peneira}
+				\label{fig:accNaVertical}
+			\end{minipage}
+			\hfill\vline\hfill
+			\begin{minipage}{0.4\linewidth}
+				\centering
+				\includegraphics[width = \linewidth]{../Fotos/peneiraAccLateral.jpg}
+				\caption{Posição do acelerômetro na lateral da peneira}
+				\label{fig:accNaLateral}
+			\end{minipage}
+		\end{figure}
+
+		Em um segundo momento, realizou-se os mesmos ensaios para o sistema de aquisição desenvolvido, realizando-se ambas medições por 10 segundos, como apresentado na Figura ~\ref{fig:daqIepe}.
+
+		\begin{figure}[H]
+			\centering
+			\begin{minipage}{0.4\linewidth}
+				\centering
 				\includegraphics[width = \linewidth]{../Fotos/cdaq.jpg}
-				\caption{Módulos de aquisição NI}
+				\caption{Sistema de aquisicao NI}
 				\label{fig:modulosNI}
 			\end{minipage}
 			\hfill\vline\hfill
 			\begin{minipage}{0.4\linewidth}
 				\centering
-				\includegraphics[width = \linewidth]{../Fotos/peneiraLateralZoom.jpg}
-				\caption{Posição do acelerômetro na peneira}
-				\label{fig:accNaLateral}
+				\includegraphics[width = \linewidth]{../Fotos/DAqIEPE.jpg}
+				\caption{Sistema de aquisição desenvolvido}
+				\label{fig:daqIepe}
 			\end{minipage}
 		\end{figure}
 
-		As configurações são feitas no \textit{software} e é realizada a
-		amostragem do sinal em um determinado intervalo de tempo,
-		apresentadas nas Figuras 44 e 45.
+		Para a análise dos dados, utilizou-se o \textit{software} SignalExpress da National Instruments\textsuperscript{TM}, cedido sob licença da empresa supervisora. Por meio desse \textit{software}, aplicou-se filtros digitais de forma a retirar os sinais fora da banda de interesse. A Figura ~\ref{fig:ni4g} apresenta o sinal de aceleração vertical obtido pelo sistema de aquisição NI-9234 e seu espectro em frequência. O sinal aquisitado pelo sistema desenvolvido é apresentado na Figura ~\ref{fig:kot4g}.
 
 		\begin{figure}[!ht]
 			\centering
-			\begin{minipage}{0.4\linewidth}
-				\centering
-				\includegraphics[width = \linewidth]{../Fotos/configSignalExpress.png}
-				\caption{Configurações da leitura do sensor}
-			\end{minipage}
-			\hfill\vline\hfill
-			\begin{minipage}{0.4\linewidth}
-				\centering
-				\includegraphics[width = \linewidth]{../Fotos/signalExpress3g.png}
-				\caption{Leitura do sinal da peneira (Signal Express)}
-			\end{minipage}
+			\includegraphics[width=\linewidth]{../Fotos/ni4g.png}
+			\caption{Resultados da medição pelo sistema NI-9234 para o ensaio de aceleração vetical}
+			\label{fig:ni4g}
 		\end{figure}
 
-		Então, o sensor foi conectado na placa desenvolvida e o sinal foi
-		aquisitado e enviado para uma placa remota. 
+		\begin{figure}[!ht]
+			\centering
+			\includegraphics[width=\linewidth]{../Fotos/kot4g.png}
+			\caption{Resultados da medição pelo sistema desenvolvido para o ensaio de aceleração vetical}
+			\label{fig:kot4g}
+		\end{figure}
 
-		>>TODO
+		Comparando-se as Figuras ~\ref{fig:ni4g} e ~\ref{fig:kot4g}, pode-se notar que os valores em frequência e amplitude dos sinais ficaram próximos nos dois sistemas de aquisição: aproximadamente $4g$ e $38Hz$. O NI-9234 mediu valores de $4,0g$ enquando o sistema de aquisição desenvolvido obteve até $4,13g$.
+
+		As Figuras ~\ref{fig:ni200mg} e ~\ref{fig:kot200mg} apresentam os sinais obtidos para a medição com o acelerômetro na lateral da peneira.
+
+		\begin{figure}[!ht]
+			\centering
+			\includegraphics[width=\linewidth]{../Fotos/ni200mg.png}
+			\caption{Resultados da medição pelo sistema NI-9234 para o ensaio de aceleração lateral}
+			\label{fig:ni200mg}
+		\end{figure}
+
+		\begin{figure}[!ht]
+			\centering
+			\includegraphics[width=\linewidth]{../Fotos/kot200mg.png}
+			\caption{Resultados da medição pelo sistema desenvolvido para o ensaio de aceleração lateral}
+			\label{fig:kot200mg}
+		\end{figure}
+
+		Comparando-se as Figuras ~\ref{fig:ni200mg} e ~\ref{fig:kot200mg}, pode-se notar que os valores de aceleração ficaram entre $170$ e $190mg$ no sistema de aquisição NI-9234, enquanto que a aceleração obtida pelo sistema desenvolvido oscilou entre $210$ e $230mg$. Analizando o espectro de frequência, ambas medições obtiveram valores próximos de frequência, com valores de amplitude um pouco diferentes na frequência de $38Hz$.
+
+		É interessante notar que a diferença entre os valores obtidos pelos dois sistemas de aquisição não é constante ao longo da faixa de medição. Enquanto que para valores de referência de $4g$ obteve-se uma variação entre medições de $130mg$ ou $3,25\%$, as medições para menores vibrações para valores de referência de $200mg$ variaram $40mg$ ou $20\%$. Como já explicitado nesta monografia, uma medição de $4g$ ou $4,13g$ não possui impacto na avaliação do estado de uma máquina como uma peneira. Apenas variações maiores, na ordem de \textit{1g} impactariam na medição. Com isso, pode-se dizer que o sistema possui um bom desempenho quando referenciado ao sistema de aquisição NI-9234 e atende às necessidades propostas. Os demais canais foram testados e todos apresentaram comportamento semelhante aos valores já apresentados.
+
+		Para analisar o alcance de envio do sistema de aquisição, realizou-se testes na rua e em ambientes fechados, ambos com área livre entre o emissor e o receptor. Consegui-se receber os dados sem perda de pacotes com distâncias de até 70 metros. Até 100 metros, cerca de $1\%$ dos pacotes são perdidos. Acima dessa distância a comunicação fica instável e não confiável.
+
 %#Endregion
 
 % ----------------------------------------------------------
@@ -1499,19 +1520,19 @@
 	de 5\% podem ser usados sem influenciar nos resultados.
 
 % ----------------------------------------------------------
-\chapter{Cálculo dos componentes da fonte de corrente}
+\chapter{Dimensionamento do conversor DC/DC \textit{boost}}
 % ----------------------------------------------------------
 \label{ape:calculoBoost}
 
 	Para elevar a tensão, utiliza-se uma fonte chaveada tipo
 	\textit{boost}. De forma a manter a uma alta eficiência do
 	\textit{boost} e não trabalhar com uma tensão muito próxima do
-	limite inferior, a tensão de alimentação escolhida foi de $19V$.
+	limite inferior do acelerômetro, a tensão de alimentação escolhida foi de $19V$.
 	A corrente total que a fonte de 19V deve fornecer é dada por:
 	\begin{gather*}
 		I_{total} = 4\* \left(I_{FAA} + I_{FonteCorrente}\right)
 	\end{gather*}
-	O \textit{quatro} representa os quatro canais. A corrente do FAA
+	O valor é multiplicado por quatro pois são quatro canais de medição. A corrente do FAA
 	é basicamente a corrente consumida pelos amplificadores
 	operacionais que, segundo o \textit{datasheet} do OP07CDR \cite{op07c}, é de
 	menos de $1mA$ para tensões de alimentação superiores a
@@ -1519,7 +1540,7 @@
 	o consumo do FAA é de $4\times 1mA =  4mA$.
 
 	As fontes de corrente consomem $4mA$ da polarização do sensor
-	mais a corrente que passa pelo resistor de polarização $R_2$.
+	mais a corrente que passa pelo resistor de polarização $R_2$ da Figura ~\ref{fig:topologiaFonteCorrenteValores}.
 	Assim, cada filtro consome aproximadamente $4,3mA$. Então:
 	\begin{gather*}
 		I_{total} = 4\* \left(4mA + 4,3mA\right) = 33,2mA.
