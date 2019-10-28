@@ -1,0 +1,96 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.7 }
+
+\bibitem[Beckhoff 2019]{iepeCircuit}
+\abntrefinfo{Beckhoff}{BECKHOFF}{2019}
+{BECKHOFF. \emph{Basic principles of IEPE technology}. 2019.
+Dispon{\'\i}vel em:
+  \url{https://infosys.beckhoff.com/english.php?content=../content/1033/epp3632/4015720203.html&id=}.}
+
+\bibitem[CTC 2014]{ctc}
+\abntrefinfo{CTC}{CTC}{2014}
+{CTC. \emph{AC102 Series}. 2014.
+Dispon{\'\i}vel em:
+  \url{https://www.ctconline.com/fileup/3DNEWPDF/AC102series\_datasheet\_3D.pdf}.}
+
+\bibitem[EasyEDA 2019]{easyEda}
+\abntrefinfo{EasyEDA}{EASYEDA}{2019}
+{EASYEDA. \emph{About EasyEDA}. 2019.
+Dispon{\'\i}vel em: \url{https://easyeda.com/page/about}.}
+
+\bibitem[Engenharia 2019]{kot}
+\abntrefinfo{Engenharia}{ENGENHARIA}{2019}
+{ENGENHARIA, K. \emph{Kotchergenko Engenharia Ltda.} 2019.
+Dispon{\'\i}vel em: \url{https://www.kotengenharia.com.br/}.}
+
+\bibitem[G1 2018]{pib}
+\abntrefinfo{G1}{G1}{2018}
+{G1. \emph{Como a mineração ajuda a alavancar a economia brasileira}. 2018.
+Dispon{\'\i}vel em:
+  \url{https://g1.globo.com/especial-publicitario/em-movimento/noticia/2018/12/10/como-a-mineracao-ajuda-a-alavancar-a-economia-brasileira.ghtml}.}
+
+\bibitem[G1 2019]{mariana}
+\abntrefinfo{G1}{G1}{2019}
+{G1. \emph{Há 3 anos, rompimento de barragem de Mariana causou maior desastre
+  ambiental do país e matou 19 pessoas}. 2019.
+Dispon{\'\i}vel em:
+  \url{https://g1.globo.com/mg/minas-gerais/noticia/2019/01/25/ha-3-anos-rompimento-de-barragem-de-mariana-causou-maior-desastre-ambiental-do-pais-e-matou-19-pessoas.ghtml}.}
+
+\bibitem[Horowitz 2015]{artElectronics}
+\abntrefinfo{Horowitz}{HOROWITZ}{2015}
+{HOROWITZ, W.~H. P. Analog-to-digital converters.
+In:  \underline{\ \ \ \ \ \ \ \ }. \emph{The Art of Electronics}. [S.l.]:
+  Cambridge University Press, 2015. cap.~1.2, p. 900--902.}
+
+\bibitem[Incorporated 2004]{nyquist}
+\abntrefinfo{Incorporated}{INCORPORATED}{2004}
+{INCORPORATED, T.~I. \emph{AN-236 An Introduction to the Sampling Theorem}.
+  2004.
+Dispon{\'\i}vel em: \url{http://www.ti.com/lit/an/snaa079c/snaa079c.pdf}.}
+
+\bibitem[Industries 2003]{ipc}
+\abntrefinfo{Industries}{INDUSTRIES}{2003}
+{INDUSTRIES, I. A. C.~E. \emph{Generic Standart on Printed Board Design}. 2003.
+Dispon{\'\i}vel em:
+  \url{http://www-eng.lbl.gov/~shuman/NEXT/CURRENT\_DESIGN/TP/MATERIALS/IPC-2221A(L).pdf}.}
+
+\bibitem[Instruments 2015]{ni9234}
+\abntrefinfo{Instruments}{INSTRUMENTS}{2015}
+{INSTRUMENTS, N. \emph{NI 9232}. 2015.
+Dispon{\'\i}vel em: \url{http://www.ni.com/pdf/manuals/374238a\_02.pdf}.}
+
+\bibitem[Instruments 2014]{op07c}
+\abntrefinfo{Instruments}{INSTRUMENTS}{2014}
+{INSTRUMENTS, T. \emph{OPO7x Precision Operational Amplifiers}. 2014.
+Dispon{\'\i}vel em: \url{http://www.ti.com/lit/ds/symlink/op07c.pdf}.}
+
+\bibitem[Petroleo 2016]{mineracaoUFMG}
+\abntrefinfo{Petroleo}{PETROLEO}{2016}
+{PETROLEO, O. \emph{Você sabe como funciona a mineração no Brasil hoje?}
+  2016.
+Dispon{\'\i}vel em:
+  \url{http://www.opetroleo.com.br/voce-sabe-como-funciona-mineracao-no-brasil-hoje/}.}
+
+\bibitem[Semiconductors 2019]{nrf}
+\abntrefinfo{Semiconductors}{SEMICONDUCTORS}{2019}
+{SEMICONDUCTORS, N. \emph{nRF24L01+}. 2019.
+Dispon{\'\i}vel em:
+  \url{https://www.nordicsemi.com/eng/Products/2.4GHz-RF/nRF24L01P}.}
+
+\bibitem[Senra 2019]{brumadinho}
+\abntrefinfo{Senra}{SENRA}{2019}
+{SENRA, B.~N. R. \emph{Brumadinho, a história de uma tragédia que poderia ter
+  sido evitada}. 2019.
+Dispon{\'\i}vel em: \url{https://www.bbc.com/portuguese/brasil-47399659}.}
+
+\bibitem[ST 2015]{stm}
+\abntrefinfo{ST}{ST}{2015}
+{ST. \emph{STM32F103X8}. 2015.
+Dispon{\'\i}vel em:
+  \url{http://www.st.com/content/ccc/resource/technical/document/datasheet/33/d4/6f/1d/df/0b/4c/6d/CD00161566.pdf/files/CD00161566.pdf/jcr:content/translations/en.CD00161566.pdf}.}
+
+\end{thebibliography}

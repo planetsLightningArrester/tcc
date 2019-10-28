@@ -1,39 +1,4 @@
 %#Region Includes & Defines
-%% Modelo adaptado de abtex2-modelo-trabalho-academico.tex, v-1.8 laurocesar
-%% Copyright 2012-2013 by abnTeX2 group at http://abntex2.googlecode.com/ 
-%%
-%% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
-%% of this license or (at your option) any later version.
-%% The latest version of this license is in
-%%   http://www.latex-project.org/lppl.txt
-%% and version 1.3 or later is part of all distributions of LaTeX
-%% version 2005/12/01 or later.
-%%
-%% This work has the LPPL maintenance status `maintained'.
-%% 
-%% The Current Maintainer of this work is the abnTeX2 team, led
-%% by Lauro César Araujo. Further information are available on 
-%% http://abntex2.googlecode.com/
-
-%%******************************************************
-%%******************************************************
-%% This work consists of the files:
-%% abntex2-modelo-trabalho-academico-TCC-EngaEletrica.tex,
-%% abntex2-modelo-include-comandos 
-%% abntex2-modelo-references.bib
-%%******************************************************
-%%******************************************************
-
-% ------------------------------------------------------------------------
-% ------------------------------------------------------------------------
-% abnTeX2: Modelo de Trabalho Academico (tese de doutorado, dissertacao de
-% mestrado e trabalhos monograficos em geral) em conformidade com 
-% ABNT NBR 14724:2011: Informacao e documentacao - Trabalhos academicos -
-% Apresentacao
-% ------------------------------------------------------------------------
-% ------------------------------------------------------------------------
-
 \documentclass[
 	% -- opções da classe memoir --
 	12pt,				% tamanho da fonte
@@ -62,10 +27,10 @@
 % ---
 % \usepackage{cmap}			% Mapear caracteres especiais no PDF
 \usepackage{lmodern}			% Usa a fonte Latin Modern			
-\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
-\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage[T1]{fontenc}		% Seleção de códigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificação do documento (conversão automática dos acentos)
 % \usepackage{lastpage}			% Usado pela Ficha catalográfica
-\usepackage{indentfirst}		           % Indenta o primeiro parágrafo de cada seção.
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
 \usepackage{color}				% Controle das cores
 \usepackage{graphicx}
 \usepackage{float}
@@ -167,7 +132,7 @@
 \setlength{\parskip}{0.2cm}  % tente também \onelineskip
 
 % ---
-% compila o indice
+% compila o índice
 % ---
 \makeindex
 % ---
@@ -235,7 +200,7 @@
 % resumo em português
 \setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
 \begin{resumo}
-	Esta monografia apresenta o projeto, desenvolvimento, fabricação e testes de um módulo capaz de amostrar sinais de sensores de aceleração IEPE uniaxiais e transmitir os dados via rádio para um outro módulo receptor. O módulo de aquisição pode ser utilizado para análises de manutenção preditiva ou para monitoramento contínuo em peneiras vibratórias de mineração, transportadores de correia e outras máquinas de áreas portuárias e ferroviárias . São levantados parâmetros e condições de contorno que diferenciam o módulo de demais sistemas de aquisição presentes no mercado. Para análise dos resultados, utilizou-se como referência comparativa o módulo NI-9234 da National Instruments.
+	Esta monografia apresenta o projeto, desenvolvimento, fabricação e testes de um módulo capaz de amostrar sinais de sensores de aceleração IEPE uniaxiais e transmitir os dados via rádio para um outro módulo receptor. O módulo de aquisição pode ser utilizado para análises de manutenção preditiva ou para monitoramento contínuo em peneiras vibratórias de mineração, transportadores de correia e outras máquinas de áreas portuárias e ferroviárias. São levantados parâmetros e condições de contorno que diferenciam o módulo de demais sistemas de aquisição presentes no mercado. Para análise dos resultados, utilizou-se como referência comparativa o módulo NI-9234 da National Instruments.
 
 	\vspace{\onelineskip}
 
@@ -281,6 +246,7 @@
 	\item[NI] National Instruments
 	\item[ADC] Analog-Digital Converter
 	\item[FFT] Fast Fourier Transform
+	\item[CI] Circuito Integrado
 	\item[LSB] Least Significant Bit
 	\item[SPI] Serial Peripheral Interface
 	\item[USART] Universal Synchronous/Asynchronous Receiver/Transmitter
@@ -331,46 +297,19 @@
 
 	\section{Mineração no Brasil}
 
-		A mineração no Brasil possui grande importância na economia atual do país e
-		do mundo e é um dos setores em maior expansão. Atividades nessa área já
-		representam em torno de 4\% do PIB do Brasil e geram mais de dois milhões de
-		empregos diretos e indiretos.\cite{pib}
+		A mineração no Brasil possui grande importância na economia atual do país e do mundo e é um dos setores em maior expansão. Atividades nessa área já representam em torno de 4\% do PIB do Brasil e geram mais de dois milhões de empregos diretos e indiretos.\cite{pib}
 
-		Novas tecnologias vêm alavancando esse setor, buscando aumentar a eficiência
-		de produção e transporte e o aproveitamento de resíduos para a
-		transformação em insumos. A Escola de Engenharia da Universidade Federal de
-		Minas Gerais (UFMG), por exemplo, desenvolve metodologias de calcificação
-		dos resíduos da mineração, os tornando matéria-prima para a fabricação de
-		produtos das áreas de construção civil. Esse reaproveitamento chega a
-		proporcionar uma redução de até 40\% no custo das obras.\cite{mineracaoUFMG}
+		Novas tecnologias vêm alavancando esse setor, buscando aumentar a eficiência de produção e transporte e o aproveitamento de resíduos para a transformação em insumos. A Escola de Engenharia da Universidade Federal de Minas Gerais (UFMG), por exemplo, desenvolve metodologias de calcificação dos resíduos da mineração, os tornando matéria-prima para a fabricação de produtos das áreas de construção civil. Esse reaproveitamento chega a proporcionar uma redução de até 40\% no custo das obras.\cite{mineracaoUFMG}
 
 		Hoje, o cenário da mineração vem sendo reconstruído. Depois dos desastres ambientais das cidades mineiras de Mariana \cite{mariana} e Brumadinho \cite{brumadinho} , as empresas desse setor têm sido pressionadas e intensificaram os investimentos em sistemas de segurança e monitoramento. Diversos sistemas ainda são antigos e possuem planos de manutenção que não foram atualizados com o passar dos anos.
 		
-		O setor de mineração conta com diversas estruturas de grande porte em
-		terminais portuários e ferrovias por todo o Brasil. A manutenção
-		preditiva e o diagnóstico de falha são duas atividades de extrema
-		importância. Tanto para sustentar uma responsabilidade social e ambiental quanto no âmbito de possibilitar a segurança dos operadores, a redução de custos em bloqueios de produção por falhas e uma melhor modelagem da dinâmicas das estruturas utilizadas. Nesse sentido,
-		diversas empresas da área baseiam suas atividades em três grandes
-		pilares: a metodologia teórica de análise de estruturas, a capacidade de
-		modelagem e simulação via \textit{software} e um preciso e confiável
-		ensaio de campo para a obtenção de dados.
+		O setor de mineração conta com diversas estruturas de grande porte em terminais portuários e ferrovias por todo o Brasil. A manutenção preditiva e o diagnóstico de falha são duas atividades de extrema importância. Tanto para sustentar uma responsabilidade social e ambiental quanto no âmbito de possibilitar a segurança dos operadores, a redução de custos em bloqueios de produção por falhas e uma melhor modelagem das dinâmicas das estruturas utilizadas. Nesse sentido, diversas empresas da área baseiam suas atividades em três grandes pilares: a metodologia teórica de análise de estruturas, a capacidade de modelagem e simulação via \textit{software} e um preciso e confiável ensaio de campo para a obtenção de dados.
 		
-		Ensaios de campo de vibração e extensometria são comumente realizados
-		utilizando equipamentos capazes de fazer aquisição de dados em tempo
-		real de vários canais simultaneamente. Os ensaios de vibração, por
-		exemplo, utilizam sensores piezoelétricos uniaxiais que são ligados em
-		sistemas de aquisição, como o NI-9234 da National
-		Instruments\textsuperscript{TM}.
-		
-		Os dados de vibração são obtidos por meio de sensores piezoelétricos com
-		eletrônica integrada, conhecidos como sensores IEPE ou \textit{Integrated
-		Electronics Piezo-Electric}. Materiais piezoelétricos são cristais capazes de
-		gerar uma tensão elétrica após os aplicar uma força mecânica.
-		Os transdutores IEPE pré-amplificam esse sinal de forma a possibilitar a
-		condução dos mesmos através de cabos coaxiais \cite{iepeCircuit}.
+		Ensaios de campo de vibração e extensometria são comumente realizados utilizando equipamentos capazes de fazer aquisição de dados em tempo real de vários canais simultaneamente. Os ensaios de vibração, por exemplo, utilizam sensores piezoelétricos uniaxiais que são ligados em sistemas de aquisição, como o NI-9234 da National Instruments\textsuperscript{TM}.
 
-		Tais ensaios são realizados em peneiras vibratórias de mineração,
-		transportadores de correia e outras máquinas de áreas portuárias e ferroviárias.
+		Os dados de vibração são obtidos por meio de sensores piezoelétricos com eletrônica integrada, conhecidos como sensores IEPE ou \textit{Integrated Electronics Piezo-Electric}. Materiais piezoelétricos são cristais capazes de gerar uma tensão elétrica após os aplicar uma força mecânica. Os transdutores IEPE pré-amplificam esse sinal de forma a possibilitar a condução dos mesmos através de cabos coaxiais \cite{iepeCircuit}.
+
+		Tais ensaios são realizados em peneiras vibratórias de mineração, transportadores de correia e outras máquinas de áreas portuárias e ferroviárias.
 	\section{Motivação}
 
 		Existem soluções hoje no mercado para medição de acelerômetros IEPE. Contudo, soluções como o sistema de aquisição NI-9234 da National Instruments são muito genéricas e com muitos recursos que acabam elevando o custo do sistema. Além do módulo funcionar apenas via cabo, ele necessita estar acoplado em um segundo módulo que faz a interface com o computador, como o NI cDAQ-9178. Para coletar os dados desse módulo, ainda é necessário \textit{softwares} como o LabVIEW ou o SignalExpress, ambos da National Instruments. 
@@ -679,7 +618,7 @@
 			H(f_{SB})_{[dB]} = -72,25 dB
 		\end{gather*}
 
-		Os ensaio de vibração que se baseia o projeto, apresenta na maior parte do tempo, excitações de frequência fixa com eventuais picos. O que
+		Os ensaios de vibração que se baseia o projeto, apresenta na maior parte do tempo, excitações de frequência fixa com eventuais picos. O que
 		interessa para a análise da estrutura é se a amplitude em
 		determinada frequência é maior que a prevista no modelo. Ou se a
 		estrutura sofreu algum impacto cuja amplitude ultrapassa determinado
@@ -731,7 +670,7 @@
 		3,3V por meio do ganho $G$. Como já citado anteriormente (Apêndice ~\ref{ape:calculoADC}), para
 		alimentação do ADC igual a 3,3V, o ganho deve ser igual a $G =
 		0,1737V/V$. Essa relação, dada por um divisor de tensão, pode
-		ser aproximada pro resistores de $15k\Omega$ e $75k\Omega$, de
+		ser aproximada por resistores de $15k\Omega$ e $75k\Omega$, de
 		forma que:
 		\begin{gather*}
 			G = \frac{15k}{15k+75k} = 0,1667V/V
@@ -771,7 +710,7 @@
 			\label{fig:topologiaFonteCorrente}
 		\end{figure}
 
-		A fonte foi dimensionada para fornecer $4mA$ constantes. Os valores foram obtidos por meio do desenvovimento matemático apresentado no Apêndice ~\ref{ape:calculoCorrente}. Realizou-se um ajuste fino dos valores utilizando o \textit{software} LTSpice.
+		A fonte foi dimensionada para fornecer $4mA$ constantes. Os valores foram obtidos por meio do desenvolvimento matemático apresentado no Apêndice ~\ref{ape:calculoCorrente}. Realizou-se um ajuste fino dos valores utilizando o \textit{software} LTSpice.
 
 		Os transistores devem ser transistores de sinal, com
 		$V_{be}\simeq 0,7V$. Assim, utilizou-se os transistores BC857B.
@@ -1106,7 +1045,7 @@
 			\end{figure}
 
 			A Figura ~\ref{fig:placaFinal} apresenta uma vista geral da placa. Com dimensões de
-			$88,8mmx77,72mm$, o preço de produção de 10 placas ficariam em torno de
+			$88,8mmx77,72mm$, o preço de produção de 10 placas fica em torno de
 			U\$90 ou U\$9 por placa.
 
 			\begin{figure}[H]
@@ -1269,7 +1208,7 @@
 		\newpage
 
 	\section{Ensaios}
-		Dois ensaios foram realizados. O primeiro ensaio consiste em utilizar um acelerômetro com base magnética posicionado na parte superior da peneira, como apresentado na Figura ~\ref{fig:accNaVertical}. O segundo ensaio também consistem em posicionar um acelerômetro com base magnética na peneira, porém na parte lateral, como apresentado na Figura ~\ref{fig:accNaLateral}, obtendo valores mais baixos de aceleração e frequência. O objetivo dos ensaios é avaliar a medição de sinais diferentes tanto em frequência quanto em amplitude, a fim de validar a linearidade da medição ao longo de parte da escala.
+		Dois ensaios foram realizados. O primeiro ensaio consiste em utilizar um acelerômetro com base magnética posicionado na parte superior da peneira, como apresentado na Figura ~\ref{fig:accNaVertical}. O segundo ensaio também consiste em posicionar um acelerômetro com base magnética na peneira, porém na parte lateral, como apresentado na Figura ~\ref{fig:accNaLateral}, obtendo valores mais baixos de aceleração e frequência. O objetivo dos ensaios é avaliar a medição de sinais diferentes tanto em frequência quanto em amplitude, a fim de validar a linearidade da medição ao longo de parte da escala.
 		
 		Em um primeiro momento, o sinal foi aquisitado pelo sistema de aquisição NI	cDAQ-9178 em conjunto com o NI-9234, cedidos pela empresa supervisora, apresentados na Figura ~\ref{fig:modulosNI}. Acionou-se a peneira em $50\%$ de sua potência máxima. Coletou-se os dados para o acelerômetro na vertical e na lateral por 10 segundos cada.
 
@@ -1297,7 +1236,7 @@
 			\begin{minipage}{0.4\linewidth}
 				\centering
 				\includegraphics[width = \linewidth]{../Fotos/cdaq.jpg}
-				\caption{Sistema de aquisicao NI}
+				\caption{Sistema de aquisição NI}
 				\label{fig:modulosNI}
 			\end{minipage}
 			\hfill\vline\hfill
@@ -1314,18 +1253,18 @@
 		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\linewidth]{../Fotos/ni4g.png}
-			\caption{Resultados da medição pelo sistema NI-9234 para o ensaio de aceleração vetical}
+			\caption{Resultados da medição pelo sistema NI-9234 para o ensaio de aceleração vertical}
 			\label{fig:ni4g}
 		\end{figure}
 
 		\begin{figure}[!ht]
 			\centering
 			\includegraphics[width=\linewidth]{../Fotos/kot4g.png}
-			\caption{Resultados da medição pelo sistema desenvolvido para o ensaio de aceleração vetical}
+			\caption{Resultados da medição pelo sistema desenvolvido para o ensaio de aceleração vertical}
 			\label{fig:kot4g}
 		\end{figure}
 
-		Comparando-se as Figuras ~\ref{fig:ni4g} e ~\ref{fig:kot4g}, pode-se notar que os valores em frequência e amplitude dos sinais ficaram próximos nos dois sistemas de aquisição: aproximadamente $4g$ e $38Hz$. O NI-9234 mediu valores de $4,0g$ enquando o sistema de aquisição desenvolvido obteve até $4,13g$.
+		Comparando-se as Figuras ~\ref{fig:ni4g} e ~\ref{fig:kot4g}, pode-se notar que os valores em frequência e amplitude dos sinais ficaram próximos nos dois sistemas de aquisição: aproximadamente $4g$ e $38Hz$. O NI-9234 mediu valores de $4,0g$ enquanto o sistema de aquisição desenvolvido obteve até $4,13g$.
 
 		As Figuras ~\ref{fig:ni200mg} e ~\ref{fig:kot200mg} apresentam os sinais obtidos para a medição com o acelerômetro na lateral da peneira.
 
@@ -1343,9 +1282,9 @@
 			\label{fig:kot200mg}
 		\end{figure}
 
-		Comparando-se as Figuras ~\ref{fig:ni200mg} e ~\ref{fig:kot200mg}, pode-se notar que os valores de aceleração ficaram entre $170$ e $190mg$ no sistema de aquisição NI-9234, enquanto que a aceleração obtida pelo sistema desenvolvido oscilou entre $210$ e $230mg$. Analizando o espectro de frequência, ambas medições obtiveram valores próximos de frequência, com valores de amplitude um pouco diferentes na frequência de $38Hz$.
+		Comparando-se as Figuras ~\ref{fig:ni200mg} e ~\ref{fig:kot200mg}, pode-se notar que os valores de aceleração ficaram entre $170$ e $190mg$ no sistema de aquisição NI-9234, enquanto a aceleração obtida pelo sistema desenvolvido oscilou entre $210$ e $230mg$. Analisando o espectro de frequência, ambas medições obtiveram valores próximos de frequência, com valores de amplitude um pouco diferentes na frequência de $38Hz$.
 
-		É interessante notar que a diferença entre os valores obtidos pelos dois sistemas de aquisição não é constante ao longo da faixa de medição. Enquanto que para valores de referência de $4g$ obteve-se uma variação entre medições de $130mg$ ou $3,25\%$, as medições para menores vibrações para valores de referência de $200mg$ variaram $40mg$ ou $20\%$. Como já explicitado nesta monografia, uma medição de $4g$ ou $4,13g$ não possui impacto na avaliação do estado de uma máquina como uma peneira. Apenas variações maiores, na ordem de \textit{1g} impactariam na medição. Com isso, pode-se dizer que o sistema possui um bom desempenho quando referenciado ao sistema de aquisição NI-9234 e atende às necessidades propostas. Os demais canais foram testados e todos apresentaram comportamento semelhante aos valores já apresentados.
+		É interessante notar que a diferença entre os valores obtidos pelos dois sistemas de aquisição não é constante ao longo da faixa de medição. Enquanto para valores de referência de $4g$ obteve-se uma variação entre medições de $130mg$ ou $3,25\%$, as medições para menores vibrações para valores de referência de $200mg$ variaram $40mg$ ou $20\%$. Como já explicitado nesta monografia, uma medição de $4g$ ou $4,13g$ não possui impacto na avaliação do estado de uma máquina como uma peneira. Apenas variações maiores, na ordem de \textit{1g} impactariam na medição. Com isso, pode-se dizer que o sistema possui um bom desempenho quando referenciado ao sistema de aquisição NI-9234 e atende às necessidades propostas. Os demais canais foram testados e todos apresentaram comportamento semelhante aos valores já apresentados.
 
 		Para analisar o alcance de envio do sistema de aquisição, realizou-se testes na rua e em ambientes fechados, ambos com área livre entre o emissor e o receptor. Consegue-se receber os dados sem perda de pacotes com distâncias de até 70 metros. Até 100 metros, cerca de $1\%$ dos pacotes são perdidos. Acima dessa distância a comunicação fica instável e não confiável.
 
@@ -1375,7 +1314,7 @@
 	\begin{itemize}
 		\item Validação de toda a faixa de banda de passagem
 		\item Validação do alcance máximo do módulo para diferentes condições ambiente
-		\item Algoritimo para retransmissão de dados no caso de perda de pacotes
+		\item Algoritmo para retransmissão de dados no caso de perda de pacotes
 		\item Otimização das bibliotecas implementadas
 		\item Interface de recebimento de dados com possibilidade de parametrização do módulo
 	\end{itemize}

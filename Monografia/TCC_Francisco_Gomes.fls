@@ -1,0 +1,494 @@
+PWD c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia
+INPUT C:\Users\franc\AppData\Local\MiKTeX\2.9\miktex\data\le\pdftex\pdflatex.fmt
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.tex
+OUTPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.log
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\abntex2\abntex2.cls
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\abntex2\abntex2.cls
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ifthen.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ifthen.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\memoir\memoir.cls
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\memoir\memoir.cls
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\ifetex\ifetex.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\ifetex\ifetex.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\plain\ifetex\ifetex.tex
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\memoir\mem12.clo
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\memoir\mem12.clo
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmr12.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\array.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\array.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\dcolumn.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\dcolumn.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\delarray.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\delarray.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\tabularx.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\tabularx.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmr10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\textcase\textcase.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\textcase\textcase.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub-generic.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\hobsub-generic.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\auxhook.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\auxhook.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\url.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\url\url.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\memoir\memhfixc.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\memoir\memhfixc.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\bookmark.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\bookmark.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\bkm-pdftex.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\bkm-pdftex.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\switch.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\arabi\bblopts.cfg
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\arabi\bblopts.cfg
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-english\english.ldf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel-french\french.ldf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-spanish\spanish.ldf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-english\english.ldf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-english\english.ldf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\babel.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel\txtbabel.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel-french\french.ldf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\babel-french\french.ldf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-spanish\spanish.ldf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-spanish\spanish.ldf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-portuges\portuges.ldf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\babel-portuges\portuges.ldf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\carlisle\scalefnt.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\carlisle\scalefnt.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\calc.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\calc.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\lmodern.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\lmodern.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\fontenc.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\fontenc.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\t1enc.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\t1enc.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\jknappen\ec\ecrm1200.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\inputenc.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\inputenc.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\indentfirst.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\indentfirst.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\color.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\color.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\color.cfg
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-def\pdftex.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphicx.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphicx.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphics.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphics.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics-cfg\graphics.cfg
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\mathtools\mathtools.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\mathtools\mathtools.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\mathtools\mhsetup.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\mathtools\mhsetup.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amstext.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amstext.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\pdflscape.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\pdflscape.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\lscape.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\lscape.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\textcomp.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\textcomp.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1enc.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1enc.def
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1enc.dfu
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1enc.dfu
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\backref.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\backref.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\abntex2\abntex2cite.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\abntex2\abntex2cite.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\abntex2\abntex2abrev.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\abntex2\abntex2abrev.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\relsize\relsize.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\relsize\relsize.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\relsize\relsize.sty
+OUTPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.idx
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.aux
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.aux
+OUTPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.aux
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1cmr.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1cmr.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmr.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmr.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr12.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty
+OUTPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.pdf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\mkii\supp-pdf.mkii
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\mkii\supp-pdf.mkii
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmss.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmss.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmss12.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmss12.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmssbx10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmssbx10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr12.tfm
+INPUT C:\Users\franc\AppData\Local\MiKTeX\2.9\pdftex\config\pdftex.map
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmssbx10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmssbx10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr12.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr8.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr6.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi12.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi8.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi6.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy8.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy6.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmex10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmss17.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmbx12.tfm
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.lof
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.lof
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmri12.tfm
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.toc
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.toc
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmssbo10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmss10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmsso10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr12.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr7.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi12.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi7.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy7.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmss17.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr8.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmri10.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ts1lmr.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ts1lmr.fd
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ts1-lmr12.tfm
+INPUT ..\Fotos\Diagramas\sinalFaaADC\sinalFaaADC.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\sinalFaaADC.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\sinalFaaADC.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\sinalFaaADC.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\sinalFaaADC.png
+INPUT ..\Fotos\Diagramas\iepe.png
+INPUT ..\Fotos\Diagramas\iepe.png
+INPUT ..\Fotos\Diagramas\iepe.png
+INPUT ..\Fotos\Diagramas\iepe.png
+INPUT ..\Fotos\Diagramas\iepe.png
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmsso17.tfm
+INPUT ..\Fotos\aliasingFs250.png
+INPUT ..\Fotos\aliasingFs250.png
+INPUT ..\Fotos\aliasingFs250.png
+INPUT ..\Fotos\aliasingFs250.png
+INPUT ..\Fotos\aliasingFs250.png
+INPUT ..\Fotos\aliasingFs200.png
+INPUT ..\Fotos\aliasingFs200.png
+INPUT ..\Fotos\aliasingFs200.png
+INPUT ..\Fotos\aliasingFs200.png
+INPUT ..\Fotos\aliasingFs200.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\filtroIdeal.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\filtroIdeal.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\filtroIdeal.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\filtroIdeal.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\filtroIdeal.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\filtroReal.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\filtroReal.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\filtroReal.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\filtroReal.png
+INPUT ..\Fotos\Diagramas\sinalFaaADC\filtroReal.png
+INPUT ..\Fotos\filterPro.png
+INPUT ..\Fotos\filterPro.png
+INPUT ..\Fotos\filterPro.png
+INPUT ..\Fotos\filterPro.png
+INPUT ..\Fotos\filterPro.png
+INPUT ..\Fotos\filterProGF.png
+INPUT ..\Fotos\filterProGF.png
+INPUT ..\Fotos\filterProGF.png
+INPUT ..\Fotos\filterProGF.png
+INPUT ..\Fotos\filterProGF.png
+INPUT ..\Fotos\filterProZoom.png
+INPUT ..\Fotos\filterProZoom.png
+INPUT ..\Fotos\filterProZoom.png
+INPUT ..\Fotos\filterProZoom.png
+INPUT ..\Fotos\filterProZoom.png
+INPUT ..\Fotos\fonteCorrenteClean2.jpg
+INPUT ..\Fotos\fonteCorrenteClean2.jpg
+INPUT ..\Fotos\fonteCorrenteClean2.jpg
+INPUT ..\Fotos\fonteCorrenteClean2.jpg
+INPUT ..\Fotos\fonteCorrenteClean2.jpg
+INPUT ..\Fotos\fonteCorrente2.jpg
+INPUT ..\Fotos\fonteCorrente2.jpg
+INPUT ..\Fotos\fonteCorrente2.jpg
+INPUT ..\Fotos\fonteCorrente2.jpg
+INPUT ..\Fotos\fonteCorrente2.jpg
+INPUT ..\Fotos\stmConsumo.jpg
+INPUT ..\Fotos\stmConsumo.jpg
+INPUT ..\Fotos\stmConsumo.jpg
+INPUT ..\Fotos\stmConsumo.jpg
+INPUT ..\Fotos\stmConsumo.jpg
+INPUT ..\Fotos\nrf.png
+INPUT ..\Fotos\nrf.png
+INPUT ..\Fotos\nrf.png
+INPUT ..\Fotos\nrf.png
+INPUT ..\Fotos\nrf.png
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr5.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi5.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy5.tfm
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmr7.tfm
+INPUT ..\Fotos\fonte.jpg
+INPUT ..\Fotos\fonte.jpg
+INPUT ..\Fotos\fonte.jpg
+INPUT ..\Fotos\fonte.jpg
+INPUT ..\Fotos\fonte.jpg
+INPUT ..\Fotos\fonteCorrenteEsquematico.jpg
+INPUT ..\Fotos\fonteCorrenteEsquematico.jpg
+INPUT ..\Fotos\fonteCorrenteEsquematico.jpg
+INPUT ..\Fotos\fonteCorrenteEsquematico.jpg
+INPUT ..\Fotos\fonteCorrenteEsquematico.jpg
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmsso12.tfm
+INPUT ..\Fotos\FAAesquematico.png
+INPUT ..\Fotos\FAAesquematico.png
+INPUT ..\Fotos\FAAesquematico.png
+INPUT ..\Fotos\FAAesquematico.png
+INPUT ..\Fotos\FAAesquematico.png
+INPUT ..\Fotos\stmEsquematico.jpg
+INPUT ..\Fotos\stmEsquematico.jpg
+INPUT ..\Fotos\stmEsquematico.jpg
+INPUT ..\Fotos\stmEsquematico.jpg
+INPUT ..\Fotos\stmEsquematico.jpg
+INPUT ..\Fotos\nrfEsquematico.jpg
+INPUT ..\Fotos\nrfEsquematico.jpg
+INPUT ..\Fotos\nrfEsquematico.jpg
+INPUT ..\Fotos\nrfEsquematico.jpg
+INPUT ..\Fotos\nrfEsquematico.jpg
+INPUT ..\Fotos\pcbLayers.png
+INPUT ..\Fotos\pcbLayers.png
+INPUT ..\Fotos\pcbLayers.png
+INPUT ..\Fotos\pcbLayers.png
+INPUT ..\Fotos\pcbLayers.png
+INPUT ..\Fotos\analogDigitalFonte.png
+INPUT ..\Fotos\analogDigitalFonte.png
+INPUT ..\Fotos\analogDigitalFonte.png
+INPUT ..\Fotos\analogDigitalFonte.png
+INPUT ..\Fotos\analogDigitalFonte.png
+INPUT ..\Fotos\capNrf.jpg
+INPUT ..\Fotos\capNrf.jpg
+INPUT ..\Fotos\capNrf.jpg
+INPUT ..\Fotos\capNrf.jpg
+INPUT ..\Fotos\capNrf.jpg
+INPUT ..\Fotos\resAmp.jpg
+INPUT ..\Fotos\resAmp.jpg
+INPUT ..\Fotos\resAmp.jpg
+INPUT ..\Fotos\resAmp.jpg
+INPUT ..\Fotos\resAmp.jpg
+INPUT ..\Fotos\placaTotal.jpg
+INPUT ..\Fotos\placaTotal.jpg
+INPUT ..\Fotos\placaTotal.jpg
+INPUT ..\Fotos\placaTotal.jpg
+INPUT ..\Fotos\placaTotal.jpg
+INPUT ..\Fotos\vistaSuperior.jpg
+INPUT ..\Fotos\vistaSuperior.jpg
+INPUT ..\Fotos\vistaSuperior.jpg
+INPUT ..\Fotos\vistaSuperior.jpg
+INPUT ..\Fotos\vistaSuperior.jpg
+INPUT ..\Fotos\diagramaTelemetria.png
+INPUT ..\Fotos\diagramaTelemetria.png
+INPUT ..\Fotos\diagramaTelemetria.png
+INPUT ..\Fotos\diagramaTelemetria.png
+INPUT ..\Fotos\diagramaTelemetria.png
+INPUT ..\Fotos\antesFiltro33.jpg
+INPUT ..\Fotos\antesFiltro33.jpg
+INPUT ..\Fotos\antesFiltro33.jpg
+INPUT ..\Fotos\antesFiltro33.jpg
+INPUT ..\Fotos\antesFiltro33.jpg
+INPUT ..\Fotos\depoisFiltro33.jpg
+INPUT ..\Fotos\depoisFiltro33.jpg
+INPUT ..\Fotos\depoisFiltro33.jpg
+INPUT ..\Fotos\depoisFiltro33.jpg
+INPUT ..\Fotos\depoisFiltro33.jpg
+INPUT ..\Fotos\antesFiltro19.jpg
+INPUT ..\Fotos\antesFiltro19.jpg
+INPUT ..\Fotos\antesFiltro19.jpg
+INPUT ..\Fotos\antesFiltro19.jpg
+INPUT ..\Fotos\antesFiltro19.jpg
+INPUT ..\Fotos\depoisFiltro19.jpg
+INPUT ..\Fotos\depoisFiltro19.jpg
+INPUT ..\Fotos\depoisFiltro19.jpg
+INPUT ..\Fotos\depoisFiltro19.jpg
+INPUT ..\Fotos\depoisFiltro19.jpg
+INPUT ..\Fotos\osc33.jpg
+INPUT ..\Fotos\osc33.jpg
+INPUT ..\Fotos\osc33.jpg
+INPUT ..\Fotos\osc33.jpg
+INPUT ..\Fotos\osc33.jpg
+INPUT ..\Fotos\tensaoAcc.jpg
+INPUT ..\Fotos\tensaoAcc.jpg
+INPUT ..\Fotos\tensaoAcc.jpg
+INPUT ..\Fotos\tensaoAcc.jpg
+INPUT ..\Fotos\tensaoAcc.jpg
+INPUT ..\Fotos\tensaoAccG.jpg
+INPUT ..\Fotos\tensaoAccG.jpg
+INPUT ..\Fotos\tensaoAccG.jpg
+INPUT ..\Fotos\tensaoAccG.jpg
+INPUT ..\Fotos\tensaoAccG.jpg
+INPUT ..\Fotos\stlink.jpg
+INPUT ..\Fotos\stlink.jpg
+INPUT ..\Fotos\stlink.jpg
+INPUT ..\Fotos\stlink.jpg
+INPUT ..\Fotos\stlink.jpg
+INPUT ..\Fotos\accVertical.jpg
+INPUT ..\Fotos\accVertical.jpg
+INPUT ..\Fotos\accVertical.jpg
+INPUT ..\Fotos\accVertical.jpg
+INPUT ..\Fotos\accVertical.jpg
+INPUT ..\Fotos\peneiraAccLateral.jpg
+INPUT ..\Fotos\peneiraAccLateral.jpg
+INPUT ..\Fotos\peneiraAccLateral.jpg
+INPUT ..\Fotos\peneiraAccLateral.jpg
+INPUT ..\Fotos\peneiraAccLateral.jpg
+INPUT ..\Fotos\cdaq.jpg
+INPUT ..\Fotos\cdaq.jpg
+INPUT ..\Fotos\cdaq.jpg
+INPUT ..\Fotos\cdaq.jpg
+INPUT ..\Fotos\cdaq.jpg
+INPUT ..\Fotos\DAqIEPE.jpg
+INPUT ..\Fotos\DAqIEPE.jpg
+INPUT ..\Fotos\DAqIEPE.jpg
+INPUT ..\Fotos\DAqIEPE.jpg
+INPUT ..\Fotos\DAqIEPE.jpg
+INPUT ..\Fotos\ni4g.png
+INPUT ..\Fotos\ni4g.png
+INPUT ..\Fotos\ni4g.png
+INPUT ..\Fotos\ni4g.png
+INPUT ..\Fotos\ni4g.png
+INPUT ..\Fotos\kot4g.png
+INPUT ..\Fotos\kot4g.png
+INPUT ..\Fotos\kot4g.png
+INPUT ..\Fotos\kot4g.png
+INPUT ..\Fotos\kot4g.png
+INPUT ..\Fotos\ni200mg.png
+INPUT ..\Fotos\ni200mg.png
+INPUT ..\Fotos\ni200mg.png
+INPUT ..\Fotos\ni200mg.png
+INPUT ..\Fotos\ni200mg.png
+INPUT ..\Fotos\kot200mg.png
+INPUT ..\Fotos\kot200mg.png
+INPUT ..\Fotos\kot200mg.png
+INPUT ..\Fotos\kot200mg.png
+INPUT ..\Fotos\kot200mg.png
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.bbl
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.bbl
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.brf
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.brf
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.brf
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.brf
+OUTPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.brf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\ec-lmsso17.tfm
+OUTPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.lof
+OUTPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.toc
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.aux
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.brf
+INPUT c:\Users\franc\OneDrive\06-Repositorios\03-TCC\Monografia\TCC_Francisco_Gomes.brf
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-mathex.enc
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-ec.enc
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-rm.enc
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-mathit.enc
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-mathsy.enc
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-ts1.enc
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmbx12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmbx12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmex10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmex10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi6.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi6.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi8.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi8.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr6.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr6.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr7.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr7.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr8.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr8.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmri10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmri10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmri12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmri12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmss10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmss10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmss12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmss12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmss17.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmss17.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmssbo10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmssbo10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmssbx10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmssbx10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsso10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsso10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsso12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsso12.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsso17.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsso17.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy10.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy8.pfb
+INPUT C:\Users\franc\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy8.pfb

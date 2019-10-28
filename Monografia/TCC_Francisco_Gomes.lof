@@ -1,0 +1,42 @@
+\babel@toc {brazil}{}
+\contentsline {figure}{\numberline {1}{\ignorespaces Condicionamento do sinal analógico}}{19}{figure.2.1}% 
+\contentsline {figure}{\numberline {2}{\ignorespaces Diagrama de interligação de um transdutor \textit {IEPE}}}{20}{figure.2.2}% 
+\contentsline {figure}{\numberline {3}{\ignorespaces Exemplo de sinal sem \textit {aliasing} amostrado à $250Hz$}}{21}{figure.2.3}% 
+\contentsline {figure}{\numberline {4}{\ignorespaces Exemplo de sinal com \textit {aliasing} amostrado à $200Hz$}}{21}{figure.2.4}% 
+\contentsline {figure}{\numberline {5}{\ignorespaces Resposta em frequência de um filtro ideal}}{22}{figure.2.5}% 
+\contentsline {figure}{\numberline {6}{\ignorespaces Resposta em frequência de um filtro real}}{22}{figure.2.6}% 
+\contentsline {figure}{\numberline {7}{\ignorespaces Filtro anti-\textit {aliasing}}}{28}{figure.3.7}% 
+\contentsline {figure}{\numberline {8}{\ignorespaces Diagrama de Bode do FFA}}{28}{figure.3.8}% 
+\contentsline {figure}{\numberline {9}{\ignorespaces \textit {Zoom} na banda de transição}}{28}{figure.3.9}% 
+\contentsline {figure}{\numberline {10}{\ignorespaces Fonte de corrente}}{30}{figure.3.10}% 
+\contentsline {figure}{\numberline {11}{\ignorespaces Fonte de corrente com medições}}{30}{figure.3.11}% 
+\contentsline {figure}{\numberline {12}{\ignorespaces Consumo estimado do STM32F103C8T6}}{32}{figure.3.12}% 
+\contentsline {figure}{\numberline {13}{\ignorespaces Módulo nRF24L01+}}{33}{figure.3.13}% 
+\contentsline {figure}{\numberline {14}{\ignorespaces Esquemático das fontes}}{35}{figure.3.14}% 
+\contentsline {figure}{\numberline {15}{\ignorespaces Esquemático das fontes de corrente}}{36}{figure.3.15}% 
+\contentsline {figure}{\numberline {16}{\ignorespaces Esquemático do filtro anti-\textit {aliasing}}}{37}{figure.3.16}% 
+\contentsline {figure}{\numberline {17}{\ignorespaces Esquemático do STM32F103C8T6}}{38}{figure.3.17}% 
+\contentsline {figure}{\numberline {18}{\ignorespaces Esquemático do nRF24L01+}}{39}{figure.3.18}% 
+\contentsline {figure}{\numberline {19}{\ignorespaces Planos de terra, 19V e 3,3V}}{39}{figure.3.19}% 
+\contentsline {figure}{\numberline {20}{\ignorespaces Divisão das partes analógico, digital e fontes}}{40}{figure.3.20}% 
+\contentsline {figure}{\numberline {21}{\ignorespaces Capacitores próximos aos pinos de alimentação}}{41}{figure.3.21}% 
+\contentsline {figure}{\numberline {22}{\ignorespaces Resistores e amplificadores operacionais orientados na mesma direção}}{41}{figure.3.22}% 
+\contentsline {figure}{\numberline {23}{\ignorespaces Placa final}}{42}{figure.3.23}% 
+\contentsline {figure}{\numberline {24}{\ignorespaces Vista superior}}{43}{figure.3.24}% 
+\contentsline {figure}{\numberline {25}{\ignorespaces Máquina de estados finitos}}{45}{figure.4.25}% 
+\contentsline {figure}{\numberline {26}{\ignorespaces Sinal AC da saída da fonte de 3,3V}}{46}{figure.4.26}% 
+\contentsline {figure}{\numberline {27}{\ignorespaces Sinal AC da saída do filtro LC de 3,3V}}{46}{figure.4.27}% 
+\contentsline {figure}{\numberline {28}{\ignorespaces Sinal AC da saída da fonte de 19V}}{46}{figure.4.28}% 
+\contentsline {figure}{\numberline {29}{\ignorespaces Sinal AC da saída do filtro LC de 19V}}{46}{figure.4.29}% 
+\contentsline {figure}{\numberline {30}{\ignorespaces Oscilações causadas pelo modo de telemetria}}{47}{figure.4.30}% 
+\contentsline {figure}{\numberline {31}{\ignorespaces Tensão média do acelerômetro}}{47}{figure.4.31}% 
+\contentsline {figure}{\numberline {32}{\ignorespaces Tensão média do acelerômetro após o ganho}}{47}{figure.4.32}% 
+\contentsline {figure}{\numberline {33}{\ignorespaces Placa sem acelerômetros conectados, em modo \textit {standby}}}{49}{figure.4.33}% 
+\contentsline {figure}{\numberline {34}{\ignorespaces Posição do acelerômetro na parte superior da peneira}}{50}{figure.4.34}% 
+\contentsline {figure}{\numberline {35}{\ignorespaces Posição do acelerômetro na lateral da peneira}}{50}{figure.4.35}% 
+\contentsline {figure}{\numberline {36}{\ignorespaces Sistema de aquisição NI}}{51}{figure.4.36}% 
+\contentsline {figure}{\numberline {37}{\ignorespaces Sistema de aquisição desenvolvido}}{51}{figure.4.37}% 
+\contentsline {figure}{\numberline {38}{\ignorespaces Resultados da medição pelo sistema NI-9234 para o ensaio de aceleração vertical}}{51}{figure.4.38}% 
+\contentsline {figure}{\numberline {39}{\ignorespaces Resultados da medição pelo sistema desenvolvido para o ensaio de aceleração vertical}}{52}{figure.4.39}% 
+\contentsline {figure}{\numberline {40}{\ignorespaces Resultados da medição pelo sistema NI-9234 para o ensaio de aceleração lateral}}{53}{figure.4.40}% 
+\contentsline {figure}{\numberline {41}{\ignorespaces Resultados da medição pelo sistema desenvolvido para o ensaio de aceleração lateral}}{53}{figure.4.41}% 
